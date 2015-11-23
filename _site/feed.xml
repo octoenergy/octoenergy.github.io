@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Octopus Energy</title>
+    <description>Octopus Energy is a modern, green energy supplier for the UK.
+</description>
+    <link>http://tech.octopus.energy/</link>
+    <atom:link href="http://tech.octopus.energy/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 23 Nov 2015 15:04:41 +0000</pubDate>
+    <lastBuildDate>Mon, 23 Nov 2015 15:04:41 +0000</lastBuildDate>
+    <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Hello world, would you like to join us?</title>
+        <description>&lt;p&gt;We’re looking for smart people to join the tech team at Octopus Energy, to help
+build out our initial set of infrastructure. To start with, our main
+technologies will be:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Python - particularly Django and data processing libraries like numpy or pandas;&lt;/li&gt;
+  &lt;li&gt;Postgres and Redis;&lt;/li&gt;
+  &lt;li&gt;React and related modules from the Javascript ecosystem;&lt;/li&gt;
+  &lt;li&gt;AWS - using the Hashicorp toolset (Vagrant, Packer, Consul and Terraform).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Our current priorities lie with server side work so we’re keen to
+speak to Pythonistas or anyone with a love of automation and data processing.
+But we’re always interesting in talking to smart, motivated people with an
+interest in green tech - but we’d love to hear from anyone with experience in the
+above. &lt;/p&gt;
+
+&lt;p&gt;Could this be you?&lt;/p&gt;
+
+&lt;p&gt;We hope so. Ideally, you’ll have experience in one or more of the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Strong Python, especially Django and data processing libraries;&lt;/li&gt;
+  &lt;li&gt;Building slick user interfaces with React; &lt;/li&gt;
+  &lt;li&gt;Knowledge of the modern Javascript ecosystem and asset build pipelines (eg
+webpack, mocha, gulp);&lt;/li&gt;
+  &lt;li&gt;Non-trivial experience with AWS;&lt;/li&gt;
+  &lt;li&gt;Experience working with 3rd party APIs, eg XML webservices, REST APIs, FTP
+filedrops, that kind of thing.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is a great opportunity to be an early employee at a revolutionary company.
+Get in touch via &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#116;&amp;#097;&amp;#108;&amp;#101;&amp;#110;&amp;#116;&amp;#064;&amp;#111;&amp;#099;&amp;#116;&amp;#111;&amp;#101;&amp;#110;&amp;#101;&amp;#114;&amp;#103;&amp;#121;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#116;&amp;#097;&amp;#108;&amp;#101;&amp;#110;&amp;#116;&amp;#064;&amp;#111;&amp;#099;&amp;#116;&amp;#111;&amp;#101;&amp;#110;&amp;#101;&amp;#114;&amp;#103;&amp;#121;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
+        <link>http://tech.octopus.energy/2015/11/23/tech-jobs.html</link>
+        <guid isPermaLink="true">http://tech.octopus.energy/2015/11/23/tech-jobs.html</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
