@@ -26,7 +26,9 @@ Could this be you?
 
 We hope so. Ideally, you'll have experience in one or more of the following:
 
-- Strong Python, especially Django and data processing libraries;
+- Strong Python, especially Django and building for the web;
+- Knowledge of data processing (eg luigi, pandas, numpy - doesn't have
+  to be Python though)
 - Building slick user interfaces with React; 
 - Knowledge of the modern Javascript ecosystem and asset build pipelines (eg
   webpack, mocha, gulp);
@@ -39,5 +41,9 @@ This is a great opportunity to be an early employee at a revolutionary company. 
 Get in touch via [talent@octoenergy.com](mailto:talent@octoenergy.com).
 
 
+PS - Right now, we're not considering 100% remote candidates. At this early
+stage, there's enormous value in high-bandwidth person-to-person communication
+that you can only get by working in the same space. This may change later on of
+course.
 
 
