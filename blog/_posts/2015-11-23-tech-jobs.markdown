@@ -1,0 +1,38 @@
+---
+title: Hello world, would you like to join us?
+layout: post
+---
+
+We're looking for smart people to join the tech team at Octopus Energy, to help
+build out our initial set of infrastructure. To start with, our main
+technologies will be:
+
+- Python - particularly Django and data processing libraries like numpy or pandas;
+- Postgres and Redis;
+- React and related modules from the Javascript ecosystem;
+- AWS - using the Hashicorp toolset (Vagrant, Packer, Consul and Terraform).
+
+Our current priorities lie with server side work so we're keen to
+speak to Pythonistas or anyone with a love of automation and data processing.
+But we're always interesting in talking to smart, motivated people with an
+interest in green tech - but we'd love to hear from anyone with experience in the
+above. 
+
+Could this be you?
+
+We hope so. Ideally, you'll have experience in one or more of the following:
+
+- Strong Python, especially Django and data processing libraries;
+- Building slick user interfaces with React; 
+- Knowledge of the modern Javascript ecosystem and asset build pipelines (eg
+  webpack, mocha, gulp);
+- Non-trivial experience with AWS;
+- Experience working with 3rd party APIs, eg XML webservices, REST APIs, FTP
+  filedrops, that kind of thing.
+
+This is a great opportunity to be an early employee at a revolutionary company.
+Get in touch via [talent@octoenergy.com](mailto:talent@octoenergy.com).
+
+
+
+
