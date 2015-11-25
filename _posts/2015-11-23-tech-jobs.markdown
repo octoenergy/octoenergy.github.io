@@ -36,10 +36,11 @@ We hope so. Ideally, you'll have experience in one or more of the following:
 - Experience working with 3rd party APIs, eg XML webservices, REST APIs, FTP
   filedrops, that kind of thing.
 
-This is a great opportunity to be an early employee at a revolutionary company. Working at Octopus Energy offers the unique combination of solving difficult technical problems with modern technology as well as working on something that genuinely will make the world a better place.
+This is a great opportunity to be an early employee at a revolutionary company. Working at Octopus Energy offers the unique combination of solving difficult technical problems with modern technology as well as working on something that genuinely will make the world a better place (that is, helping transition the UK to a lower carbon future).
 
-Get in touch via [talent@octoenergy.com](mailto:talent@octoenergy.com).
+Lots of experience isn't strictly necessary to join. We're interested in both graduates as well as developers with experience in the above technologies or the UK energy market. 
 
+If this sounds interesting, tell us about yourself via [talent@octoenergy.com](mailto:talent@octoenergy.com).
 
 PS - Right now, we're not considering 100% remote candidates. At this early
 stage, there's enormous value in high-bandwidth person-to-person communication
