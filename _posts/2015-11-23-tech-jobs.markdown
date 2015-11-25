@@ -3,19 +3,23 @@ title: Hello world, would you like to join us?
 layout: post
 ---
 
-We're looking for smart people to join the tech team at Octopus Energy, to help
-build out our initial set of infrastructure. To start with, our main
-technologies will be:
+We're looking for super-smart people to join the tech team at Octopus Energy. We're in the process of designing and building our initial infrastructure. There are many difficult design problems to solve; we need creative, analytical minds who can help tame this notoriously tricky domain.  
 
-- Python - particularly Django and data processing libraries like numpy or pandas;
-- Postgres and Redis;
-- React and related modules from the Javascript ecosystem;
-- AWS - using the Hashicorp toolset (Vagrant, Packer, Consul and Terraform).
+To start with, our main technologies will be:
 
-Our current priorities lie with server side work so we're keen to
-speak to Pythonistas or anyone with a love of automation and data processing.
+- AWS - using the excellent Hashicorp toolset (Vagrant, Packer, Consul and Terraform).
+- Python - especially Django and Django-REST-Framework. We're also looking to employ Python's data processing libraries such as numpy and pandas (although this is still up for debate);
+- Postgres and DynamoDB
+- Memcached and Redis;
+- React and related modules from the Javascript ecosystem - our consumer-facing user interfaces are going to be super slick;
+- Node, npm, webpack, babel, gulp etc
+- Puppet - for config management
+
+Our current priorities lie with server-side work so we're keen to
+speak to Pythonistas, developer data scientists or anyone with a love of automation and data processing.
+
 But we're always interesting in talking to smart, motivated people with an
-interest in green tech - but we'd love to hear from anyone with experience in the
+interest in green tech - we'd love to hear from anyone with experience in the
 above. 
 
 Could this be you?
@@ -30,7 +34,8 @@ We hope so. Ideally, you'll have experience in one or more of the following:
 - Experience working with 3rd party APIs, eg XML webservices, REST APIs, FTP
   filedrops, that kind of thing.
 
-This is a great opportunity to be an early employee at a revolutionary company.
+This is a great opportunity to be an early employee at a revolutionary company. Working at Octopus Energy offers the unique combination of solving difficult technical problems with modern technology as well as working on something that genuinely will make the world a better place.
+
 Get in touch via [talent@octoenergy.com](mailto:talent@octoenergy.com).
 
 
