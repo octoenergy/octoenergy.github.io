@@ -6,27 +6,31 @@
 </description>
     <link>http://tech.octopus.energy/</link>
     <atom:link href="http://tech.octopus.energy/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 23 Nov 2015 15:04:41 +0000</pubDate>
-    <lastBuildDate>Mon, 23 Nov 2015 15:04:41 +0000</lastBuildDate>
+    <pubDate>Tue, 08 Dec 2015 15:19:34 +0000</pubDate>
+    <lastBuildDate>Tue, 08 Dec 2015 15:19:34 +0000</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
         <title>Hello world, would you like to join us?</title>
-        <description>&lt;p&gt;We’re looking for smart people to join the tech team at Octopus Energy, to help
-build out our initial set of infrastructure. To start with, our main
-technologies will be:&lt;/p&gt;
+        <description>&lt;p&gt;We’re looking for super-smart people to join the tech team at Octopus Energy. We’re in the process of designing and building our initial infrastructure. There are many difficult design problems to solve; we need creative, analytical minds who can help tame this notoriously tricky domain.  &lt;/p&gt;
+
+&lt;p&gt;To start with, our main technologies will be:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Python - particularly Django and data processing libraries like numpy or pandas;&lt;/li&gt;
-  &lt;li&gt;Postgres and Redis;&lt;/li&gt;
-  &lt;li&gt;React and related modules from the Javascript ecosystem;&lt;/li&gt;
-  &lt;li&gt;AWS - using the Hashicorp toolset (Vagrant, Packer, Consul and Terraform).&lt;/li&gt;
+  &lt;li&gt;AWS - using the excellent Hashicorp toolset (Vagrant, Packer, Consul and Terraform).&lt;/li&gt;
+  &lt;li&gt;Python - especially Django and Django-REST-Framework. We’re also looking to employ Python’s data processing libraries such as numpy and pandas (although this is still up for debate);&lt;/li&gt;
+  &lt;li&gt;Postgres and DynamoDB&lt;/li&gt;
+  &lt;li&gt;Memcached and Redis;&lt;/li&gt;
+  &lt;li&gt;React and related modules from the Javascript ecosystem - our consumer-facing user interfaces are going to be super slick;&lt;/li&gt;
+  &lt;li&gt;Node, npm, webpack, babel, gulp etc&lt;/li&gt;
+  &lt;li&gt;Puppet - for config management&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Our current priorities lie with server side work so we’re keen to
-speak to Pythonistas or anyone with a love of automation and data processing.
-But we’re always interesting in talking to smart, motivated people with an
-interest in green tech - but we’d love to hear from anyone with experience in the
+&lt;p&gt;Our current priorities lie with server-side work so we’re keen to
+speak to Pythonistas, developer data scientists or anyone with a love of automation and data processing.&lt;/p&gt;
+
+&lt;p&gt;But we’re always interesting in talking to smart, motivated people with an
+interest in green tech - we’d love to hear from anyone with experience in the
 above. &lt;/p&gt;
 
 &lt;p&gt;Could this be you?&lt;/p&gt;
@@ -34,7 +38,9 @@ above. &lt;/p&gt;
 &lt;p&gt;We hope so. Ideally, you’ll have experience in one or more of the following:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Strong Python, especially Django and data processing libraries;&lt;/li&gt;
+  &lt;li&gt;Strong Python, especially Django and building for the web;&lt;/li&gt;
+  &lt;li&gt;Knowledge of data processing (eg luigi, pandas, numpy - doesn’t have
+to be Python though)&lt;/li&gt;
   &lt;li&gt;Building slick user interfaces with React; &lt;/li&gt;
   &lt;li&gt;Knowledge of the modern Javascript ecosystem and asset build pipelines (eg
 webpack, mocha, gulp);&lt;/li&gt;
@@ -43,8 +49,16 @@ webpack, mocha, gulp);&lt;/li&gt;
 filedrops, that kind of thing.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;This is a great opportunity to be an early employee at a revolutionary company.
-Get in touch via &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#116;&amp;#097;&amp;#108;&amp;#101;&amp;#110;&amp;#116;&amp;#064;&amp;#111;&amp;#099;&amp;#116;&amp;#111;&amp;#101;&amp;#110;&amp;#101;&amp;#114;&amp;#103;&amp;#121;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#116;&amp;#097;&amp;#108;&amp;#101;&amp;#110;&amp;#116;&amp;#064;&amp;#111;&amp;#099;&amp;#116;&amp;#111;&amp;#101;&amp;#110;&amp;#101;&amp;#114;&amp;#103;&amp;#121;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is a great opportunity to be an early employee at a revolutionary company. Working at Octopus Energy offers the unique combination of solving difficult technical problems with modern technology as well as working on something that genuinely will make the world a better place (that is, helping transition the UK to a lower carbon future).&lt;/p&gt;
+
+&lt;p&gt;Lots of experience isn’t strictly necessary to join. We’re interested in both graduates as well as developers with experience in the above technologies or the UK energy market. &lt;/p&gt;
+
+&lt;p&gt;If this sounds interesting, tell us about yourself via &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#116;&amp;#097;&amp;#108;&amp;#101;&amp;#110;&amp;#116;&amp;#064;&amp;#111;&amp;#099;&amp;#116;&amp;#111;&amp;#101;&amp;#110;&amp;#101;&amp;#114;&amp;#103;&amp;#121;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#116;&amp;#097;&amp;#108;&amp;#101;&amp;#110;&amp;#116;&amp;#064;&amp;#111;&amp;#099;&amp;#116;&amp;#111;&amp;#101;&amp;#110;&amp;#101;&amp;#114;&amp;#103;&amp;#121;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;PS - Right now, we’re not considering 100% remote candidates. At this early
+stage, there’s enormous value in high-bandwidth person-to-person communication
+that you can only get by working in the same space. This may change later on of
+course.&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
