@@ -18,7 +18,7 @@ To start with, our main technologies will be:
 Our current priorities lie with server-side work so we're keen to
 speak to Pythonistas, developer data scientists or anyone with a love of automation and data processing.
 
-But we're always interesting in talking to smart, motivated people with an
+But we're always interested in talking to smart, motivated people with an
 interest in green tech - we'd love to hear from anyone with experience in the
 above. 
 
