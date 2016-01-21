@@ -6,7 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://tech.octopus.energy" # the base hostname & protocol for your site
 twitter_username: 
-github_username:  octoenergy
+github_username: octoenergy
 
 # Build settings
 markdown: kramdown
