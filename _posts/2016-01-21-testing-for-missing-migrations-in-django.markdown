@@ -65,3 +65,7 @@ Credit for this implementation belongs to Mozilla's Ed Morley, who [committed a
 similar fix](https://github.com/mozilla/treeherder/commit/dd539147716125bb4d2798cdaf613e294c363fb2) 
 for their [treeherder](https://github.com/mozilla/treeherder/) project. The above snippets are 
 slightly extended versions of his original.
+
+Related reading:
+
+- Here's [another approach](http://tech.yunojuno.com/keeping-on-top-of-django-migrations) by YunoJuno that achieves the same effect.

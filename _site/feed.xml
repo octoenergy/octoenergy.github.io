@@ -6,8 +6,8 @@
 </description>
     <link>http://tech.octopus.energy/</link>
     <atom:link href="http://tech.octopus.energy/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 21 Jan 2016 10:30:24 +0000</pubDate>
-    <lastBuildDate>Thu, 21 Jan 2016 10:30:24 +0000</lastBuildDate>
+    <pubDate>Thu, 21 Jan 2016 15:11:31 +0000</pubDate>
+    <lastBuildDate>Thu, 21 Jan 2016 15:11:31 +0000</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -69,6 +69,12 @@ the above command to work:&lt;/p&gt;
 similar fix&lt;/a&gt; 
 for their &lt;a href=&quot;https://github.com/mozilla/treeherder/&quot;&gt;treeherder&lt;/a&gt; project. The above snippets are 
 slightly extended versions of his original.&lt;/p&gt;
+
+&lt;p&gt;Related reading:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Here’s &lt;a href=&quot;http://tech.yunojuno.com/keeping-on-top-of-django-migrations&quot;&gt;another approach&lt;/a&gt; by YunoJuno that achieves the same effect.&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
         <link>http://tech.octopus.energy/2016/01/21/testing-for-missing-migrations-in-django.html</link>
