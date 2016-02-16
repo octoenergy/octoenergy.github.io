@@ -2,24 +2,25 @@
  * Site header
  */
 .site-header {
-    border-top: 5px solid $grey-color-dark;
-    border-bottom: 1px solid $grey-color-light;
-    min-height: 56px;
-
-    // Positioning context for the mobile navigation icon
-    position: relative;
+    background-color: #233249;
+    padding: 0.8rem 0;
 }
 
 .site-title {
-    font-size: 26px;
-    line-height: 56px;
-    letter-spacing: -1px;
-    margin-bottom: 0;
-    float: left;
+    display: block;
+    margin: 2.0rem auto 4.0rem;
+    background: url(../assets/img/logo.svg);
+    background-repeat: no-repeat;
+    width: 16rem;
+    height: 8.4rem;
 
-    &,
-    &:visited {
-        color: $grey-color-dark;
+    span {
+        position: absolute;
+        left: -100000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        outline: 0;
     }
 }
 
@@ -92,8 +93,9 @@
  * Site footer
  */
 .site-footer {
-    border-top: 1px solid $grey-color-light;
-    padding: $spacing-unit 0;
+    margin: ($spacing-unit * 2) 0 0;
+    padding: ($spacing-unit / 2) 0;
+    background-color: #272822;
 }
 
 .footer-heading {
@@ -110,59 +112,54 @@
 .footer-col-wrapper {
     font-size: 15px;
     color: $grey-color;
-    margin-left: -$spacing-unit / 2;
     @extend %clearfix;
 }
 
 .footer-col {
     float: left;
-    margin-bottom: $spacing-unit / 2;
-    padding-left: $spacing-unit / 2;
 }
 
 .footer-col-1 {
-    width: -webkit-calc(35% - (#{$spacing-unit} / 2));
-    width:         calc(35% - (#{$spacing-unit} / 2));
+    width: 70%;
+
+    @include media-query($on-laptop) {
+        width: 60%;
+    }
+
+    p {
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+    }
 }
 
 .footer-col-2 {
-    width: -webkit-calc(20% - (#{$spacing-unit} / 2));
-    width:         calc(20% - (#{$spacing-unit} / 2));
-}
+    width: 20%;
+    margin-left: 10%;
+    text-align: right;
 
-.footer-col-3 {
-    width: -webkit-calc(45% - (#{$spacing-unit} / 2));
-    width:         calc(45% - (#{$spacing-unit} / 2));
-}
-
-@include media-query($on-laptop) {
-    .footer-col-1,
-    .footer-col-2 {
-        width: -webkit-calc(50% - (#{$spacing-unit} / 2));
-        width:         calc(50% - (#{$spacing-unit} / 2));
-    }
-
-    .footer-col-3 {
-        width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-        width:         calc(100% - (#{$spacing-unit} / 2));
+    @include media-query($on-laptop) {
+        width: 30%;
     }
 }
 
 @include media-query($on-palm) {
     .footer-col {
         float: none;
-        width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-        width:         calc(100% - (#{$spacing-unit} / 2));
+        width: 100%;
+        margin-left: 0;
+        text-align: left;
     }
 }
 
-
+.icon-rss {
+    margin-right: 10px;
+}
 
 /**
  * Page content
  */
 .page-content {
-    padding: $spacing-unit 0;
+    padding: 0;
 }
 
 .page-heading {
@@ -179,7 +176,7 @@
 }
 
 .post-meta {
-    font-size: $small-font-size;
+    font-size: $base-font-size;
     color: $grey-color;
 }
 
@@ -188,49 +185,44 @@
     font-size: 24px;
 }
 
+.btn-back {
+    position: absolute;
+    top: 5.5rem;
+
+    img {
+        width: 1.8rem;
+        height: 3.0rem;
+        margin-right: 1.0rem;
+    }
+
+    @media (max-width: 450px) {
+        span {
+            display: none;
+        }
+    }
+}
 
 
 /**
  * Posts
  */
-.post-header {
-    margin-bottom: $spacing-unit;
-}
+.post-list {
+    margin: $spacing-unit 0;
 
-.post-title {
-    font-size: 42px;
-    letter-spacing: -1px;
-    line-height: 1;
+    .post-list__item {
+        margin-bottom: 3.2rem;
+        
+        h2 {
+            margin-bottom: 0;
 
-    @include media-query($on-laptop) {
-        font-size: 36px;
-    }
-}
-
-.post-content {
-    margin-bottom: $spacing-unit;
-
-    h2 {
-        font-size: 32px;
-
-        @include media-query($on-laptop) {
-            font-size: 28px;
+            a {
+                margin-bottom: 0;
+            }
         }
-    }
-
-    h3 {
-        font-size: 26px;
-
-        @include media-query($on-laptop) {
-            font-size: 22px;
-        }
-    }
-
-    h4 {
-        font-size: 20px;
-
-        @include media-query($on-laptop) {
-            font-size: 18px;
+        .post-meta {
+            display: block;
+            margin-bottom: 0.8rem;
         }
     }
 }
+

@@ -1,7 +1,7 @@
 ---
 title: Testing for missing migrations in Django
 layout: post
-author: David Winterbottom, Head of Engineering
+author: David Winterbottom
 ---
 
 Since version 1.7, Django creates migrations for a more than just changes to

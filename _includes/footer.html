@@ -4,27 +4,22 @@
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>{{ site.title }}</li>
-          {% if site.github_username %}
-          <li>
-            <a href="https://github.com/{{ site.github_username }}">
-              <span class="username">github.com/{{ site.github_username }}</span>
-            </a>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-2">
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p class="text">{{ site.description }}</p>
-        <p class="text">
+        <p>{{ site.description }}</p>
+        <p>
             We're looking for <a href="/2015/11/23/tech-jobs.html">strong Python developers to join our team</a>. 
             Email us at <a href="mailto:{{ site.email }}">{{ site.email }}</a> if you're interested.
         </p>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        {% if site.github_username %}
+          <a href="{{ "/feed.xml" | prepend: site.baseurl }}" class="icon-rss">
+            <img src="{{ site.baseurl }}/assets/img/rss.svg" alt="">
+          </a>
+          <a href="https://github.com/{{ site.github_username }}" target="_blank">
+            <img src="{{ site.baseurl }}/assets/img/github.svg" alt="">
+          </a>
+        {% endif %}
       </div>
     </div>
 

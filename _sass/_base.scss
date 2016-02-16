@@ -97,7 +97,7 @@ a {
     }
 
     &:hover {
-        color: $text-color;
+        color: $brand-color;
         text-decoration: underline;
     }
 }
@@ -133,6 +133,7 @@ code {
 
 code {
     padding: 1px 5px;
+    background: #272822;
 }
 
 pre {

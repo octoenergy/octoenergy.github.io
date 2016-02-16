@@ -4,24 +4,28 @@ layout: default
 
 <div class="home">
 
-    <h1 class="page-heading">Hello</h1>
-    <p>We’re a new energy supplier for the UK. Through smart use of modern
-        technology, we’re going to change the way people consume and buy
-        energy.
-    </p>
-
-    <ul class="post-list">
+    <h1 class="hero-h1">Roboctopods: Our tech blog</h1>
+    <p>
+        We’re a new energy supplier for the UK. This is a collection of interesting challenges and handy tips that we have discovered on our journey...or something like that.
+    
+    <div class="post-list">
         {% for post in site.posts %}
-            <li>
-                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
+            {% for member in site.data.members %}
+                {% if member.name == post.author %}
+                    {% assign author = member %}
+                {% endif %}
+            {% endfor %}
+            <div class="post-list__item">
                 <h2>
-                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                    <a class="title post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
                 </h2>
-            </li>
+                <span class="subtitle post-meta">{{ post.date | date: "%b %-d, %Y" }} {% if post.author %} • {% if author.twitter %}<a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ post.author }}</a>{% else %}{{ post.author }}{% endif %}{% if author.jobtitle %}, {{ author.jobtitle }}{% endif %}{% endif %}</span>
+                <p>
+                    {{ post.content | strip_html | truncatewords:35}}
+                </p>
+            </div>
         {% endfor %}
-    </ul>
-
-    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+    </div>
 
 </div>
