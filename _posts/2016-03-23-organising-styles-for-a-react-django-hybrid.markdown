@@ -6,7 +6,7 @@ author: Ashley Firth
 
 When we started working with React JS here at Octopus Energy, I thought I'd try implementing [CSS Modules](https://github.com/css-modules/css-modules) to achieve what they call 'interoperable CSS'.
 
-It works especially well with React as a lot of your codebase is written as components. By definition these are pieces of code that can be re-used and placed throughout your site to achieve the same effect, so the idea of making a component truly self-contained by having it's own encapsulated styles as well as functionaluity was brilliant. I used CSS modules as a PostCSS plugin and, with a few more plugins to handle things like mixins, nesting, and variables. I was ready to go.
+It works especially well with React as a lot of your codebase is written as components. By definition these are pieces of code that can be re-used and placed throughout your site to achieve the same effect, so the idea of making a component truly self-contained by having it's own encapsulated styles as well as functionality was brilliant. I used CSS modules as a PostCSS plugin and, with a few more plugins to handle things like mixins, nesting, and variables. I was ready to go.
 
 The basic notion of CSS Modules is:
 
@@ -51,7 +51,7 @@ However encapsulation means just that; totally encapsulated.
 
 
 ##The issue
-It's important to note that the downside to CSS modules in this context is entirely our own doing. There were instances where React either wasn't the best approach or wasn't necessary for a particular section of the site. We have a lot of skilled Python developers at Octopus Energy and so it's always smart to utilise that. Regardless of what is going on behind the scenes though, the front end is always expected to be consistent. However I was now in the position where I had no way to access the randomly generated hash in the CSS selector that CSS modules creates and use it in a django template.
+It's important to note that the downside to CSS modules in this context is entirely our own doing. There were instances where React either wasn't the best approach or wasn't necessary for a particular section of the site. We have a lot of skilled Python developers at Octopus Energy and so it's always smart to utilise that. Regardless of what is going on behind the scenes though, the front end is always expected to be consistent. However I was now in the position where I had no way to access the randomly generated hash in the CSS selector that CSS modules creates and use it in a Django template.
 
 basically this part:
 {% highlight css %}
@@ -188,8 +188,3 @@ You are allowed to style anything inside a class that is a regular HTML componen
   color: green;
 }
 {% endhighlight %}
-
-
-
-
-
