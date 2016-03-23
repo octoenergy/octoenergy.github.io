@@ -6,37 +6,45 @@
 </description>
     <link>http://tech.octopus.energy/</link>
     <atom:link href="http://tech.octopus.energy/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 23 Mar 2016 16:32:52 +0000</pubDate>
-    <lastBuildDate>Wed, 23 Mar 2016 16:32:52 +0000</lastBuildDate>
+    <pubDate>Wed, 23 Mar 2016 16:52:35 +0000</pubDate>
+    <lastBuildDate>Wed, 23 Mar 2016 16:52:35 +0000</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
         <title>Organising styles for a React/Django hybrid</title>
-        <description>&lt;p&gt;When we started working with React JS here at Octopus Energy, I thought I’d try implementing &lt;a href=&quot;https://github.com/css-modules/css-modules&quot;&gt;CSS Modules&lt;/a&gt; to achieve what they call ‘interoperable CSS’.&lt;/p&gt;
+        <description>&lt;p&gt;When we started working with React JS here at Octopus Energy, I thought I’d try
+implementing &lt;a href=&quot;https://github.com/css-modules/css-modules&quot;&gt;CSS Modules&lt;/a&gt; to
+achieve what they call ‘interoperable CSS’.&lt;/p&gt;
 
-&lt;p&gt;It works especially well with React as a lot of your codebase is written as components. By definition these are pieces of code that can be re-used and placed throughout your site to achieve the same effect, so the idea of making a component truly self-contained by having it’s own encapsulated styles as well as functionality was brilliant. I used CSS modules as a PostCSS plugin and, with a few more plugins to handle things like mixins, nesting, and variables. I was ready to go.&lt;/p&gt;
+&lt;p&gt;It works especially well with React components, which are re-usable units of
+mark-up and Javascript functionality. Using CSS modules allows a component’s
+styles to be bundled with the component so they can be re-used through your
+site.&lt;/p&gt;
 
-&lt;p&gt;The basic notion of CSS Modules is:&lt;/p&gt;
+&lt;p&gt;I used CSS modules as a PostCSS plugin and, with a few more plugins to handle
+things like mixins, nesting, and variables, I was ready to go.&lt;/p&gt;
 
-&lt;h3 id=&quot;have-a-stylesheet-for-a-component&quot;&gt;Have a stylesheet for a component…&lt;/h3&gt;
+&lt;p&gt;Briefly, CSS Modules can be used with a React component as follows. Given a stylesheet for a component:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;c&quot;&gt;/* component.css */&lt;/span&gt;
 &lt;span class=&quot;nc&quot;&gt;.className&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;reference-it-in-your-component-js-file&quot;&gt;Reference it in your component JS file…&lt;/h3&gt;
+&lt;p&gt;you can reference it in your component JSX file:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;./component.css&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* Component.jsx */&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;./component.css&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;use-it-in-the-jsx&quot;&gt;Use it in the JSX…&lt;/h3&gt;
+&lt;p&gt;and reference the styles in the JSX:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* Component.jsx */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
 	&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h1&amp;gt;&lt;/span&gt;
 	&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Lorem&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ipsum&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dolor&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sit&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;amet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;and-css-modules-makes-each-reference-unique&quot;&gt;and CSS modules makes each reference unique:&lt;/h3&gt;
+&lt;p&gt;Finally, during compilation, the CSS modules will ensure each reference is unique:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.className__abc5436&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
 &lt;span class=&quot;nc&quot;&gt;.className__def6547&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -46,40 +54,64 @@
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;className__abc5436&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Hello word&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;className__def6547&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Lorem ipsum dolor sit amet&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;em&gt;Note: for a proper introduction to CSS modules, check out &lt;a href=&quot;http://glenmaddern.com/articles/css-modules&quot;&gt;this article&lt;/a&gt; from Glen Maddern&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;For a more detailed introduction to &lt;a href=&quot;http://glenmaddern.com/articles/css-modules&quot;&gt;CSS Modules: Welcome to the Future&lt;/a&gt; by Glen Maddern&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;The benefits were pretty immediate. I had a &lt;code&gt;.css&lt;/code&gt; file to accompany every component &lt;code&gt;.jsx&lt;/code&gt; file and I could use the sort of vague classnames you would never dream of using in a regular css file. Suddenly &lt;code&gt;.Image&lt;/code&gt; was a totally acceptable selector in the context, and one that wouldn’t result in me being killed by another front end developer. The use of &lt;code&gt;@extend&lt;/code&gt; prevented code duplication inside the component file, and allowed me to use styles from another file if I was happy with reducing the level of encapsulation a little.&lt;/p&gt;
+&lt;p&gt;The benefits were pretty immediate. I had a &lt;code&gt;.css&lt;/code&gt; file to accompany every
+component &lt;code&gt;.jsx&lt;/code&gt; file and I could use the sort of vague classnames you would
+never dream of using in a regular CSS file. Suddenly &lt;code&gt;.Image&lt;/code&gt; was an
+acceptable selector in the context, and one that wouldn’t result in me being
+killed by another front end developer. The use of &lt;code&gt;@extend&lt;/code&gt; prevented code
+duplication inside the component file, and allowed me to use styles from another
+file if I was happy with reducing the level of encapsulation a little.&lt;/p&gt;
 
 &lt;p&gt;However encapsulation means just that; totally encapsulated. &lt;/p&gt;
 
 &lt;h2 id=&quot;the-issue&quot;&gt;The issue&lt;/h2&gt;
-&lt;p&gt;It’s important to note that the downside to CSS modules in this context is entirely our own doing. There were instances where React either wasn’t the best approach or wasn’t necessary for a particular section of the site. We have a lot of skilled Python developers at Octopus Energy and so it’s always smart to utilise that. Regardless of what is going on behind the scenes though, the front end is always expected to be consistent. However I was now in the position where I had no way to access the randomly generated hash in the CSS selector that CSS modules creates and use it in a Django template.&lt;/p&gt;
 
-&lt;p&gt;basically this part:&lt;/p&gt;
+&lt;p&gt;It’s important to note that the downside to CSS modules in this context is
+entirely our own doing. There were instances where React either wasn’t the best
+approach or wasn’t necessary for a particular section of the site. We have a lot
+of skilled Python developers at Octopus Energy and so it’s always smart to
+utilise that. Regardless of what is going on behind the scenes though, the front
+end is always expected to be consistent. However, I was now in the position where
+I had no way to access the randomly generated hash in the CSS selector that CSS
+modules creates and use it in a Django template.&lt;/p&gt;
+
+&lt;p&gt;Specifically, this part:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;__abc5436&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;of this&lt;/p&gt;
+&lt;p&gt;of this class name:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.className__abc5436&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 	
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;is dynamically injected before the page is rendered. I could try and guess the hash but I may as well have bought a lottery ticket and expected the same outcome - an unstyled component and no extra money.&lt;/p&gt;
+&lt;p&gt;is dynamically injected before the page is rendered. I could try and guess the
+hash but I may as well have bought a lottery ticket and expected the same
+outcome - an unstyled component and no extra money.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-attempted-workaround&quot;&gt;The attempted workaround&lt;/h2&gt;
 
-&lt;p&gt;So I had CSS siloed in modular component files and areas of the site that now wanted to use those styles that weren’t React-based. In an attempt to prevent excessive duplication between the two, I created a &lt;code&gt;Sitewide.css&lt;/code&gt; file that both the CSS modules and the SASS (used for the rest of the site/global styles) could extend from. The downside to this approach is two-fold:  &lt;/p&gt;
+&lt;p&gt;So I had CSS siloed in modular component files and areas of the site that now
+wanted to use those styles that weren’t React-based. In an attempt to prevent
+excessive duplication between the two, I created a &lt;code&gt;Sitewide.css&lt;/code&gt; file that both
+the CSS modules and the SASS (used for the rest of the site/global styles) could
+extend from. The downside to this approach is two-fold:  &lt;/p&gt;
 
 &lt;p&gt;1) The styles in this file had to be written in pure CSS as SASS and PostCSS have different syntax for mixins and variables.  &lt;/p&gt;
 
 &lt;p&gt;2) As pure CSS, the bigger the file becomes the less maintainable it is without the use of pre-processor features such as variables, nesting, and mixins.&lt;/p&gt;
 
-&lt;p&gt;Therefore for future code quality, I had to remove CSS modules from the setup and replace it with SASS globally. However it’s approach did teach me some good techniques that I brought over to the custom approach we use now.&lt;/p&gt;
+&lt;p&gt;Therefore, for future code quality, I had to remove CSS modules from the setup
+and replace it with SASS globally. However its approach did teach me some good
+techniques that I brought over to the custom approach we use now.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-new-approach&quot;&gt;The new approach&lt;/h2&gt;
 
-&lt;p&gt;We use a version of the &lt;a href=&quot;http://sass-guidelin.es/#the-7-1-pattern&quot;&gt;7-1 pattern&lt;/a&gt; to lay out our styles and directories (although ours is only 5-1). It looks like this:&lt;/p&gt;
+&lt;p&gt;We use a version of the &lt;a href=&quot;http://sass-guidelin.es/#the-7-1-pattern&quot;&gt;7-1 pattern&lt;/a&gt;
+to lay out our styles and directories (although ours is only 5-1). It looks like
+this:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;sass/
 |
@@ -129,7 +161,7 @@
 
 &lt;h2 id=&quot;the-rules&quot;&gt;The rules&lt;/h2&gt;
 
-&lt;h3 id=&quot;mimic-the-react-component-layout&quot;&gt;1.Mimic the React component layout&lt;/h3&gt;
+&lt;h3 id=&quot;mimic-the-react-component-layout&quot;&gt;1. Mimic the React component layout&lt;/h3&gt;
 
 &lt;p&gt;As you can see from the structure above, Within &lt;code&gt;sass/&lt;/code&gt;, we have a &lt;code&gt;components/&lt;/code&gt; directory that mimics the layout of the React components folder in &lt;code&gt;app/components&lt;/code&gt;. Although this isn’t in the same directory as the JS, it still maintains CSS modules’ idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!&lt;/p&gt;
 
@@ -160,7 +192,7 @@
 
 &lt;p&gt;This rule only applies to component-specific &lt;code&gt;.scss&lt;/code&gt; files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the heirarchy of the component markup, it would break the styling.&lt;/p&gt;
 
-&lt;p&gt;You are allowed to style anything inside a class that is a regular HTML component (paragraph or anchor tags for example), but instead of nesting classes, simple create them as two separate selectors. The fact that each component selector starts with the component’s name also means that you can be vague in your selector names and not worry that the style will affect other areas of the app:&lt;/p&gt;
+&lt;p&gt;You are allowed to style anything inside a class that is a regular HTML component (paragraph or anchor tags for example), but instead of nesting classes, simply create them as two separate selectors. The fact that each component selector starts with the component’s name also means that you can be vague in your selector names and not worry that the style will affect other areas of the app:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scss&quot; data-lang=&quot;scss&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* Instead of this: */&lt;/span&gt;
 &lt;span class=&quot;nc&quot;&gt;.well&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
