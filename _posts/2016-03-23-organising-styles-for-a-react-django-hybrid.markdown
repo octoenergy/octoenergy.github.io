@@ -4,34 +4,46 @@ layout: post
 author: Ashley Firth
 ---
 
-When we started working with React JS here at Octopus Energy, I thought I'd try implementing [CSS Modules](https://github.com/css-modules/css-modules) to achieve what they call 'interoperable CSS'.
+When we started working with React JS here at Octopus Energy, I thought I'd try
+implementing [CSS Modules](https://github.com/css-modules/css-modules) to
+achieve what they call 'interoperable CSS'.
 
-It works especially well with React as a lot of your codebase is written as components. By definition these are pieces of code that can be re-used and placed throughout your site to achieve the same effect, so the idea of making a component truly self-contained by having its own encapsulated styles as well as functionality was brilliant. I used CSS modules as a PostCSS plugin and, with a few more plugins to handle things like mixins, nesting, and variables, I was ready to go.
+It works especially well with React components, which are re-usable units of
+mark-up and Javascript functionality. Using CSS modules allows a component's
+styles to be bundled with the component so they can be re-used through your
+site.
 
-The basic notion of CSS Modules is:
+I used CSS modules as a PostCSS plugin and, with a few more plugins to handle
+things like mixins, nesting, and variables, I was ready to go.
 
-###Have a stylesheet for a component...
+Briefly, CSS Modules can be used with a React component as follows. Given a stylesheet for a component:
+
 {% highlight css %}
 /* component.css */
 .className {
-  color: green;
+    color: green;
 }
 {% endhighlight %}
 
-###Reference it in your component JS file...
+you can reference it in your component JSX file:
+
 {% highlight js %}
+/* Component.jsx */
 import styles from "./component.css";
 {% endhighlight %}
 
-###Use it in the JSX...
+and reference the styles in the JSX:
+
 {% highlight js %}
+/* Component.jsx */
 return (
 	<h1 class={styles.className}>Hello word</h1>
 	<p className={styles.className}>Lorem ipsum dolor sit amet</p>
 );
 {% endhighlight %}
 
-###and CSS modules makes each reference unique:
+Finally, during compilation, the CSS modules will ensure each reference is unique:
+
 {% highlight css %}
 .className__abc5436,
 .className__def6547 {
@@ -43,43 +55,66 @@ return (
 <p class="className__def6547">Lorem ipsum dolor sit amet</p>
 {% endhighlight %}
 
-*Note: for a proper introduction to CSS modules, check out [this article](http://glenmaddern.com/articles/css-modules) from Glen Maddern*
+*For a more detailed introduction to [CSS Modules: Welcome to the Future](http://glenmaddern.com/articles/css-modules) by Glen Maddern*
 
-The benefits were pretty immediate. I had a `.css` file to accompany every component `.jsx` file and I could use the sort of vague classnames you would never dream of using in a regular css file. Suddenly `.Image` was a totally acceptable selector in the context, and one that wouldn't result in me being killed by another front end developer. The use of `@extend` prevented code duplication inside the component file, and allowed me to use styles from another file if I was happy with reducing the level of encapsulation a little.
+The benefits were pretty immediate. I had a `.css` file to accompany every
+component `.jsx` file and I could use the sort of vague classnames you would
+never dream of using in a regular CSS file. Suddenly `.Image` was an
+acceptable selector in the context, and one that wouldn't result in me being
+killed by another front end developer. The use of `@extend` prevented code
+duplication inside the component file, and allowed me to use styles from another
+file if I was happy with reducing the level of encapsulation a little.
 
 However encapsulation means just that; totally encapsulated. 
 
+## The issue
 
-##The issue
-It's important to note that the downside to CSS modules in this context is entirely our own doing. There were instances where React either wasn't the best approach or wasn't necessary for a particular section of the site. We have a lot of skilled Python developers at Octopus Energy and so it's always smart to utilise them. Regardless of what is going on behind the scenes though, the front end is always expected to be consistent. However I was now in the position where I had no way to access the randomly generated hash in the CSS selector that CSS modules creates and use it in a Django template.
+It's important to note that the downside to CSS modules in this context is
+entirely our own doing. There were instances where React either wasn't the best
+approach or wasn't necessary for a particular section of the site. We have a lot
+of skilled Python developers at Octopus Energy and so it's always smart to
+utilise that. Regardless of what is going on behind the scenes though, the front
+end is always expected to be consistent. However, I was now in the position where
+I had no way to access the randomly generated hash in the CSS selector that CSS
+modules creates and use it in a Django template.
 
-basically this part:
+Specifically, this part:
 {% highlight css %}
 __abc5436
 {% endhighlight %}
 
-of this
+of this class name:
 {% highlight css %}
 .className__abc5436 {
 	
 }
 {% endhighlight %}
 
-is dynamically injected before the page is rendered. I could try and guess the hash but I may as well have bought a lottery ticket and expected the same outcome - an unstyled component and no extra money.
+is dynamically injected before the page is rendered. I could try and guess the
+hash but I may as well have bought a lottery ticket and expected the same
+outcome - an unstyled component and no extra money.
 
 ##The attempted workaround
 
-So I had CSS siloed in modular component files and areas of the site that now wanted to use those styles that weren't React-based. In an attempt to prevent excessive duplication between the two, I created a `Sitewide.css` file that both the CSS modules and the SASS (used for the rest of the site/global styles) could extend from. The downside to this approach is two-fold:  
+So I had CSS siloed in modular component files and areas of the site that now
+wanted to use those styles that weren't React-based. In an attempt to prevent
+excessive duplication between the two, I created a `Sitewide.css` file that both
+the CSS modules and the SASS (used for the rest of the site/global styles) could
+extend from. The downside to this approach is two-fold:  
   
 1) The styles in this file had to be written in pure CSS as SASS and PostCSS have different syntax for mixins and variables.  
   
 2) As pure CSS, the bigger the file becomes the less maintainable it is without the use of pre-processor features such as variables, nesting, and mixins.
 
-Therefore for future code quality, I had to remove CSS modules from the setup and replace it with SASS globally. However its approach did teach me some good techniques that I brought over to the custom approach we use now.
+Therefore, for future code quality, I had to remove CSS modules from the setup
+and replace it with SASS globally. However its approach did teach me some good
+techniques that I brought over to the custom approach we use now.
 
-##The new approach
+## The new approach
 
-We use a version of the [7-1 pattern](http://sass-guidelin.es/#the-7-1-pattern) to lay out our styles and directories (although ours is only 5-1). It looks like this:
+We use a version of the [7-1 pattern](http://sass-guidelin.es/#the-7-1-pattern)
+to lay out our styles and directories (although ours is only 5-1). It looks like
+this:
 
 {% highlight html %}
 sass/
@@ -166,7 +201,7 @@ This may seem like overkill if your component uses many common app styles, but i
 
 This rule only applies to component-specific `.scss` files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the hierarchy of the component markup, it would break the styling.
 
-You are allowed to style anything inside a class that is a regular HTML component (paragraph or anchor tags for example), but instead of nesting classes, simple create them as two separate selectors. The fact that each component selector starts with the component's name also means that you can be vague in your selector names and not worry that the style will affect other areas of the app:
+You are allowed to style anything inside a class that is a regular HTML component (paragraph or anchor tags for example), but instead of nesting classes, simply create them as two separate selectors. The fact that each component selector starts with the component's name also means that you can be vague in your selector names and not worry that the style will affect other areas of the app:
 
 {% highlight scss %}
 /* Instead of this: */
