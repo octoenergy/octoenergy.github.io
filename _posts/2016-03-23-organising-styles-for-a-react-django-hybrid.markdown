@@ -160,7 +160,7 @@ sass/
 |- styles.scss          # Main Sass file
 {% endhighlight %}
 
-Although all styles are technically 'global' now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance occuring. 
+Although all styles are technically 'global' now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance occurring. 
 
 To achieve this, we have a set of rules when styling components new or existing. The rules are as follows:
 
@@ -168,7 +168,7 @@ To achieve this, we have a set of rules when styling components new or existing.
 
 ###1. Mimic the React component layout
 
-As you can see from the structure above, Within `sass/`, we have a `components/` directory that mimics the layout of the React components folder in `app/components`. Although this isn't in the same directory as the JS, it still maintains CSS modules' idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!
+As you can see from the structure above, within `sass/`, we have a `components/` directory that mimics the layout of the React components folder in `app/components`. Although this isn't in the same directory as the JS, it still maintains CSS modules' idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!
 
 ###2. Never use global classes
 
@@ -197,10 +197,9 @@ So for our above example, if `JoinComponent-button` was intended for use in the 
 
 This may seem like overkill if your component uses many common app styles, but it ensures that component selectors remain totally isolated and will never clash with one another. It does technically mean that everything you need to style the component does not lie solely in the file, but it would still look the same if it were used anywhere in the site. Additionally, it prevents code duplication.
 
-  
 ###4. Do not nest classes
 
-This rule only applies to component-specific `.scss` files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the heirarchy of the component markup, it would break the styling.
+This rule only applies to component-specific `.scss` files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the hierarchy of the component markup, it would break the styling.
 
 You are allowed to style anything inside a class that is a regular HTML component (paragraph or anchor tags for example), but instead of nesting classes, simply create them as two separate selectors. The fact that each component selector starts with the component's name also means that you can be vague in your selector names and not worry that the style will affect other areas of the app:
 

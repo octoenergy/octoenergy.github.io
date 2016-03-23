@@ -6,8 +6,8 @@
 </description>
     <link>http://tech.octopus.energy/</link>
     <atom:link href="http://tech.octopus.energy/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 23 Mar 2016 16:52:35 +0000</pubDate>
-    <lastBuildDate>Wed, 23 Mar 2016 16:52:35 +0000</lastBuildDate>
+    <pubDate>Wed, 23 Mar 2016 16:57:22 +0000</pubDate>
+    <lastBuildDate>Wed, 23 Mar 2016 16:57:22 +0000</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -155,7 +155,7 @@ this:&lt;/p&gt;
 |
 |- styles.scss          # Main Sass file&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Although all styles are technically ‘global’ now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance occuring. &lt;/p&gt;
+&lt;p&gt;Although all styles are technically ‘global’ now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance occurring. &lt;/p&gt;
 
 &lt;p&gt;To achieve this, we have a set of rules when styling components new or existing. The rules are as follows:&lt;/p&gt;
 
@@ -163,7 +163,7 @@ this:&lt;/p&gt;
 
 &lt;h3 id=&quot;mimic-the-react-component-layout&quot;&gt;1. Mimic the React component layout&lt;/h3&gt;
 
-&lt;p&gt;As you can see from the structure above, Within &lt;code&gt;sass/&lt;/code&gt;, we have a &lt;code&gt;components/&lt;/code&gt; directory that mimics the layout of the React components folder in &lt;code&gt;app/components&lt;/code&gt;. Although this isn’t in the same directory as the JS, it still maintains CSS modules’ idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!&lt;/p&gt;
+&lt;p&gt;As you can see from the structure above, within &lt;code&gt;sass/&lt;/code&gt;, we have a &lt;code&gt;components/&lt;/code&gt; directory that mimics the layout of the React components folder in &lt;code&gt;app/components&lt;/code&gt;. Although this isn’t in the same directory as the JS, it still maintains CSS modules’ idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!&lt;/p&gt;
 
 &lt;h3 id=&quot;never-use-global-classes&quot;&gt;2. Never use global classes&lt;/h3&gt;
 
@@ -190,7 +190,7 @@ this:&lt;/p&gt;
 
 &lt;h3 id=&quot;do-not-nest-classes&quot;&gt;4. Do not nest classes&lt;/h3&gt;
 
-&lt;p&gt;This rule only applies to component-specific &lt;code&gt;.scss&lt;/code&gt; files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the heirarchy of the component markup, it would break the styling.&lt;/p&gt;
+&lt;p&gt;This rule only applies to component-specific &lt;code&gt;.scss&lt;/code&gt; files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the hierarchy of the component markup, it would break the styling.&lt;/p&gt;
 
 &lt;p&gt;You are allowed to style anything inside a class that is a regular HTML component (paragraph or anchor tags for example), but instead of nesting classes, simply create them as two separate selectors. The fact that each component selector starts with the component’s name also means that you can be vague in your selector names and not worry that the style will affect other areas of the app:&lt;/p&gt;
 

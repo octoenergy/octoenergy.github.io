@@ -184,7 +184,7 @@ this:</p>
 |
 |- styles.scss          # Main Sass file</code></pre></div>
 
-<p>Although all styles are technically ‘global’ now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance occuring. </p>
+<p>Although all styles are technically ‘global’ now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance occurring. </p>
 
 <p>To achieve this, we have a set of rules when styling components new or existing. The rules are as follows:</p>
 
@@ -192,7 +192,7 @@ this:</p>
 
 <h3 id="mimic-the-react-component-layout">1. Mimic the React component layout</h3>
 
-<p>As you can see from the structure above, Within <code>sass/</code>, we have a <code>components/</code> directory that mimics the layout of the React components folder in <code>app/components</code>. Although this isn’t in the same directory as the JS, it still maintains CSS modules’ idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!</p>
+<p>As you can see from the structure above, within <code>sass/</code>, we have a <code>components/</code> directory that mimics the layout of the React components folder in <code>app/components</code>. Although this isn’t in the same directory as the JS, it still maintains CSS modules’ idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!</p>
 
 <h3 id="never-use-global-classes">2. Never use global classes</h3>
 
@@ -219,7 +219,7 @@ this:</p>
 
 <h3 id="do-not-nest-classes">4. Do not nest classes</h3>
 
-<p>This rule only applies to component-specific <code>.scss</code> files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the heirarchy of the component markup, it would break the styling.</p>
+<p>This rule only applies to component-specific <code>.scss</code> files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the hierarchy of the component markup, it would break the styling.</p>
 
 <p>You are allowed to style anything inside a class that is a regular HTML component (paragraph or anchor tags for example), but instead of nesting classes, simply create them as two separate selectors. The fact that each component selector starts with the component’s name also means that you can be vague in your selector names and not worry that the style will affect other areas of the app:</p>
 
