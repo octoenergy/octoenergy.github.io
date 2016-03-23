@@ -6,7 +6,7 @@ author: Ashley Firth
 
 When we started working with React JS here at Octopus Energy, I thought I'd try implementing [CSS Modules](https://github.com/css-modules/css-modules) to achieve what they call 'interoperable CSS'.
 
-It works especially well with React as a lot of your codebase is written as components. By definition these are pieces of code that can be re-used and placed throughout your site to achieve the same effect, so the idea of making a component truly self-contained by having it's own encapsulated styles as well as functionaluity was brilliant. I used CSS modules as a PostCSS plugin and, with a few more plugins to handle things like mixins, nesting, and variables. I was ready to go.
+It works especially well with React as a lot of your codebase is written as components. By definition these are pieces of code that can be re-used and placed throughout your site to achieve the same effect, so the idea of making a component truly self-contained by having its own encapsulated styles as well as functionality was brilliant. I used CSS modules as a PostCSS plugin and, with a few more plugins to handle things like mixins, nesting, and variables, I was ready to go.
 
 The basic notion of CSS Modules is:
 
@@ -51,7 +51,7 @@ However encapsulation means just that; totally encapsulated.
 
 
 ##The issue
-It's important to note that the downside to CSS modules in this context is entirely our own doing. There were instances where React either wasn't the best approach or wasn't necessary for a particular section of the site. We have a lot of skilled Python developers at Octopus Energy and so it's always smart to utilise that. Regardless of what is going on behind the scenes though, the front end is always expected to be consistent. However I was now in the position where I had no way to access the randomly generated hash in the CSS selector that CSS modules creates and use it in a django template.
+It's important to note that the downside to CSS modules in this context is entirely our own doing. There were instances where React either wasn't the best approach or wasn't necessary for a particular section of the site. We have a lot of skilled Python developers at Octopus Energy and so it's always smart to utilise them. Regardless of what is going on behind the scenes though, the front end is always expected to be consistent. However I was now in the position where I had no way to access the randomly generated hash in the CSS selector that CSS modules creates and use it in a Django template.
 
 basically this part:
 {% highlight css %}
@@ -65,7 +65,6 @@ of this
 }
 {% endhighlight %}
 
-
 is dynamically injected before the page is rendered. I could try and guess the hash but I may as well have bought a lottery ticket and expected the same outcome - an unstyled component and no extra money.
 
 ##The attempted workaround
@@ -76,7 +75,7 @@ So I had CSS siloed in modular component files and areas of the site that now wa
   
 2) As pure CSS, the bigger the file becomes the less maintainable it is without the use of pre-processor features such as variables, nesting, and mixins.
 
-Therefore for future code quality, I had to remove CSS modules from the setup and replace it with SASS globally. However it's approach did teach me some good techniques that I brought over to the custom approach we use now.
+Therefore for future code quality, I had to remove CSS modules from the setup and replace it with SASS globally. However its approach did teach me some good techniques that I brought over to the custom approach we use now.
 
 ##The new approach
 
@@ -126,15 +125,15 @@ sass/
 |- styles.scss          # Main Sass file
 {% endhighlight %}
 
-Although all styles are technically 'global' now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance occuring. 
+Although all styles are technically 'global' now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance occurring. 
 
 To achieve this, we have a set of rules when styling components new or existing. The rules are as follows:
 
 ##The rules
 
-###1.Mimic the React component layout
+###1. Mimic the React component layout
 
-As you can see from the structure above, Within `sass/`, we have a `components/` directory that mimics the layout of the React components folder in `app/components`. Although this isn't in the same directory as the JS, it still maintains CSS modules' idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!
+As you can see from the structure above, within `sass/`, we have a `components/` directory that mimics the layout of the React components folder in `app/components`. Although this isn't in the same directory as the JS, it still maintains CSS modules' idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!
 
 ###2. Never use global classes
 
@@ -163,10 +162,9 @@ So for our above example, if `JoinComponent-button` was intended for use in the 
 
 This may seem like overkill if your component uses many common app styles, but it ensures that component selectors remain totally isolated and will never clash with one another. It does technically mean that everything you need to style the component does not lie solely in the file, but it would still look the same if it were used anywhere in the site. Additionally, it prevents code duplication.
 
-  
 ###4. Do not nest classes
 
-This rule only applies to component-specific `.scss` files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the heirarchy of the component markup, it would break the styling.
+This rule only applies to component-specific `.scss` files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the hierarchy of the component markup, it would break the styling.
 
 You are allowed to style anything inside a class that is a regular HTML component (paragraph or anchor tags for example), but instead of nesting classes, simple create them as two separate selectors. The fact that each component selector starts with the component's name also means that you can be vague in your selector names and not worry that the style will affect other areas of the app:
 
@@ -188,8 +186,3 @@ You are allowed to style anything inside a class that is a regular HTML componen
   color: green;
 }
 {% endhighlight %}
-
-
-
-
-
