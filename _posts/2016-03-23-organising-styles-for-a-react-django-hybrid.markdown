@@ -94,7 +94,7 @@ is dynamically injected before the page is rendered. I could try and guess the
 hash but I may as well have bought a lottery ticket and expected the same
 outcome - an unstyled component and no extra money.
 
-##The attempted workaround
+## The attempted workaround
 
 So I had CSS siloed in modular component files and areas of the site that now
 wanted to use those styles that weren't React-based. In an attempt to prevent
@@ -164,13 +164,13 @@ Although all styles are technically 'global' now, we try and make each component
 
 To achieve this, we have a set of rules when styling components new or existing. The rules are as follows:
 
-##The rules
+## The rules
 
-###1. Mimic the React component layout
+### 1. Mimic the React component layout
 
 As you can see from the structure above, within `sass/`, we have a `components/` directory that mimics the layout of the React components folder in `app/components`. Although this isn't in the same directory as the JS, it still maintains CSS modules' idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!
 
-###2. Never use global classes
+### 2. Never use global classes
 
 Each selector in a component `.scss` file will start with the name of the component followed by the class name. i.e. if we were creating a `button` class in a container called `JoinComponent`, the class selector in `_JoinComponent.scss` would be:
 
@@ -182,7 +182,7 @@ Each selector in a component `.scss` file will start with the name of the compon
 
 This way, the button styles is exclusive to the `JoinComponent` component, and would not be caught up in specificity issues or accidentally overridden in another file.
 
-###3. If it's commonly used, always `@extend` it
+### 3. If it's commonly used, always `@extend` it
 
 If your component uses a common piece of styling, such as a button or link, create a new component-specific selector and use the SASS `@extend` syntax to bring in the style. You need to do this even if you aren't doing anything to edit the styles of it.
 
@@ -197,7 +197,7 @@ So for our above example, if `JoinComponent-button` was intended for use in the 
 
 This may seem like overkill if your component uses many common app styles, but it ensures that component selectors remain totally isolated and will never clash with one another. It does technically mean that everything you need to style the component does not lie solely in the file, but it would still look the same if it were used anywhere in the site. Additionally, it prevents code duplication.
 
-###4. Do not nest classes
+### 4. Do not nest classes
 
 This rule only applies to component-specific `.scss` files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the hierarchy of the component markup, it would break the styling.
 
