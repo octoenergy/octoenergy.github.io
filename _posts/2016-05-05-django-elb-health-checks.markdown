@@ -9,7 +9,7 @@ Services is to use an [Elastic Load Balancer](https://aws.amazon.com/elasticload
 (ELB) to balance requests between an "Auto Scaling Group" (ASG) of EC2 instances. As
 well as horizontally scaling, this set-up allows automated canary (aka
 blue-green) deployments, where new application versions are deployed as a new
-ASG replacing the old EC2 instances with new; a so-called "immutable
+ASG which replaces the existing EC2 instances with new; a so-called "immutable
 infrastructure" approach. 
 
 Such a procedure relies on ELB "health check" requests to test that the
@@ -25,7 +25,7 @@ excellent [Atlas](https://www.hashicorp.com/atlas.html) service:
 1. CircleCI, our continuous integration service, packages up the application
    when the tests pass on master and uploads the tarball to Atlas. 
    
-2. Atlas then employs Packer with a set of uploaded configuration (eg Puppet
+2. Atlas then employs Packer with a set of uploaded configuration (e.g. Puppet
    manifests and modules) to create a new Amazon Machine Image (AMI).
    
 3. Atlas then deploys this AMI into production using Terraform. Terraform brings
@@ -34,7 +34,7 @@ excellent [Atlas](https://www.hashicorp.com/atlas.html) service:
 
 Evolving this process over the last few months has highlighted the importance of
 getting the health check right. Below are some tips. An example Django application
-run with uWSGI and Nginx is used but most of the advice
+run with uWSGI and NGINX is used but most of the advice
 translates to other frameworks and HTTP servers.
 
 While this article is nominally about health checks, the TLDR is that you can
@@ -93,7 +93,7 @@ def health(request):
     return http.HttpResponse()
 {% endhighlight %}
 
-It would have been easier to use Nginx to respond to the health-check request
+It would have been easier to use NGINX to respond to the health-check request
 directly without troubling uWSGI.
 But we get considerably more value by going a layer deeper and getting the
 Django application to respond.  Several classes of problem
@@ -166,7 +166,7 @@ practice ensures canary deployments fail if configuration is missing.
 Assuming uWSGI can start the Python application, let's example the set-up that
 allows Django to respond successfully to the health check.
 
-# Nginx 
+# NGINX 
 
 We terminate TLS on the ELB and proxy requests to port 80 of the EC2 instance.
 For normal user requests, we use the `X_FORWARDED_PROTO` header to ensure TLS is used. 
@@ -218,7 +218,7 @@ ELB health-check requests use the private IP address of the EC2 instance as the
 host header so we need to ensure such requests are correctly handled by the Django
 application.
 
-For Nginx, this isn't a problem as we proxy to the Django application in the
+For NGINX, this isn't a problem as we proxy to the Django application in the
 catch-all virtualhost (the first one defined). 
 
 For the Django application to respond correctly, the private IP address must be
