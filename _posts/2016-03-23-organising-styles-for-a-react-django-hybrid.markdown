@@ -2,6 +2,7 @@
 title: Organising styles for a React/Django hybrid
 layout: post
 author: Ashley Firth
+banner: /assets/img/posts/2016-03-23-organising-styles-for-a-react-django-hybrid.jpg
 ---
 
 When we started working with React JS here at Octopus Energy, I thought I'd try

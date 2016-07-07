@@ -4,28 +4,81 @@ layout: default
 
 <div class="home">
 
-    <h1 class="hero-h1">Roboctopods: Our tech blog</h1>
-    <p>
-        We’re a new energy supplier for the UK. This is a collection of interesting challenges and handy tips that we have discovered on our journey...or something like that.
-    
-    <div class="post-list">
-        {% for post in site.posts %}
+
+        {% for hero in site.posts limit: 1 %}
+            </div> <!-- /home -->
+            </div> <!-- /wrapper -->
 
             {% for member in site.data.members %}
-                {% if member.name == post.author %}
+                {% if member.name == hero.author %}
                     {% assign author = member %}
                 {% endif %}
             {% endfor %}
-            <div class="post-list__item">
-                <h2>
-                    <a class="title post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                </h2>
-                <span class="subtitle post-meta">{{ post.date | date: "%b %-d, %Y" }} {% if post.author %} • {% if author.twitter %}<a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ post.author }}</a>{% else %}{{ post.author }}{% endif %}{% if author.jobtitle %}, {{ author.jobtitle }}{% endif %}{% endif %}</span>
-                <p>
-                    {{ post.content | strip_html | truncatewords:35}}
-                </p>
-            </div>
+
+                <div style="background-color: #233249;">
+                        {% if hero.banner %}
+                            <img src="{{ site.baseurl }}{{ hero.banner }}" alt="Blog " class="blog-hero-image">
+                        {% endif %}
+                        <div class="wrapper relative">
+                            <div class="blog-hero--content">
+                                <h1><a href="{{ hero.url | prepend: site.baseurl }}" class="blog-hero--title"">{{ hero.title }}</a></h1>
+                                <p class="blog-hero--author">
+                                    {% if author.twitter %}
+                                        <a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ hero.author }}</a>,
+                                    {% else %}
+                                        {{ hero.author }}
+                                    {% endif %}
+                                    {% if author.jobtitle %}
+                                        <span class="blog-author--title">{{ author.jobtitle }}</span>
+                                    {% endif %}
+                                </p>
+                                <a href="{{ hero.url | prepend: site.baseurl }}" class="blog-hero--link">Read more</a>
+                            </div>
+                        </div>
+                </div>
+
+            <div class="wrapper">
+            <div class="home">
         {% endfor %}
-    </div>
+
+        <div class="blog-entries">
+            {% for post in site.posts offset: 1 %}
+
+                {% for member in site.data.members %}
+                    {% if member.name == post.author %}
+                        {% assign author = member %}
+                    {% endif %}
+                {% endfor %}
+
+                    <!-- <div class="post-list__item">
+                        {% if post.banner %}
+                            <img src="{{ site.baseurl }}{{ post.banner }}" alt="">
+                        {% endif %}
+                        <h2>
+                            <a class="title post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                        </h2>
+                        <span class="subtitle post-meta">{{ post.date | date: "%b %-d, %Y" }} {% if post.author %} • {% if author.twitter %}<a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ post.author }}</a>{% else %}{{ post.author }}{% endif %}{% if author.jobtitle %}, {{ author.jobtitle }}{% endif %}{% endif %}</span>
+                        <p>
+                            {{ post.content | strip_html | truncatewords:25}}
+                        </p>
+                    </div> -->
+
+                    <div class="blog-entry">
+                        <a href="{{ post.url | prepend: site.baseurl }}">
+                            <div class="blog-entry--image" {% if post.banner %} style="background-image: url({{ site.baseurl }}{{ post.banner }});" {% endif %}>
+                                <h1 class="blog-entry--title">{{ post.title }}</h1>
+                            </div>
+                        </a>
+                        <div class="blog-entry--text">
+                            <p>{{ post.content | strip_html | truncate:140}}</p>
+                        </div>
+                        <div class="blog-entry--actions">
+                            {% if author.twitter %}<p><a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ post.author }}</a>{% else %}{{ post.author }}</p>{% endif %}
+                            {% if author.jobtitle %}<p class="blog-author--title">{{ author.jobtitle }}</p>{% endif %}
+                        </div>
+                    </div>
+
+            {% endfor %}
+        </div>
 
 </div>

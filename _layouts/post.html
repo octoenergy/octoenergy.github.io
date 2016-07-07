@@ -12,13 +12,69 @@ layout: default
 
   <a href="/" class="btn-back"><img src="/assets/img/back.svg" alt=""><span>Back</span></a>
 
-  <header class="post-header">
-    <h1 class="title hero-h1">{{ page.title }}</h1>
-    <p class="subtitle post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {% if author.twitter %}<a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ page.author }}</a>{% else %}{{ page.author }}{% endif %}{% endif %}{% if author.jobtitle %}, {{ author.jobtitle }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+  </div> <!-- /post -->
+  </div> <!-- /wrapper -->
+
+  <header>
+    <div style="background-color: #233249;">
+            {% if page.banner %}
+              <img src="{{ site.baseurl }}{{ page.banner }}" alt="banner image" class="blog-hero-image">
+            {% endif %}
+
+            <div class="wrapper relative margin-bottom-md">
+              <div class="blog-hero--content">
+                  <h1 class="blog-hero--title">{{ page.title }}</h1>
+                  <p class="blog-hero--author">{{ page.date | date: "%b %-d, %Y" }}</p>
+                  <p>
+                    {% if author.twitter %}
+                        <a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ page.author }}</a>,
+                    {% else %}
+                        {{ page.author }}
+                    {% endif %}
+                    {% if author.jobtitle %}
+                        <span class="blog-author--title">{{ author.jobtitle }}</span>
+                    {% endif %}
+                  </p>
+              </div>
+          </div>
+    </div>
   </header>
+
+  <div class="wrapper">
+  <div class="post">
 
   <article class="post-content">
     {{ content }}
+
+    <div class="author">
+      {% if author.image %}
+        <div class="author-image">
+          {% if author.twitter %}
+            <a href="https://twitter.com/{{ author.twitter }}" target="_blank">
+          {% endif %}
+              <img src="{{ author.image }}" alt="image of {{ post.author }}">
+          {% if author.twitter %}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="author-profile">
+        <p class="author-profile--name">
+          {% if author.twitter %}
+            <a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ page.author }}</a>
+          {% else %}
+              {{ page.author }}
+          {% endif %}
+        </p>
+        {% if author.jobtitle %}
+          <p class="author-profile--title">
+            {{ author.jobtitle }}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+
   </article>
 
 </div>

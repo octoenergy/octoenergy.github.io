@@ -2,6 +2,7 @@
 title: Django, ELB health checks and continuous delivery
 layout: post
 author: David Winterbottom
+banner: /assets/img/posts/2016-05-05-django-elb-health-checks.jpg
 ---
 
 A robust means of deploying web applications with Amazon Web
