@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>      <html lang="en-gb" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en-gb" class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en-gb" class="no-js lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html lang="en-gb" class="no-js lt-ie10 ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en-gb" class="no-js"> <!--<![endif]-->
 
   <head>
     <meta charset="utf-8">
@@ -9,10 +13,11 @@
     <title>Django, ELB health checks and continuous delivery | Octopus Energy Tech blog</title>
     <meta name="description" content="Octopus Energy is a modern, green energy supplier for the UK.
 ">
-	
+
 	<link rel="stylesheet" type="text/css" href="//cloud.typography.com/6806472/664928/css/fonts.css" />
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://tech.octopus.energy/2016/05/05/django-elb-health-checks.html">
+    <link rel="icon" href="/assets/img/favicon.ico">
 </head>
 
 
@@ -35,10 +40,34 @@
 
   <a href="/" class="btn-back"><img src="/assets/img/back.svg" alt=""><span>Back</span></a>
 
-  <header class="post-header">
-    <h1 class="title hero-h1">Django, ELB health checks and continuous delivery</h1>
-    <p class="subtitle post-meta">May 5, 2016 • <a href="https://twitter.com/codeinthehole" target="_blank">David Winterbottom</a>, Head of Engineering</p>
+  </div> <!-- /post -->
+  </div> <!-- /wrapper -->
+
+  <header>
+    <div style="background-color: #233249;">
+            
+              <img src="/assets/img/posts/2016-05-05-django-elb-health-checks.jpg" alt="banner image" class="blog-hero-image">
+            
+
+            <div class="wrapper relative margin-bottom-md">
+              <div class="blog-hero--content">
+                  <h1 class="blog-hero--title">Django, ELB health checks and continuous delivery</h1>
+                  <p class="blog-hero--author">May 5, 2016</p>
+                  <p>
+                    
+                        <a href="https://twitter.com/codeinthehole" target="_blank">David Winterbottom</a>,
+                    
+                    
+                        <span class="blog-author--title">Head of Engineering</span>
+                    
+                  </p>
+              </div>
+          </div>
+    </div>
   </header>
+
+  <div class="wrapper">
+  <div class="post">
 
   <article class="post-content">
     <p>A robust means of deploying web applications with Amazon Web
@@ -46,7 +75,7 @@ Services is to use an <a href="https://aws.amazon.com/elasticloadbalancing/">Ela
 (ELB) to balance requests between an “Auto Scaling Group” (ASG) of EC2 instances. As
 well as horizontally scaling, this set-up allows automated canary (aka
 blue-green) deployments, where new application versions are deployed as a new
-ASG replacing the old EC2 instances with new; a so-called “immutable
+ASG which replaces the existing EC2 instances with new; a so-called “immutable
 infrastructure” approach. </p>
 
 <p>Such a procedure relies on ELB “health check” requests to test that the
@@ -65,7 +94,7 @@ excellent <a href="https://www.hashicorp.com/atlas.html">Atlas</a> service:</p>
 when the tests pass on master and uploads the tarball to Atlas. </p>
   </li>
   <li>
-    <p>Atlas then employs Packer with a set of uploaded configuration (eg Puppet
+    <p>Atlas then employs Packer with a set of uploaded configuration (e.g. Puppet
 manifests and modules) to create a new Amazon Machine Image (AMI).</p>
   </li>
   <li>
@@ -77,7 +106,7 @@ configuration that uses the new AMI.</p>
 
 <p>Evolving this process over the last few months has highlighted the importance of
 getting the health check right. Below are some tips. An example Django application
-run with uWSGI and Nginx is used but most of the advice
+run with uWSGI and NGINX is used but most of the advice
 translates to other frameworks and HTTP servers.</p>
 
 <p>While this article is nominally about health checks, the TLDR is that you can
@@ -130,7 +159,7 @@ return a 200 status (within five seconds). </p>
 <span class="k">def</span> <span class="nf">health</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">()</span></code></pre></div>
 
-<p>It would have been easier to use Nginx to respond to the health-check request
+<p>It would have been easier to use NGINX to respond to the health-check request
 directly without troubling uWSGI.
 But we get considerably more value by going a layer deeper and getting the
 Django application to respond.  Several classes of problem
@@ -199,7 +228,7 @@ practice ensures canary deployments fail if configuration is missing.</p>
 <p>Assuming uWSGI can start the Python application, let’s example the set-up that
 allows Django to respond successfully to the health check.</p>
 
-<h1 id="nginx">Nginx</h1>
+<h1 id="nginx">NGINX</h1>
 
 <p>We terminate TLS on the ELB and proxy requests to port 80 of the EC2 instance.
 For normal user requests, we use the <code>X_FORWARDED_PROTO</code> header to ensure TLS is used. 
@@ -249,7 +278,7 @@ to Loggly (this is super-useful).</p>
 host header so we need to ensure such requests are correctly handled by the Django
 application.</p>
 
-<p>For Nginx, this isn’t a problem as we proxy to the Django application in the
+<p>For NGINX, this isn’t a problem as we proxy to the Django application in the
 catch-all virtualhost (the first one defined). </p>
 
 <p>For the Django application to respond correctly, the private IP address must be
@@ -383,6 +412,34 @@ health check:</p>
 
 <p>And there you have it: an effective health check view for Django applications. </p>
 
+
+    <div class="author">
+      
+        <div class="author-image">
+          
+            <a href="https://twitter.com/codeinthehole" target="_blank">
+          
+              <img src="/assets/img/authors/david.jpg" alt="image of ">
+          
+            </a>
+          
+        </div>
+      
+
+      <div class="author-profile">
+        <p class="author-profile--name">
+          
+            <a href="https://twitter.com/codeinthehole" target="_blank">David Winterbottom</a>
+          
+        </p>
+        
+          <p class="author-profile--title">
+            Head of Engineering
+          </p>
+        
+      </div>
+    </div>
+
   </article>
 
 </div>
@@ -399,16 +456,13 @@ health check:</p>
         <p>Octopus Energy is a modern, green energy supplier for the UK.
 </p>
         <p>
-            We're looking for <a href="/2015/11/23/tech-jobs.html">strong Python developers to join our team</a>. 
+            We're looking for <a href="/2015/11/23/tech-jobs.html">strong Python developers to join our team</a>.
             Email us at <a href="mailto:talent@octoenergy.com">talent@octoenergy.com</a> if you're interested.
         </p>
       </div>
 
       <div class="footer-col footer-col-2">
         
-          <a href="/feed.xml" class="icon-rss">
-            <img src="/assets/img/rss.svg" alt="">
-          </a>
           <a href="https://github.com/octoenergy" target="_blank">
             <img src="/assets/img/github.svg" alt="">
           </a>

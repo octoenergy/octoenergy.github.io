@@ -6,8 +6,8 @@
 </description>
     <link>http://tech.octopus.energy/</link>
     <atom:link href="http://tech.octopus.energy/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 05 May 2016 22:56:36 +0100</pubDate>
-    <lastBuildDate>Thu, 05 May 2016 22:56:36 +0100</lastBuildDate>
+    <pubDate>Thu, 07 Jul 2016 16:57:56 +0100</pubDate>
+    <lastBuildDate>Thu, 07 Jul 2016 16:57:56 +0100</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -17,7 +17,7 @@ Services is to use an &lt;a href=&quot;https://aws.amazon.com/elasticloadbalanci
 (ELB) to balance requests between an “Auto Scaling Group” (ASG) of EC2 instances. As
 well as horizontally scaling, this set-up allows automated canary (aka
 blue-green) deployments, where new application versions are deployed as a new
-ASG replacing the old EC2 instances with new; a so-called “immutable
+ASG which replaces the existing EC2 instances with new; a so-called “immutable
 infrastructure” approach. &lt;/p&gt;
 
 &lt;p&gt;Such a procedure relies on ELB “health check” requests to test that the
@@ -36,7 +36,7 @@ excellent &lt;a href=&quot;https://www.hashicorp.com/atlas.html&quot;&gt;Atlas&l
 when the tests pass on master and uploads the tarball to Atlas. &lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Atlas then employs Packer with a set of uploaded configuration (eg Puppet
+    &lt;p&gt;Atlas then employs Packer with a set of uploaded configuration (e.g. Puppet
 manifests and modules) to create a new Amazon Machine Image (AMI).&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -48,7 +48,7 @@ configuration that uses the new AMI.&lt;/p&gt;
 
 &lt;p&gt;Evolving this process over the last few months has highlighted the importance of
 getting the health check right. Below are some tips. An example Django application
-run with uWSGI and Nginx is used but most of the advice
+run with uWSGI and NGINX is used but most of the advice
 translates to other frameworks and HTTP servers.&lt;/p&gt;
 
 &lt;p&gt;While this article is nominally about health checks, the TLDR is that you can
@@ -101,7 +101,7 @@ return a 200 status (within five seconds). &lt;/p&gt;
 &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;health&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpResponse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;It would have been easier to use Nginx to respond to the health-check request
+&lt;p&gt;It would have been easier to use NGINX to respond to the health-check request
 directly without troubling uWSGI.
 But we get considerably more value by going a layer deeper and getting the
 Django application to respond.  Several classes of problem
@@ -170,7 +170,7 @@ practice ensures canary deployments fail if configuration is missing.&lt;/p&gt;
 &lt;p&gt;Assuming uWSGI can start the Python application, let’s example the set-up that
 allows Django to respond successfully to the health check.&lt;/p&gt;
 
-&lt;h1 id=&quot;nginx&quot;&gt;Nginx&lt;/h1&gt;
+&lt;h1 id=&quot;nginx&quot;&gt;NGINX&lt;/h1&gt;
 
 &lt;p&gt;We terminate TLS on the ELB and proxy requests to port 80 of the EC2 instance.
 For normal user requests, we use the &lt;code&gt;X_FORWARDED_PROTO&lt;/code&gt; header to ensure TLS is used. 
@@ -220,7 +220,7 @@ to Loggly (this is super-useful).&lt;/p&gt;
 host header so we need to ensure such requests are correctly handled by the Django
 application.&lt;/p&gt;
 
-&lt;p&gt;For Nginx, this isn’t a problem as we proxy to the Django application in the
+&lt;p&gt;For NGINX, this isn’t a problem as we proxy to the Django application in the
 catch-all virtualhost (the first one defined). &lt;/p&gt;
 
 &lt;p&gt;For the Django application to respond correctly, the private IP address must be
