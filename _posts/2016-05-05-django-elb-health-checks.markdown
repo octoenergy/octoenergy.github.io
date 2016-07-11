@@ -10,14 +10,14 @@ Services is to use an [Elastic Load Balancer](https://aws.amazon.com/elasticload
 (ELB) to balance requests between an "Auto Scaling Group" (ASG) of EC2 instances. As
 well as horizontally scaling, this set-up allows automated canary (aka
 blue-green) deployments, where new application versions are deployed as a new
-ASG which replaces the existing EC2 instances with new; a so-called "immutable
+ASG which replaces the existing EC2 instances; a so-called "immutable
 infrastructure" approach. 
 
 Such a procedure relies on ELB "health check" requests to test that the
 new EC2 instances are ready to take production traffic (and the old instances
 can be terminated). For canary deployments, it's important that the health check 
 is accurate: false positives lead to broken applications being brought into
-production causing errors, downtime and other sadness.
+production, causing errors, downtime, and other sadness.
 
 At [Octopus Energy](https://octopus.energy), we deploy Django applications in
 this way as part of a continuous delivery pipeline coordinated by Hashicorp's
