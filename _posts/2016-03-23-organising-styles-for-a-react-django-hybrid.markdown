@@ -66,7 +66,7 @@ killed by another front end developer. The use of `@extend` prevented code
 duplication inside the component file, and allowed me to use styles from another
 file if I was happy with reducing the level of encapsulation a little.
 
-However encapsulation means just that; totally encapsulated. 
+However, encapsulation means just that; totally encapsulated. 
 
 ## The issue
 
@@ -161,7 +161,7 @@ sass/
 |- styles.scss          # Main Sass file
 {% endhighlight %}
 
-Although all styles are technically 'global' now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance occurring. 
+Although all styles are technically 'global' now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance. 
 
 To achieve this, we have a set of rules when styling components new or existing. The rules are as follows:
 
@@ -181,7 +181,7 @@ Each selector in a component `.scss` file will start with the name of the compon
 }
 {% endhighlight %}
 
-This way, the button styles is exclusive to the `JoinComponent` component, and would not be caught up in specificity issues or accidentally overridden in another file.
+This way, the button styles are exclusive to the `JoinComponent` component, and would not be caught up in specificity issues or accidentally overridden in another file.
 
 ### 3. If it's commonly used, always `@extend` it
 
