@@ -5,7 +5,7 @@ author: David Winterbottom
 banner: /assets/img/posts/2016-01-21-testing-for-missing-migrations-in-django.jpg
 ---
 
-Since version 1.7, Django creates migrations for a more than just changes to
+Since version 1.7, Django creates migrations for more than just changes to
 your model fields. It's easy to forget to create a migration after changing,
 say, the `verbose_name_plural` of a model class - I've done this many times.
 This can lead to a mess down the line when multiple developers all end up
