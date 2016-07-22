@@ -64,9 +64,9 @@ h1, h2, h3, h4, h5, h6 {
  */
 a {
   color: #00AFFF;
-  text-decoration: none; }
+  text-decoration: underline; }
   a:visited {
-    color: #007bb3; }
+    color: #00AFFF; }
   a:hover {
     color: #00AFFF;
     text-decoration: underline; }
@@ -585,6 +585,9 @@ a.btn-back {
   line-height: 3.6rem; }
 .author-profile .author-profile--title {
   margin-bottom: 0; }
+
+ul {
+  margin-bottom: 45px; }
 
 .ie9 .blog-entry {
   float: left; }
