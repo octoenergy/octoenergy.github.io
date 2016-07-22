@@ -6,7 +6,7 @@ banner: /assets/img/posts/2016-07-22-improving-accessibility-at-octopus-energy.j
 hex: b6bfc8
 ---
 
-The home office recently published guidance on how companies can use web design
+The Home Office recently published guidance on how companies can use web design
 and development to make sites accessible to everyone. They outlined rules to
 help those with low vision, dyslexia, users on the autism spectrum, or those
 using screen readers.
