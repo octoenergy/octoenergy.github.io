@@ -16,7 +16,7 @@ layout: default
   </div> <!-- /wrapper -->
 
   <header>
-    <div style="background-color: #233249;">
+    <div style="background-color: {% if page.hex %}#{{ page.hex }}{% else %}#233249{% endif %};">
             {% if page.banner %}
               <img src="{{ site.baseurl }}{{ page.banner }}" alt="banner image" class="blog-hero-image">
             {% endif %}

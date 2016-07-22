@@ -3,6 +3,7 @@ title: Hello world, would you like to join us?
 layout: post
 author: David Winterbottom
 banner: /assets/img/posts/2015-11-23-tech-jobs.jpg
+hex: 0e1720
 ---
 
 We're looking for super-smart people to join the tech team at Octopus Energy. We're in the process of designing and building our initial infrastructure. There are many difficult design problems to solve; we need creative, analytical minds who can help tame this notoriously tricky domain.  
