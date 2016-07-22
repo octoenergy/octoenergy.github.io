@@ -29,7 +29,7 @@ than “About us banner image.”
 ## Heading structure
 All headers in a web page should have a hierarchy, beginning with the most
 important header to the least, and the markup of the page should reflect that.
-In HTML, the most important title is an <h1> tag, and can go all the way down to
+In HTML, the most important title is an `<h1>` tag, and can go all the way down to
 an `<h6>`. You can use as many or as few of these as you like, but they must start
 with an `<h1>` and must always be used in order. The reason for this is that heading
 tags denote importance to screen readers, and out of order headers may well
