@@ -44,7 +44,7 @@
   </div> <!-- /wrapper -->
 
   <header>
-    <div style="background-color: #233249;">
+    <div style="background-color: #38383a;">
             
               <img src="/assets/img/posts/2016-03-23-organising-styles-for-a-react-django-hybrid.jpg" alt="banner image" class="blog-hero-image">
             
@@ -122,7 +122,7 @@ killed by another front end developer. The use of <code>@extend</code> prevented
 duplication inside the component file, and allowed me to use styles from another
 file if I was happy with reducing the level of encapsulation a little.</p>
 
-<p>However encapsulation means just that; totally encapsulated. </p>
+<p>However, encapsulation means just that; totally encapsulated. </p>
 
 <h2 id="the-issue">The issue</h2>
 
@@ -213,7 +213,7 @@ this:</p>
 |
 |- styles.scss          # Main Sass file</code></pre></div>
 
-<p>Although all styles are technically ‘global’ now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance occurring. </p>
+<p>Although all styles are technically ‘global’ now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance. </p>
 
 <p>To achieve this, we have a set of rules when styling components new or existing. The rules are as follows:</p>
 
@@ -231,7 +231,7 @@ this:</p>
   
 <span class="p">}</span></code></pre></div>
 
-<p>This way, the button styles is exclusive to the <code>JoinComponent</code> component, and would not be caught up in specificity issues or accidentally overridden in another file.</p>
+<p>This way, the button styles are exclusive to the <code>JoinComponent</code> component, and would not be caught up in specificity issues or accidentally overridden in another file.</p>
 
 <h3 id="if-its-commonly-used-always-extend-it">3. If it’s commonly used, always <code>@extend</code> it</h3>
 

@@ -15,7 +15,7 @@ layout: default
                 {% endif %}
             {% endfor %}
 
-                <div style="background-color: #233249;">
+                <div style="background-color: {% if hero.hex %}#{{ hero.hex }}{% else %}#233249;{% endif %}">
                         {% if hero.banner %}
                             <img src="{{ site.baseurl }}{{ hero.banner }}" alt="Blog " class="blog-hero-image">
                         {% endif %}

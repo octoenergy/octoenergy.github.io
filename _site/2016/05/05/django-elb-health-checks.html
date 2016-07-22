@@ -44,7 +44,7 @@
   </div> <!-- /wrapper -->
 
   <header>
-    <div style="background-color: #233249;">
+    <div style="background-color: #727377;">
             
               <img src="/assets/img/posts/2016-05-05-django-elb-health-checks.jpg" alt="banner image" class="blog-hero-image">
             
@@ -75,14 +75,14 @@ Services is to use an <a href="https://aws.amazon.com/elasticloadbalancing/">Ela
 (ELB) to balance requests between an “Auto Scaling Group” (ASG) of EC2 instances. As
 well as horizontally scaling, this set-up allows automated canary (aka
 blue-green) deployments, where new application versions are deployed as a new
-ASG which replaces the existing EC2 instances with new; a so-called “immutable
+ASG which replaces the existing EC2 instances; a so-called “immutable
 infrastructure” approach. </p>
 
 <p>Such a procedure relies on ELB “health check” requests to test that the
 new EC2 instances are ready to take production traffic (and the old instances
 can be terminated). For canary deployments, it’s important that the health check 
 is accurate: false positives lead to broken applications being brought into
-production causing errors, downtime and other sadness.</p>
+production, causing errors, downtime, and other sadness.</p>
 
 <p>At <a href="https://octopus.energy">Octopus Energy</a>, we deploy Django applications in
 this way as part of a continuous delivery pipeline coordinated by Hashicorp’s
