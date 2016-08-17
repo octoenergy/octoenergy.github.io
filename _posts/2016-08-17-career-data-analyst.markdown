@@ -20,7 +20,7 @@ Your core challenge will be to automate trading administration and market risk m
 
 Although the role will necessarily involve getting to grips with complex industry processes and language, prior experience in the industry is not a pre-requisite; we provide a supportive learning environment for those with the right inherent capabilities and motivation to succeed.
 
-##Principal Accountabilities
+## Principal Accountabilities
 - Carry out a number of tasks but simultaneously use Python, SQL, VBA or other appropriate methods to implement process automation, including:
   - Using weather forecasts to produce forecasted output from renewable generation sites and forecasted customer usage
   - Using forecast data and hedge position to produce trade proposals, minimising exposure to cash-out prices
@@ -34,7 +34,7 @@ Although the role will necessarily involve getting to grips with complex industr
 - Contribute to the design and implementation of the ongoing procurement strategy
 
 
-##Skills and Qualifications
+## Skills and Qualifications
 - Knowledge of Electricity and Gas wholesale markets would be an advantage but not essential
 - Experience with Python, SQL and VBA with willingness to learn
 - Strong analytical skills
