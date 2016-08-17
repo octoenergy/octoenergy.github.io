@@ -11,12 +11,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Django, ELB health checks and continuous delivery | Octopus Energy Tech blog</title>
-    <meta name="description" content="Octopus Energy is a modern, green energy supplier for the UK.
+    <meta name="description" content="Octopus Energy: supplying greener, affordable energy to the UK.
 ">
 
 	<link rel="stylesheet" type="text/css" href="//cloud.typography.com/6806472/664928/css/fonts.css" />
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://tech.octopus.energy/2016/05/05/django-elb-health-checks.html">
+    <link rel="canonical" href="http://tech.octopus.energy/news/2016/05/05/django-elb-health-checks.html">
     <link rel="icon" href="/assets/img/favicon.ico">
 </head>
 
@@ -71,16 +71,16 @@
 
   <article class="post-content">
     <p>A robust means of deploying web applications with Amazon Web
-Services is to use an <a href="https://aws.amazon.com/elasticloadbalancing/">Elastic Load Balancer</a> 
+Services is to use an <a href="https://aws.amazon.com/elasticloadbalancing/">Elastic Load Balancer</a>
 (ELB) to balance requests between an “Auto Scaling Group” (ASG) of EC2 instances. As
 well as horizontally scaling, this set-up allows automated canary (aka
 blue-green) deployments, where new application versions are deployed as a new
 ASG which replaces the existing EC2 instances; a so-called “immutable
-infrastructure” approach. </p>
+infrastructure” approach.</p>
 
 <p>Such a procedure relies on ELB “health check” requests to test that the
 new EC2 instances are ready to take production traffic (and the old instances
-can be terminated). For canary deployments, it’s important that the health check 
+can be terminated). For canary deployments, it’s important that the health check
 is accurate: false positives lead to broken applications being brought into
 production, causing errors, downtime, and other sadness.</p>
 
@@ -91,7 +91,7 @@ excellent <a href="https://www.hashicorp.com/atlas.html">Atlas</a> service:</p>
 <ol>
   <li>
     <p>CircleCI, our continuous integration service, packages up the application
-when the tests pass on master and uploads the tarball to Atlas. </p>
+when the tests pass on master and uploads the tarball to Atlas.</p>
   </li>
   <li>
     <p>Atlas then employs Packer with a set of uploaded configuration (e.g. Puppet
@@ -139,8 +139,8 @@ checked out Terraform before - do that today.</p>
     }
 }</code></pre></div>
 
-<p>In other words: an EC2 instance is considered healthy when two HTTP requests to <code>/health</code> 
-return a 200 status (within five seconds). </p>
+<p>In other words: an EC2 instance is considered healthy when two HTTP requests to <code>/health</code>
+return a 200 status (within five seconds).</p>
 
 <p>Let’s start simple:</p>
 
@@ -169,12 +169,12 @@ start the Python application.</p>
 <h2 id="unhealthy-instances-cant-run-the-python-application">Unhealthy instances can’t run the Python application</h2>
 
 <p>As per the <a href="http://12factor.net/">12-factor app guidelines</a>, our EC2 instances are stateless and
-read their configuration from environment variables. These are set by Upstart, 
+read their configuration from environment variables. These are set by Upstart,
 sourcing a configuration file managed by consul-template:</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/init/uwsgi</span>
 
-<span class="c"># Ensure the uWSGI process doesn&#39;t start until </span>
+<span class="c"># Ensure the uWSGI process doesn&#39;t start until</span>
 <span class="c"># the consul-template process has started.</span>
 start on started consul-template
 stop on runlevel <span class="o">[</span>06<span class="o">]</span>
@@ -187,10 +187,10 @@ env <span class="nv">UWSGI_INI_FILE</span><span class="o">=</span><span class="s
 env <span class="nv">VENV_ROOT</span><span class="o">=</span><span class="s2">&quot;/opt/venv&quot;</span>
 
 script
-    <span class="c"># Set environment variables </span>
+    <span class="c"># Set environment variables</span>
     <span class="nb">source</span> <span class="nv">$ENV_FILE</span>
 
-    <span class="c"># Apply migrations. Piping the output to logger ensures it get </span>
+    <span class="c"># Apply migrations. Piping the output to logger ensures it get</span>
     <span class="c"># is included in /var/log/syslog and hence gets forwarded to Loggly.</span>
     sudo -u www-data django-admin migrate --noinput --no-color <span class="p">|</span> logger -t migrations
 
@@ -231,13 +231,13 @@ allows Django to respond successfully to the health check.</p>
 <h1 id="nginx">NGINX</h1>
 
 <p>We terminate TLS on the ELB and proxy requests to port 80 of the EC2 instance.
-For normal user requests, we use the <code>X_FORWARDED_PROTO</code> header to ensure TLS is used. 
+For normal user requests, we use the <code>X_FORWARDED_PROTO</code> header to ensure TLS is used.
 However, we don’t want this for health-check requests so we use a separate <code>location</code>
-directive:  </p>
+directive:</p>
 
 <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># /etc/nginx/sites-enabled/default</span>
 
-<span class="c"># uWSGI is configured to use this socket </span>
+<span class="c"># uWSGI is configured to use this socket</span>
 <span class="n">upstream</span> <span class="n">public</span> <span class="p">{</span>
     <span class="n">server</span> <span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="n">tmp</span><span class="o">/</span><span class="n">uwsgi</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
 <span class="p">}</span>
@@ -253,7 +253,7 @@ directive:  </p>
     <span class="n">location</span> <span class="o">/</span><span class="n">health</span> <span class="p">{</span>
         <span class="n">access_log</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">health</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
 
-        <span class="n">uwsgi_pass</span> <span class="n">public</span><span class="p">;</span> 
+        <span class="n">uwsgi_pass</span> <span class="n">public</span><span class="p">;</span>
         <span class="n">include</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">uwsgi_params</span><span class="p">;</span>
     <span class="p">}</span>
 
@@ -261,9 +261,9 @@ directive:  </p>
         <span class="c"># Ensure non-TLS requests are redirected</span>
         <span class="k">if</span> <span class="p">(</span><span class="err">$</span><span class="n">http_x_forwarded_proto</span> <span class="o">!=</span> <span class="s">&#39;https&#39;</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">rewrite</span> <span class="o">^</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="err">$</span><span class="n">host</span><span class="err">$</span><span class="n">request_uri</span><span class="err">?</span> <span class="n">permanent</span><span class="p">;</span>
-        <span class="p">}</span> 
+        <span class="p">}</span>
 
-        <span class="n">uwsgi_pass</span> <span class="n">public</span><span class="p">;</span> 
+        <span class="n">uwsgi_pass</span> <span class="n">public</span><span class="p">;</span>
         <span class="n">include</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">uwsgi_params</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></div>
@@ -279,7 +279,7 @@ host header so we need to ensure such requests are correctly handled by the Djan
 application.</p>
 
 <p>For NGINX, this isn’t a problem as we proxy to the Django application in the
-catch-all virtualhost (the first one defined). </p>
+catch-all virtualhost (the first one defined).</p>
 
 <p>For the Django application to respond correctly, the private IP address must be
 in the <code>ALLOWED_HOSTS</code> setting or Django will return a “400 Bad Request”
@@ -290,7 +290,7 @@ value to a config file, or call the metadata service when <code>settings.py</cod
 imported.  The former may look something like:</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># userdata.sh</span>
- 
+
 <span class="nb">echo</span> <span class="s2">&quot;Writing EC2 metadata to files in /etc/aws/&quot;</span>
 mkdir -p /etc/aws/
 ec2metadata --local-ipv4 &gt; /etc/aws/ipv4</code></pre></div>
@@ -410,7 +410,7 @@ health check:</p>
         <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">httplib</span><span class="o">.</span><span class="n">SERVICE_UNAVAILABLE</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">()</span></code></pre></div>
 
-<p>And there you have it: an effective health check view for Django applications. </p>
+<p>And there you have it: an effective health check view for Django applications.</p>
 
 
     <div class="author">
@@ -453,20 +453,17 @@ health check:</p>
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
-        <p>Octopus Energy is a modern, green energy supplier for the UK.
+        <p>Octopus Energy: supplying greener, affordable energy to the UK.
 </p>
-        <p>
-            We're looking for <a href="/2015/11/23/tech-jobs.html">strong Python developers to join our team</a>.
-            Email us at <a href="mailto:talent@octoenergy.com">talent@octoenergy.com</a> if you're interested.
-        </p>
       </div>
 
       <div class="footer-col footer-col-2">
-        
-          <a href="https://github.com/octoenergy" target="_blank">
-            <img src="/assets/img/github.svg" alt="">
-          </a>
-        
+        <a href="https://www.facebook.com/octopusenergy" target="_blank">
+          <img src="/assets/img/icon-facebook.png" alt="Facebook logo">
+        </a>
+        <a href="https://twitter.com/octopus_energy" target="_blank">
+          <img src="/assets/img/icon-twitter.png" alt="Twitter logo">
+        </a>
       </div>
     </div>
 

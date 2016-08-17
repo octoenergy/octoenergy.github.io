@@ -1,22 +1,23 @@
 ---
 title: Django, ELB health checks and continuous delivery
 layout: post
+category: news
 author: David Winterbottom
 banner: /assets/img/posts/2016-05-05-django-elb-health-checks.jpg
 hex: 727377
 ---
 
 A robust means of deploying web applications with Amazon Web
-Services is to use an [Elastic Load Balancer](https://aws.amazon.com/elasticloadbalancing/) 
+Services is to use an [Elastic Load Balancer](https://aws.amazon.com/elasticloadbalancing/)
 (ELB) to balance requests between an "Auto Scaling Group" (ASG) of EC2 instances. As
 well as horizontally scaling, this set-up allows automated canary (aka
 blue-green) deployments, where new application versions are deployed as a new
 ASG which replaces the existing EC2 instances; a so-called "immutable
-infrastructure" approach. 
+infrastructure" approach.
 
 Such a procedure relies on ELB "health check" requests to test that the
 new EC2 instances are ready to take production traffic (and the old instances
-can be terminated). For canary deployments, it's important that the health check 
+can be terminated). For canary deployments, it's important that the health check
 is accurate: false positives lead to broken applications being brought into
 production, causing errors, downtime, and other sadness.
 
@@ -25,11 +26,11 @@ this way as part of a continuous delivery pipeline coordinated by Hashicorp's
 excellent [Atlas](https://www.hashicorp.com/atlas.html) service:
 
 1. CircleCI, our continuous integration service, packages up the application
-   when the tests pass on master and uploads the tarball to Atlas. 
-   
+   when the tests pass on master and uploads the tarball to Atlas.
+
 2. Atlas then employs Packer with a set of uploaded configuration (e.g. Puppet
    manifests and modules) to create a new Amazon Machine Image (AMI).
-   
+
 3. Atlas then deploys this AMI into production using Terraform. Terraform brings
    the new AMI into production as described above, creating a new ASG and launch
    configuration that uses the new AMI.
@@ -71,8 +72,8 @@ resource "aws_elb" "web" {
 }
 {% endhighlight %}
 
-In other words: an EC2 instance is considered healthy when two HTTP requests to `/health` 
-return a 200 status (within five seconds). 
+In other words: an EC2 instance is considered healthy when two HTTP requests to `/health`
+return a 200 status (within five seconds).
 
 Let's start simple:
 
@@ -105,13 +106,13 @@ start the Python application.
 ## Unhealthy instances can't run the Python application
 
 As per the [12-factor app guidelines](http://12factor.net/), our EC2 instances are stateless and
-read their configuration from environment variables. These are set by Upstart, 
+read their configuration from environment variables. These are set by Upstart,
 sourcing a configuration file managed by consul-template:
 
 {% highlight bash %}
 # /etc/init/uwsgi
 
-# Ensure the uWSGI process doesn't start until 
+# Ensure the uWSGI process doesn't start until
 # the consul-template process has started.
 start on started consul-template
 stop on runlevel [06]
@@ -124,10 +125,10 @@ env UWSGI_INI_FILE="/etc/uwsgi.ini"
 env VENV_ROOT="/opt/venv"
 
 script
-    # Set environment variables 
+    # Set environment variables
     source $ENV_FILE
 
-    # Apply migrations. Piping the output to logger ensures it get 
+    # Apply migrations. Piping the output to logger ensures it get
     # is included in /var/log/syslog and hence gets forwarded to Loggly.
     sudo -u www-data django-admin migrate --noinput --no-color | logger -t migrations
 
@@ -168,17 +169,17 @@ practice ensures canary deployments fail if configuration is missing.
 Assuming uWSGI can start the Python application, let's example the set-up that
 allows Django to respond successfully to the health check.
 
-# NGINX 
+# NGINX
 
 We terminate TLS on the ELB and proxy requests to port 80 of the EC2 instance.
-For normal user requests, we use the `X_FORWARDED_PROTO` header to ensure TLS is used. 
+For normal user requests, we use the `X_FORWARDED_PROTO` header to ensure TLS is used.
 However, we don't want this for health-check requests so we use a separate `location`
-directive:  
+directive:
 
 {% highlight python %}
 # /etc/nginx/sites-enabled/default
 
-# uWSGI is configured to use this socket 
+# uWSGI is configured to use this socket
 upstream public {
     server unix:///tmp/uwsgi.sock;
 }
@@ -194,7 +195,7 @@ server {
     location /health {
         access_log /var/log/nginx/health.log;
 
-        uwsgi_pass public; 
+        uwsgi_pass public;
         include /etc/nginx/uwsgi_params;
     }
 
@@ -202,9 +203,9 @@ server {
         # Ensure non-TLS requests are redirected
         if ($http_x_forwarded_proto != 'https') {
             rewrite ^ https://$host$request_uri? permanent;
-        } 
+        }
 
-        uwsgi_pass public; 
+        uwsgi_pass public;
         include /etc/nginx/uwsgi_params;
     }
 }
@@ -221,7 +222,7 @@ host header so we need to ensure such requests are correctly handled by the Djan
 application.
 
 For NGINX, this isn't a problem as we proxy to the Django application in the
-catch-all virtualhost (the first one defined). 
+catch-all virtualhost (the first one defined).
 
 For the Django application to respond correctly, the private IP address must be
 in the `ALLOWED_HOSTS` setting or Django will return a "400 Bad Request"
@@ -233,7 +234,7 @@ imported.  The former may look something like:
 
 {% highlight bash %}
 # userdata.sh
- 
+
 echo "Writing EC2 metadata to files in /etc/aws/"
 mkdir -p /etc/aws/
 ec2metadata --local-ipv4 > /etc/aws/ipv4
@@ -366,4 +367,4 @@ def health(request):
     return http.HttpResponse()
 {% endhighlight %}
 
-And there you have it: an effective health check view for Django applications. 
+And there you have it: an effective health check view for Django applications.

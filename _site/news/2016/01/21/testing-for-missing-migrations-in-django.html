@@ -11,12 +11,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Testing for missing migrations in Django | Octopus Energy Tech blog</title>
-    <meta name="description" content="Octopus Energy is a modern, green energy supplier for the UK.
+    <meta name="description" content="Octopus Energy: supplying greener, affordable energy to the UK.
 ">
 
 	<link rel="stylesheet" type="text/css" href="//cloud.typography.com/6806472/664928/css/fonts.css" />
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://tech.octopus.energy/2016/01/21/testing-for-missing-migrations-in-django.html">
+    <link rel="canonical" href="http://tech.octopus.energy/news/2016/01/21/testing-for-missing-migrations-in-django.html">
     <link rel="icon" href="/assets/img/favicon.ico">
 </head>
 
@@ -95,7 +95,7 @@ suite:</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">pytest</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s">&quot;There are missing migrations:</span><span class="se">\n</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span></code></pre></div>
 
-<p>Here we call the <code>makemigrations</code> command in “dry-run” mode and test the 
+<p>Here we call the <code>makemigrations</code> command in “dry-run” mode and test the
 exit code to determine if there are any missing migrations. If there are missing
 migrations, the test will fail and print the captured output from the
 <code>makemigrations</code> command.</p>
@@ -124,8 +124,8 @@ the above command to work:</p>
         <span class="n">pytest</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s">&quot;There are missing migrations:</span><span class="se">\n</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span></code></pre></div>
 
 <p>Credit for this implementation belongs to Mozilla’s Ed Morley, who <a href="https://github.com/mozilla/treeherder/commit/dd539147716125bb4d2798cdaf613e294c363fb2">committed a
-similar fix</a> 
-for their <a href="https://github.com/mozilla/treeherder/">treeherder</a> project. The above snippets are 
+similar fix</a>
+for their <a href="https://github.com/mozilla/treeherder/">treeherder</a> project. The above snippets are
 slightly extended versions of his original.</p>
 
 <p>Related reading:</p>
@@ -175,20 +175,17 @@ slightly extended versions of his original.</p>
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
-        <p>Octopus Energy is a modern, green energy supplier for the UK.
+        <p>Octopus Energy: supplying greener, affordable energy to the UK.
 </p>
-        <p>
-            We're looking for <a href="/2015/11/23/tech-jobs.html">strong Python developers to join our team</a>.
-            Email us at <a href="mailto:talent@octoenergy.com">talent@octoenergy.com</a> if you're interested.
-        </p>
       </div>
 
       <div class="footer-col footer-col-2">
-        
-          <a href="https://github.com/octoenergy" target="_blank">
-            <img src="/assets/img/github.svg" alt="">
-          </a>
-        
+        <a href="https://www.facebook.com/octopusenergy" target="_blank">
+          <img src="/assets/img/icon-facebook.png" alt="Facebook logo">
+        </a>
+        <a href="https://twitter.com/octopus_energy" target="_blank">
+          <img src="/assets/img/icon-twitter.png" alt="Twitter logo">
+        </a>
       </div>
     </div>
 

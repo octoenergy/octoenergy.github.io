@@ -120,13 +120,17 @@
 }
 
 .footer-col-1 {
+    display: flex;
     width: 70%;
+    height: 50px;
+    align-items: center;
 
     @include media-query($on-laptop) {
         width: 60%;
     }
 
     p {
+        margin-bottom: 0;
         font-size: 1.4rem;
         line-height: 1.8rem;
     }
@@ -140,6 +144,11 @@
     @include media-query($on-laptop) {
         width: 30%;
     }
+
+    a {
+        display: inline-block;
+        width: 50px;
+    }
 }
 
 @include media-query($on-palm) {
@@ -147,7 +156,7 @@
         float: none;
         width: 100%;
         margin-left: 0;
-        text-align: left;
+        text-align: center;
     }
 }
 
@@ -189,6 +198,7 @@ a.btn-back {
     position: absolute;
     top: 5.5rem;
     color: #ffffff;
+    text-decoration: none;
 
     img {
         width: 1.8rem;
@@ -234,6 +244,8 @@ a.btn-back {
 .relative { position: relative; }
 
 .margin-bottom-md { margin-bottom: 2.4rem; }
+
+.margin-bottom-lg { margin-bottom: 4.0rem; }
 
 .blog-hero--content {
     position: absolute;
@@ -316,23 +328,13 @@ a.btn-back {
     flex-direction: column;
     width: 50%;
     width: calc(50% - 1.0rem);
-    height: 40.4rem;
-    min-height: 40.4rem;
     margin: 1.0rem .5rem;
     background-color: #fafafa;
     border-radius: .2rem;
 
-    @media (max-width: 800px) {
-        height: 43.4rem;
-    }
-
     @media (max-width: 700px) {
         width: 100%;
         margin: 1.0rem 0;
-    }
-
-    @media (max-width: 350px) {
-        height: 49.4rem;
     }
 
     h1 {
@@ -483,4 +485,80 @@ ul { margin-bottom: 45px; }
     img {text-decoration: none; border: 0px}
 }
 
+/* Info blocks
+ * -------------------------------------------------------------------------- */
+.info {
+    padding: 1.8rem 1.5rem;
+    margin: 2.4rem 0;
+    text-align: center;
+    border: .1rem solid #00afff;
+}
 
+.emphasis {
+    padding: 1.8rem 1.5rem;
+    background: #262627;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+
+        &:first-of-type {
+            margin-top: 0;
+        }
+    }
+
+    p {
+        font-size: 1.6rem;
+        line-height: 2.1rem;
+
+        &:last-of-type { margin-bottom: 0; }
+    }
+}
+
+/* Careers section
+ * -------------------------------------------------------------------------- */
+.careers-banner {
+
+    .blog-hero--content {
+
+        h1 { margin-bottom: 50px; }
+    }
+}
+
+.careers {
+
+    .blog-entry {
+
+        .blog-entry--text {
+
+            p:last-of-type { margin-bottom: 0; }
+
+            .blog-entry--date {
+                margin-bottom: 8px;
+                font-size: 14px;
+                font-weight: 800;
+                line-height: 16px;
+            }
+        }
+    }
+}
+
+.no-style {
+    font-weight: inherit;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+/* Job advert
+ * -------------------------------------------------------------------------- */
+.job-advert {
+
+    .info { text-align: left; }
+}
