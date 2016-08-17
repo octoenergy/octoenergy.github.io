@@ -2,10 +2,10 @@
 title: Octopus Energy
 email: talent@octoenergy.com
 description: > # this means to ignore newlines until "baseurl:"
-  Octopus Energy is a modern, green energy supplier for the UK.
+  Octopus Energy: supplying greener, affordable energy to the UK.
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://tech.octopus.energy" # the base hostname & protocol for your site
-twitter_username: 
+twitter_username:
 github_username: octoenergy
 
 # Build settings

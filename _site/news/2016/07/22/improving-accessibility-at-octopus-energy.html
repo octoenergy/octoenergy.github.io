@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en-gb" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en-gb" class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en-gb" class="no-js lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html lang="en-gb" class="no-js lt-ie10 ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en-gb" class="no-js"> <!--<![endif]-->
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Improving accessibility at Octopus Energy | Octopus Energy Tech blog</title>
+    <meta name="description" content="Octopus Energy: supplying greener, affordable energy to the UK.
+">
+
+	<link rel="stylesheet" type="text/css" href="//cloud.typography.com/6806472/664928/css/fonts.css" />
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://tech.octopus.energy/news/2016/07/22/improving-accessibility-at-octopus-energy.html">
+    <link rel="icon" href="/assets/img/favicon.ico">
+</head>
+
+
+  <body>
+
+    <div class="page-content">
+      <div class="wrapper">
+
+        <a class="site-title" href="https://octopus.energy" target="_blank"><span>Octopus Energy</span></a>
+
+        
+	
+
+	
+		
+	
+
+
+<div class="post">
+
+  <a href="/" class="btn-back"><img src="/assets/img/back.svg" alt=""><span>Back</span></a>
+
+  </div> <!-- /post -->
+  </div> <!-- /wrapper -->
+
+  <header>
+    <div style="background-color: #b6bfc8;">
+            
+              <img src="/assets/img/posts/2016-07-22-improving-accessibility-at-octopus-energy.jpg" alt="banner image" class="blog-hero-image">
+            
+
+            <div class="wrapper relative margin-bottom-md">
+              <div class="blog-hero--content">
+                  <h1 class="blog-hero--title">Improving accessibility at Octopus Energy</h1>
+                  <p class="blog-hero--author">Jul 22, 2016</p>
+                  <p>
+                    
+                        <a href="https://twitter.com/MrFirthy" target="_blank">Ashley Firth</a>,
+                    
+                    
+                        <span class="blog-author--title">Front End Developer</span>
+                    
+                  </p>
+              </div>
+          </div>
+    </div>
+  </header>
+
+  <div class="wrapper">
+  <div class="post">
+
+  <article class="post-content">
+    <p>The Home Office recently published guidance on how companies can use web design
+and development to make sites accessible to everyone. They outlined rules to
+help those with low vision, dyslexia, users on the autism spectrum, or those
+using screen readers.</p>
+
+<p>We took this as the perfect opportunity to audit our website and see if we were
+providing all of our visitors and customers with an easy and enjoyable
+experience. The results of this audit were good, but not perfect, so we got to
+work. Here are some of the checks we ran and a few areas in which we improved –
+hopefully our progress will encourage others to do the same.</p>
+
+<h2 id="alt-tags">Alt tags</h2>
+<p>Ever questioned the importance of alt tags? Have them read out to you at speed
+by a screen reader and you’ll be persuaded. The only real rule here is to ensure
+that the text used actually describes what is in the image, rather than the
+image’s purpose within the page. For example, the alt text for our “About Us”
+page banner should be “an image of the Octopus Energy operations team,” rather
+than “About us banner image.”</p>
+
+<h2 id="heading-structure">Heading structure</h2>
+<p>All headers in a web page should have a hierarchy, beginning with the most
+important header to the least, and the markup of the page should reflect that.
+In HTML, the most important title is an <code>&lt;h1&gt;</code> tag, and can go all the way down to
+an <code>&lt;h6&gt;</code>. You can use as many or as few of these as you like, but they must start
+with an <code>&lt;h1&gt;</code> and must always be used in order. The reason for this is that heading
+tags denote importance to screen readers, and out of order headers may well
+confuse a user. Proper heading structure also benefits the SEO of your page.</p>
+
+<p>You can check this using the Headings Map chrome extension. When run on a page,
+this generates a tree based on the headings on your page, and highlights any
+that are out of place or have been skipped entirely</p>
+
+<p>Note: To dispel a common myth, having multiple <code>&lt;h1&gt;</code> tags in a page is no
+longer a huge taboo. Google themselves state that you can have <a href="https://www.youtube.com/watch?v=GIn5qJKU8VM">up to three <code>&lt;h1&gt;</code>’s
+in a page</a> that are used to garner
+its content. The real importance is that those <code>&lt;h1&gt;</code>’s remain on the same
+hierarchical level as each other, and that as you make your way down the heading
+ladder, no rung is skipped or added out of place.</p>
+
+<h2 id="html5-outline">HTML5 outline</h2>
+<p>That same extension is also terrific for assessing your compliance with HTML5
+outline. This is the structure of a document, generated by the document’s
+headings, form titles, table titles, and any other appropriate landmarks to <a href="http://www.w3.org/TR/2002/REC-UAAG10-20021217/guidelines#tech-provide-outline-view">map
+out the document</a>.
+The user agent can apply this information to generate a table of contents, for
+example, which could then be used by assistive technology to help the user
+navigate.</p>
+
+<p>The key here is to make sure that each section has an appropriate header, and
+that no parts of the page are “marooned” from a screen reader’s perspective
+without context. Although this feature has been in the W3C spec <a href="http://www.w3.org/TR/2008/WD-html5-20080122/#outlines">for years – (2008)</a>, it has only
+recently gone beyond a theoretical stage. However, it stands to make the whole
+page – not just it’s headers – more digestible for screen readers.</p>
+
+<h2 id="off-screen-headers">Off-screen headers</h2>
+<p>Whilst auditing the site, I found that certain sections lacked context. Most
+notable was the navigation, which sat at the top of every page without a title.
+Very few menus call for a title, so a small utility class was used to add these
+headers but place them off the screen visually so they didn’t impact design.</p>
+
+<h2 id="use-correct-html5-tags">Use correct HTML5 tags</h2>
+<p>There’s nothing new I could write here as it’s such standard practice now. And
+you’re doing it perfectly… right?!</p>
+
+<h2 id="tab-index">Tab index</h2>
+<p>This was probably the most important addition to the site throughout the audit.
+Many users prefer to use just a keyboard, or can only use a keyboard, to
+navigate a website. For pages such as articles this is relatively easy as all
+the content is there, but for core flows on our site, such as getting a quote,
+breaking it down and signing up, this content exists over multiple pages, within
+modals and dropdowns, and requires user input.</p>
+
+<p>Most browsers are very good at allowing keyboard interaction with elements such
+as buttons, links, and form inputs. However, sometimes design and UX dictates
+custom components that stray from this, and they need to be just as accessible.
+Tab index allows you to define a sequence that users follow when they use the
+Tab key to navigate through a page. With this, you can ensure that users have
+access to all the information on a page in an order that is both clear and
+logical.</p>
+
+<h2 id="dom-interactions">DOM interactions</h2>
+<p>Tab index helped a keyboard user focus a particular element, but this didn’t
+guarantee that they could actually interact with it. For components created with
+divs and spans, a browser wouldn’t be able to recognise the role they were
+designed to play without appropriate markup.</p>
+
+<p>Therefore, we set up listeners that checked for the following when a key is pressed:</p>
+
+<ol>
+  <li>
+    <p>Was that key the spacebar or the enter button (common keys used to interact with buttons, forms, links, etc.)?</p>
+  </li>
+  <li>
+    <p>Is there an element currently focused (either naturally by the browser or through tab index)?</p>
+  </li>
+</ol>
+
+<p>If these both return true, a click is triggered on the element. An additional
+check is made for elements that use the “aria-role=‘button’” attribute, as those
+are typically only interacted with using the space bar.</p>
+
+<h2 id="focus-styles">Focus styles</h2>
+<p>Once we’d overcome the tab indexing issues, we needed to ensure it was obvious
+to users which part of the site they were focused on. There are default browser
+styles for focused elements, but it’s fairly common for developers to apply
+blanket rules to these selectors due to the less than preferable blue line it
+shows when a user clicks them.</p>
+
+<p>As they’re seen when a user clicks the element as well as when it’s focused via
+keyboard, focus styles need to tread the line between being obvious and not
+negatively impacting a page’s design. Nice alternatives to the typical outline
+rule can be box-shadows or changes in background and border colour.</p>
+
+<h2 id="contrast-levels">Contrast levels</h2>
+<p>This is a tricky issue to spot sometimes, but easy to test. W3C state that the
+contrast level between foreground and background colours should be at least 7:1
+for regular text to be <a href="https://www.w3.org/TR/WCAG20/#visual-audio-contrast7">AAA compliant</a>. This is
+especially important for users with low vision, who may have trouble focusing on
+text coloured similarly to the background.</p>
+
+<p>As it would be incredibly difficult assessing contrast with the human eye, there
+are quite a few helpful online tools. The <a href="http://webaim.org/resources/contrastchecker/">webaim contrast
+tool</a> is what we used (you submit
+the two hex codes manually), but there are tools that can assess a whole page,
+such as <a href="http://wave.webaim.org/">Webaim Wave</a>. The Google Accessibility
+developer tools extension also raises any issues with contrast when you audit a
+page.</p>
+
+<h2 id="semantics">Semantics</h2>
+<p>This isn’t solely focused on accessibility, since all aspects of page markup are
+intrinsically linked to a good page. You would struggle to have a good heading
+structure or HTML outline without having  semantic markup. Also, passing
+validation gives you that warm, fuzzy feeling inside. We used the Validity
+Chrome extension to test our pages on the fly.</p>
+
+<h2 id="and-many-more">And many more…</h2>
+
+<h3 id="some-minimal-effort-quick-wins-that-can-really-help-customers">Some minimal effort “quick wins” that can really help customers:</h3>
+
+<ul>
+  <li>
+    <p>Raising the base font size to help those with low vision. The gov.uk site has
+19px as the lowest font size, ensuring everyone can easily read their content
+(we use 18px).</p>
+  </li>
+  <li>
+    <p>Ensuring that action buttons state what you’re about to do, instead of being
+vague. For example, a sign up button should say “Sign up” and not “Click
+here”.</p>
+  </li>
+  <li>
+    <p>When using icons or colour to convey meaning or action, always support it with
+text. Colour only impacts those with low vision or colourblindness, and the
+use of figures of speech, idioms, or visuals that could be misinterpreted can
+affect those on the autistic spectrum.</p>
+  </li>
+  <li>
+    <p>Don’t have large text in paragraph tags masquerading as headers. The visual
+meaning attributed to it will never be conveyed via a screen reader.</p>
+  </li>
+</ul>
+
+<h2 id="tools">Tools</h2>
+<p>Finding the problems are sometimes just as hard as fixing them. These were the
+best tools we found over the course of the audit:</p>
+
+<ul>
+  <li>
+    <p><a href="https://chrome.google.com/webstore/detail/accessibility-developer-t/fpkknkljclfencbdbgkenhalefipecmb">Google accessibility developer tools</a> (ran in the ‘audit’ panel of developer tools)</p>
+  </li>
+  <li>
+    <p><a href="https://chrome.google.com/webstore/detail/headingsmap/flbjommegcjonpdmenkdiocclhjacmbi">Headings map extension (Chrome)</a> – for HTML5 outline and heading structure</p>
+  </li>
+  <li>
+    <p><a href="http://www.apple.com/uk/accessibility/osx/voiceover/">Voice over for Mac</a> – screen reader</p>
+  </li>
+  <li>
+    <p><a href="https://chrome.google.com/webstore/detail/validity/bbicmjjbohdfglopkidebfccilipgeif">Validity extension</a> – for inline W3C validation</p>
+  </li>
+</ul>
+
+<h2 id="inspiration">Inspiration</h2>
+<p>The Home Office’s excellent visual posters of the <a href="https://github.com/UKHomeOffice/posters/tree/master/accessibility">Do’s and Don’ts of Designing
+with Accessibility in
+Mind</a>.</p>
+
+<h2 id="users-can-now">Users can now:</h2>
+
+<ul>
+  <li>
+    <p>Get a quote, interact with it, and sign up using just the keyboard or a screen reader.</p>
+  </li>
+  <li>
+    <p>Perform regular tasks within the members area such as submit a meter reading,
+view their bills or edit their details using just the keyboard or a screen
+reader.</p>
+  </li>
+  <li>
+    <p>Use screen readers with more ease, as all pages follow a logical informational
+and heading structure, with descriptive alt tags for images.</p>
+  </li>
+  <li>
+    <p>Easily read all content on the website, as it has a passing AAA contrast rating.</p>
+  </li>
+  <li>
+    <p>Clearly understand the purpose of links and buttons, with descriptive action
+text and no instances where only imagery is used to convey meaning.</p>
+  </li>
+</ul>
+
+<p>I am proud of the progress we’ve made on the site’s accessibility, but no site
+we’ve seen is perfect all the time. We’ll diligently maintain the new standards
+we’ve set for ourselves, with the goal that nobody will be excluded based on the
+way they interact with our site.</p>
+
+
+    <div class="author">
+      
+        <div class="author-image">
+          
+            <a href="https://twitter.com/MrFirthy" target="_blank">
+          
+              <img src="/assets/img/authors/ashley.jpg" alt="image of ">
+          
+            </a>
+          
+        </div>
+      
+
+      <div class="author-profile">
+        <p class="author-profile--name">
+          
+            <a href="https://twitter.com/MrFirthy" target="_blank">Ashley Firth</a>
+          
+        </p>
+        
+          <p class="author-profile--title">
+            Front End Developer
+          </p>
+        
+      </div>
+    </div>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <p>Octopus Energy: supplying greener, affordable energy to the UK.
+</p>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <a href="https://www.facebook.com/octopusenergy" target="_blank">
+          <img src="/assets/img/icon-facebook.png" alt="Facebook logo">
+        </a>
+        <a href="https://twitter.com/octopus_energy" target="_blank">
+          <img src="/assets/img/icon-twitter.png" alt="Twitter logo">
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

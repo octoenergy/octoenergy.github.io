@@ -325,11 +325,15 @@ em {
   float: left; }
 
 .footer-col-1 {
-  width: 70%; }
+  display: flex;
+  width: 70%;
+  height: 50px;
+  align-items: center; }
   @media screen and (max-width: 800px) {
     .footer-col-1 {
       width: 60%; } }
   .footer-col-1 p {
+    margin-bottom: 0;
     font-size: 1.4rem;
     line-height: 1.8rem; }
 
@@ -340,13 +344,16 @@ em {
   @media screen and (max-width: 800px) {
     .footer-col-2 {
       width: 30%; } }
+  .footer-col-2 a {
+    display: inline-block;
+    width: 50px; }
 
 @media screen and (max-width: 600px) {
   .footer-col {
     float: none;
     width: 100%;
     margin-left: 0;
-    text-align: left; } }
+    text-align: center; } }
 .icon-rss {
   margin-right: 10px; }
 
@@ -376,7 +383,8 @@ em {
 a.btn-back {
   position: absolute;
   top: 5.5rem;
-  color: #ffffff; }
+  color: #ffffff;
+  text-decoration: none; }
   a.btn-back img {
     width: 1.8rem;
     height: 3.0rem;
@@ -405,6 +413,9 @@ a.btn-back {
 
 .margin-bottom-md {
   margin-bottom: 2.4rem; }
+
+.margin-bottom-lg {
+  margin-bottom: 4.0rem; }
 
 .blog-hero--content {
   position: absolute;
@@ -468,21 +479,13 @@ a.btn-back {
   flex-direction: column;
   width: 50%;
   width: calc(50% - 1.0rem);
-  height: 40.4rem;
-  min-height: 40.4rem;
   margin: 1.0rem .5rem;
   background-color: #fafafa;
   border-radius: .2rem; }
-  @media (max-width: 800px) {
-    .blog-entry {
-      height: 43.4rem; } }
   @media (max-width: 700px) {
     .blog-entry {
       width: 100%;
       margin: 1.0rem 0; } }
-  @media (max-width: 350px) {
-    .blog-entry {
-      height: 49.4rem; } }
   .blog-entry h1 {
     margin: 1.0rem 0; }
   .blog-entry .blog-entry--image {
@@ -594,6 +597,54 @@ ul {
 .ie9 img {
   text-decoration: none;
   border: 0px; }
+
+/* Info blocks
+ * -------------------------------------------------------------------------- */
+.info {
+  padding: 1.8rem 1.5rem;
+  margin: 2.4rem 0;
+  text-align: center;
+  border: .1rem solid #00afff; }
+
+.emphasis {
+  padding: 1.8rem 1.5rem;
+  background: #262627; }
+  .emphasis h1:first-of-type,
+  .emphasis h2:first-of-type,
+  .emphasis h3:first-of-type,
+  .emphasis h4:first-of-type,
+  .emphasis h5:first-of-type,
+  .emphasis h6:first-of-type {
+    margin-top: 0; }
+  .emphasis p {
+    font-size: 1.6rem;
+    line-height: 2.1rem; }
+    .emphasis p:last-of-type {
+      margin-bottom: 0; }
+
+/* Careers section
+ * -------------------------------------------------------------------------- */
+.careers-banner .blog-hero--content h1 {
+  margin-bottom: 50px; }
+
+.careers .blog-entry .blog-entry--text p:last-of-type {
+  margin-bottom: 0; }
+.careers .blog-entry .blog-entry--text .blog-entry--date {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 16px; }
+
+.no-style {
+  font-weight: inherit;
+  text-decoration: none; }
+  .no-style:focus, .no-style:hover {
+    text-decoration: none; }
+
+/* Job advert
+ * -------------------------------------------------------------------------- */
+.job-advert .info {
+  text-align: left; }
 
 .highlight {
   margin: 2.4rem 0;

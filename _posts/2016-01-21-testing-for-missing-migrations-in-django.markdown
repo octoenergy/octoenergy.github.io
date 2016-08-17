@@ -1,6 +1,7 @@
 ---
 title: Testing for missing migrations in Django
 layout: post
+category: news
 author: David Winterbottom
 banner: /assets/img/posts/2016-01-21-testing-for-missing-migrations-in-django.jpg
 hex: 3d354a
@@ -33,7 +34,7 @@ def test_for_missing_migrations():
         pytest.fail("There are missing migrations:\n %s" % output.getvalue())
 {% endhighlight %}
 
-Here we call the `makemigrations` command in "dry-run" mode and test the 
+Here we call the `makemigrations` command in "dry-run" mode and test the
 exit code to determine if there are any missing migrations. If there are missing
 migrations, the test will fail and print the captured output from the
 `makemigrations` command.
@@ -64,8 +65,8 @@ def test_for_missing_migrations():
 {% endhighlight %}
 
 Credit for this implementation belongs to Mozilla's Ed Morley, who [committed a
-similar fix](https://github.com/mozilla/treeherder/commit/dd539147716125bb4d2798cdaf613e294c363fb2) 
-for their [treeherder](https://github.com/mozilla/treeherder/) project. The above snippets are 
+similar fix](https://github.com/mozilla/treeherder/commit/dd539147716125bb4d2798cdaf613e294c363fb2)
+for their [treeherder](https://github.com/mozilla/treeherder/) project. The above snippets are
 slightly extended versions of his original.
 
 Related reading:

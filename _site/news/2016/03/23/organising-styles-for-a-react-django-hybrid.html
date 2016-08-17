@@ -11,12 +11,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Organising styles for a React/Django hybrid | Octopus Energy Tech blog</title>
-    <meta name="description" content="Octopus Energy is a modern, green energy supplier for the UK.
+    <meta name="description" content="Octopus Energy: supplying greener, affordable energy to the UK.
 ">
 
 	<link rel="stylesheet" type="text/css" href="//cloud.typography.com/6806472/664928/css/fonts.css" />
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://tech.octopus.energy/2016/03/23/organising-styles-for-a-react-django-hybrid.html">
+    <link rel="canonical" href="http://tech.octopus.energy/news/2016/03/23/organising-styles-for-a-react-django-hybrid.html">
     <link rel="icon" href="/assets/img/favicon.ico">
 </head>
 
@@ -122,7 +122,7 @@ killed by another front end developer. The use of <code>@extend</code> prevented
 duplication inside the component file, and allowed me to use styles from another
 file if I was happy with reducing the level of encapsulation a little.</p>
 
-<p>However, encapsulation means just that; totally encapsulated. </p>
+<p>However, encapsulation means just that; totally encapsulated.</p>
 
 <h2 id="the-issue">The issue</h2>
 
@@ -142,7 +142,7 @@ modules creates and use it in a Django template.</p>
 <p>of this class name:</p>
 
 <div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.className__abc5436</span> <span class="p">{</span>
-	
+
 <span class="p">}</span></code></pre></div>
 
 <p>is dynamically injected before the page is rendered. I could try and guess the
@@ -155,9 +155,9 @@ outcome - an unstyled component and no extra money.</p>
 wanted to use those styles that weren’t React-based. In an attempt to prevent
 excessive duplication between the two, I created a <code>Sitewide.css</code> file that both
 the CSS modules and the SASS (used for the rest of the site/global styles) could
-extend from. The downside to this approach is two-fold:  </p>
+extend from. The downside to this approach is two-fold:</p>
 
-<p>1) The styles in this file had to be written in pure CSS as SASS and PostCSS have different syntax for mixins and variables.  </p>
+<p>1) The styles in this file had to be written in pure CSS as SASS and PostCSS have different syntax for mixins and variables.</p>
 
 <p>2) As pure CSS, the bigger the file becomes the less maintainable it is without the use of pre-processor features such as variables, nesting, and mixins.</p>
 
@@ -213,7 +213,7 @@ this:</p>
 |
 |- styles.scss          # Main Sass file</code></pre></div>
 
-<p>Although all styles are technically ‘global’ now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance. </p>
+<p>Although all styles are technically ‘global’ now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance.</p>
 
 <p>To achieve this, we have a set of rules when styling components new or existing. The rules are as follows:</p>
 
@@ -228,7 +228,7 @@ this:</p>
 <p>Each selector in a component <code>.scss</code> file will start with the name of the component followed by the class name. i.e. if we were creating a <code>button</code> class in a container called <code>JoinComponent</code>, the class selector in <code>_JoinComponent.scss</code> would be:</p>
 
 <div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.JoinComponent-button</span> <span class="p">{</span>
-  
+
 <span class="p">}</span></code></pre></div>
 
 <p>This way, the button styles are exclusive to the <code>JoinComponent</code> component, and would not be caught up in specificity issues or accidentally overridden in another file.</p>
@@ -311,20 +311,17 @@ this:</p>
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
-        <p>Octopus Energy is a modern, green energy supplier for the UK.
+        <p>Octopus Energy: supplying greener, affordable energy to the UK.
 </p>
-        <p>
-            We're looking for <a href="/2015/11/23/tech-jobs.html">strong Python developers to join our team</a>.
-            Email us at <a href="mailto:talent@octoenergy.com">talent@octoenergy.com</a> if you're interested.
-        </p>
       </div>
 
       <div class="footer-col footer-col-2">
-        
-          <a href="https://github.com/octoenergy" target="_blank">
-            <img src="/assets/img/github.svg" alt="">
-          </a>
-        
+        <a href="https://www.facebook.com/octopusenergy" target="_blank">
+          <img src="/assets/img/icon-facebook.png" alt="Facebook logo">
+        </a>
+        <a href="https://twitter.com/octopus_energy" target="_blank">
+          <img src="/assets/img/icon-twitter.png" alt="Twitter logo">
+        </a>
       </div>
     </div>
 

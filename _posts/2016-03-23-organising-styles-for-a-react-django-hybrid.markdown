@@ -1,6 +1,7 @@
 ---
 title: Organising styles for a React/Django hybrid
 layout: post
+category: news
 author: Ashley Firth
 banner: /assets/img/posts/2016-03-23-organising-styles-for-a-react-django-hybrid.jpg
 hex: 38383a
@@ -67,7 +68,7 @@ killed by another front end developer. The use of `@extend` prevented code
 duplication inside the component file, and allowed me to use styles from another
 file if I was happy with reducing the level of encapsulation a little.
 
-However, encapsulation means just that; totally encapsulated. 
+However, encapsulation means just that; totally encapsulated.
 
 ## The issue
 
@@ -88,7 +89,7 @@ __abc5436
 of this class name:
 {% highlight css %}
 .className__abc5436 {
-	
+
 }
 {% endhighlight %}
 
@@ -102,10 +103,10 @@ So I had CSS siloed in modular component files and areas of the site that now
 wanted to use those styles that weren't React-based. In an attempt to prevent
 excessive duplication between the two, I created a `Sitewide.css` file that both
 the CSS modules and the SASS (used for the rest of the site/global styles) could
-extend from. The downside to this approach is two-fold:  
-  
-1) The styles in this file had to be written in pure CSS as SASS and PostCSS have different syntax for mixins and variables.  
-  
+extend from. The downside to this approach is two-fold:
+
+1) The styles in this file had to be written in pure CSS as SASS and PostCSS have different syntax for mixins and variables.
+
 2) As pure CSS, the bigger the file becomes the less maintainable it is without the use of pre-processor features such as variables, nesting, and mixins.
 
 Therefore, for future code quality, I had to remove CSS modules from the setup
@@ -162,7 +163,7 @@ sass/
 |- styles.scss          # Main Sass file
 {% endhighlight %}
 
-Although all styles are technically 'global' now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance. 
+Although all styles are technically 'global' now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance.
 
 To achieve this, we have a set of rules when styling components new or existing. The rules are as follows:
 
@@ -178,7 +179,7 @@ Each selector in a component `.scss` file will start with the name of the compon
 
 {% highlight css %}
 .JoinComponent-button {
-  
+
 }
 {% endhighlight %}
 
