@@ -185,20 +185,26 @@ Each selector in a component `.scss` file will start with the name of the compon
 
 This way, the button styles are exclusive to the `JoinComponent` component, and would not be caught up in specificity issues or accidentally overridden in another file.
 
-### 3. If it's commonly used, always `@extend` it
+### 3. Only `@extend` global classes for a reason
 
-If your component uses a common piece of styling, such as a button or link, create a new component-specific selector and use the SASS `@extend` syntax to bring in the style. You need to do this even if you aren't doing anything to edit the styles of it.
-
-So for our above example, if `JoinComponent-button` was intended for use in the component to look like a standard button, the code would be:
+If your component uses a common piece of styling, such as a button or link, you should use the original selector rather than extending it just to give it a new name that starts with the name of the component. So this is no good:
 
 {% highlight css %}
 .JoinComponent-button {
   @extend .button;
-  /* any new styles if applicable */
 }
 {% endhighlight %}
 
-This may seem like overkill if your component uses many common app styles, but it ensures that component selectors remain totally isolated and will never clash with one another. It does technically mean that everything you need to style the component does not lie solely in the file, but it would still look the same if it were used anywhere in the site. Additionally, it prevents code duplication.
+The only reasons to `@extend` a selector in this way are:
+
+- If you wish to use the core styles but want to add some more on top. In this case extending is fine as it prevents code duplication.
+- If the name of the core selector would make no sense in the context of the component. The markup of a component should be easy to read and therefore the selectors should make sense alongside the markup. An example of this would be using the exact same styles as a <code>.button</code> but it actually being an alert. In which case the following would be fine:
+
+{% highlight css %}
+.JoinComponent-alert {
+  @extend .button;
+}
+{% endhighlight %}
 
 ### 4. Do not nest classes
 
