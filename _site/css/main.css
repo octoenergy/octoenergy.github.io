@@ -245,11 +245,22 @@ em {
 
 .site-title {
   display: block;
-  margin: 2.0rem auto 2.4rem;
+  margin: 3.0rem auto 2.4rem;
   background: url(../assets/img/logo.svg);
+  background-size: 35rem 5.0rem;
   background-repeat: no-repeat;
-  width: 16rem;
-  height: 8.4rem; }
+  width: 35rem;
+  height: 5.0rem; }
+  @media (max-width: 600px) and (min-width: 500px) {
+    .site-title {
+      height: 8.0rem; } }
+  @media (max-width: 499px) and (min-width: 400px) {
+    .site-title {
+      height: 6.0rem; } }
+  @media screen and (max-width: 600px) {
+    .site-title {
+      width: 100%;
+      background-size: 100% auto; } }
   .site-title span {
     position: absolute;
     left: -100000px;
