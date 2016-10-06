@@ -6,8 +6,8 @@
 </description>
     <link>http://tech.octopus.energy/</link>
     <atom:link href="http://tech.octopus.energy/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 05 Oct 2016 11:58:39 +0100</pubDate>
-    <lastBuildDate>Wed, 05 Oct 2016 11:58:39 +0100</lastBuildDate>
+    <pubDate>Thu, 06 Oct 2016 15:55:35 +0100</pubDate>
+    <lastBuildDate>Thu, 06 Oct 2016 15:55:35 +0100</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -870,18 +870,24 @@ this:&lt;/p&gt;
 
 &lt;p&gt;This way, the button styles are exclusive to the &lt;code&gt;JoinComponent&lt;/code&gt; component, and would not be caught up in specificity issues or accidentally overridden in another file.&lt;/p&gt;
 
-&lt;h3 id=&quot;if-its-commonly-used-always-extend-it&quot;&gt;3. If it’s commonly used, always &lt;code&gt;@extend&lt;/code&gt; it&lt;/h3&gt;
+&lt;h3 id=&quot;only-extend-global-classes-for-a-reason&quot;&gt;3. Only &lt;code&gt;@extend&lt;/code&gt; global classes for a reason&lt;/h3&gt;
 
-&lt;p&gt;If your component uses a common piece of styling, such as a button or link, create a new component-specific selector and use the SASS &lt;code&gt;@extend&lt;/code&gt; syntax to bring in the style. You need to do this even if you aren’t doing anything to edit the styles of it.&lt;/p&gt;
-
-&lt;p&gt;So for our above example, if &lt;code&gt;JoinComponent-button&lt;/code&gt; was intended for use in the component to look like a standard button, the code would be:&lt;/p&gt;
+&lt;p&gt;If your component uses a common piece of styling, such as a button or link, you should use the original selector rather than extending it just to give it a new name that starts with the name of the component. So this is no good:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.JoinComponent-button&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extend&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;c&quot;&gt;/* any new styles if applicable */&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;This may seem like overkill if your component uses many common app styles, but it ensures that component selectors remain totally isolated and will never clash with one another. It does technically mean that everything you need to style the component does not lie solely in the file, but it would still look the same if it were used anywhere in the site. Additionally, it prevents code duplication.&lt;/p&gt;
+&lt;p&gt;The only reasons to &lt;code&gt;@extend&lt;/code&gt; a selector in this way are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If you wish to use the core styles but want to add some more on top. In this case extending is fine as it prevents code duplication.&lt;/li&gt;
+  &lt;li&gt;If the name of the core selector would make no sense in the context of the component. The markup of a component should be easy to read and therefore the selectors should make sense alongside the markup. An example of this would be using the exact same styles as a &lt;code&gt;.button&lt;/code&gt; but it actually being an alert. In which case the following would be fine:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.JoinComponent-alert&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extend&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;do-not-nest-classes&quot;&gt;4. Do not nest classes&lt;/h3&gt;
 

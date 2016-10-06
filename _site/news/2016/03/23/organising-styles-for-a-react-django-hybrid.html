@@ -242,18 +242,24 @@ this:</p>
 
 <p>This way, the button styles are exclusive to the <code>JoinComponent</code> component, and would not be caught up in specificity issues or accidentally overridden in another file.</p>
 
-<h3 id="if-its-commonly-used-always-extend-it">3. If it’s commonly used, always <code>@extend</code> it</h3>
+<h3 id="only-extend-global-classes-for-a-reason">3. Only <code>@extend</code> global classes for a reason</h3>
 
-<p>If your component uses a common piece of styling, such as a button or link, create a new component-specific selector and use the SASS <code>@extend</code> syntax to bring in the style. You need to do this even if you aren’t doing anything to edit the styles of it.</p>
-
-<p>So for our above example, if <code>JoinComponent-button</code> was intended for use in the component to look like a standard button, the code would be:</p>
+<p>If your component uses a common piece of styling, such as a button or link, you should use the original selector rather than extending it just to give it a new name that starts with the name of the component. So this is no good:</p>
 
 <div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.JoinComponent-button</span> <span class="p">{</span>
   <span class="o">@</span><span class="n">extend</span> <span class="o">.</span><span class="n">button</span><span class="p">;</span>
-  <span class="c">/* any new styles if applicable */</span>
 <span class="p">}</span></code></pre></div>
 
-<p>This may seem like overkill if your component uses many common app styles, but it ensures that component selectors remain totally isolated and will never clash with one another. It does technically mean that everything you need to style the component does not lie solely in the file, but it would still look the same if it were used anywhere in the site. Additionally, it prevents code duplication.</p>
+<p>The only reasons to <code>@extend</code> a selector in this way are:</p>
+
+<ul>
+  <li>If you wish to use the core styles but want to add some more on top. In this case extending is fine as it prevents code duplication.</li>
+  <li>If the name of the core selector would make no sense in the context of the component. The markup of a component should be easy to read and therefore the selectors should make sense alongside the markup. An example of this would be using the exact same styles as a <code>.button</code> but it actually being an alert. In which case the following would be fine:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.JoinComponent-alert</span> <span class="p">{</span>
+  <span class="o">@</span><span class="n">extend</span> <span class="o">.</span><span class="n">button</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
 
 <h3 id="do-not-nest-classes">4. Do not nest classes</h3>
 
