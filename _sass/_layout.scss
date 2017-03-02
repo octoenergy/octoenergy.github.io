@@ -341,10 +341,11 @@ a.btn-back {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 50%;
-    width: calc(50% - 1.0rem);
+    width: 32%;
+    width: calc(32% - 1.0rem);
     margin: 1.0rem .5rem;
     background-color: #fafafa;
+    border: 0.1rem solid #9b9b9b;
     border-radius: .2rem;
 
     @media (max-width: 700px) {
