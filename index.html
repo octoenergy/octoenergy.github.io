@@ -55,7 +55,7 @@ layout: default
                 <div class="blog-entry">
                     <a href="{{ post.url | prepend: site.baseurl }}" class="no-style">
                         <div class="blog-entry--image" {% if post.banner %} style="background-image: url({{ site.baseurl }}{{ post.banner }});" {% endif %}>
-                            <h1 class="blog-entry--title">{{ post.title }}fghjk</h1>
+                            <h1 class="blog-entry--title">{{ post.title }}</h1>
                         </div>
                         <div class="blog-entry--text">
                             <p>{{ post.content | strip_html | truncate:140}}</p>
