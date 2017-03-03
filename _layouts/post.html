@@ -8,11 +8,9 @@ layout: default
 	{% endif %}
 {% endfor %}
 
-<div class="post">
-
-  <a href="/" class="btn-back"><img src="/assets/img/back.svg" alt=""><span>Back</span></a>
-
-  </div> <!-- /post -->
+    <div class="wrapper">
+      <a href="/" class="btn-back"><img src="/assets/img/back.svg" alt=""><span>Back</span></a>
+    </div> <!-- /post -->
   </div> <!-- /wrapper -->
 
   <header>
@@ -25,7 +23,7 @@ layout: default
               <div class="blog-hero--content">
                   <h1 class="blog-hero--title">{{ page.title }}</h1>
                   <p class="blog-hero--author">{{ page.date | date: "%b %-d, %Y" }}</p>
-                  <p>
+                  <p class="blog-hero--author">
                     {% if author.twitter %}
                         <a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ page.author }}</a>,
                     {% else %}
