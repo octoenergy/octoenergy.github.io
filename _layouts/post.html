@@ -22,7 +22,7 @@ layout: default
             <div class="wrapper relative margin-bottom-md">
               <div class="blog-hero--content">
                   <h1 class="blog-hero--title">{{ page.title }}</h1>
-                  <p class="blog-hero--author">{{ page.date | date: "%b %-d, %Y" }}</p>
+                  <p><span class="blog-hero--info">{{ page.date | date: "%b %-d, %Y" }}</span></p>
                   <p class="blog-hero--author">
                     {% if author.twitter %}
                         <a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ page.author }}</a>,
