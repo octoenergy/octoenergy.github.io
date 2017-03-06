@@ -24,7 +24,6 @@ layout: default
                                 <div class="blog-hero--content">
                                     <h1 class="blog-hero--title"><a href="{{ hero.url | prepend: site.baseurl }}">{{ hero.title }}</a></h1>
                                     <p class="blog-hero--author">
-                                        <span class="blog-hero--info">
                                         {% if author.twitter %}
                                             <a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ hero.author }}</a>,
                                         {% else %}
@@ -33,7 +32,6 @@ layout: default
                                         {% if author.jobtitle %}
                                             <span class="blog-author--title">{{ author.jobtitle }}</span>
                                         {% endif %}
-                                        </span>
                                     </p>
                                     <a href="{{ hero.url | prepend: site.baseurl }}" class="blog-hero--link"><span class="blog-hero--info">Read more</span></a>
                                 </div>
