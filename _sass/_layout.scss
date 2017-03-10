@@ -20,12 +20,12 @@
     }
 
     @media (max-width: 499px) and (min-width: 400px) {
-        height: 6.0rem;
+    
     }
 
     @include media-query($on-palm) {
-        width: 100%;
-        background-size: 100% auto;
+        background-size: 35rem 3rem;
+        height: 4.0rem;
     }
 
     span {
@@ -286,7 +286,7 @@ a.btn-back {
        padding: 1.6rem;
        margin-bottom: 1.6rem;
        font-size: 53px;
-       font-size: 5.3rem;
+       font-size: 4.3rem;
        font-weight: 800;
        line-height: 53px;
        line-height: 5.3rem;
@@ -295,7 +295,7 @@ a.btn-back {
        background: rgba(0,0,0,.8);
 
         @media (max-width: 768px) {
-            font-size: 4.0rem;
+            font-size: 3.0rem;
             line-height: 4.0rem;
         }
 
