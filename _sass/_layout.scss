@@ -209,7 +209,7 @@
 
 a.btn-back {
     position: absolute;
-    top: 5.5rem;
+    top: 3.8rem;
     color: #ffffff;
     text-decoration: none;
 
@@ -447,9 +447,13 @@ a.btn-back {
 }
 
 .author {
-    display: flex;
-    align-items: center;
-    margin: 4rem 0 2rem;
+        margin: 4rem 0;
+
+    @media (min-width: 600px) {
+        display: flex;
+        align-items: center;
+        margin: 4rem 0 2rem;
+    }
 
     .author-image,
     .author-profile {
@@ -487,6 +491,7 @@ a.btn-back {
         }
 
         @media (max-width: 600px) {
+            margin: 0 0 2rem;
             margin-right: auto;
             margin-left: auto;
         }
