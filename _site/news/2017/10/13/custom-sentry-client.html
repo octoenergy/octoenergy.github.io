@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Hello world, would you like to join us? | Octopus Energy Tech blog</title>
+    <title>Using a custom Sentry client | Octopus Energy Tech blog</title>
     <meta name="description" content="Octopus Energy: supplying greener, affordable energy to the UK.
 ">
 
 	<link rel="stylesheet" type="text/css" href="//cloud.typography.com/6806472/664928/css/fonts.css" />
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://tech.octopus.energy/news/2015/11/23/tech-jobs.html">
+    <link rel="canonical" href="http://tech.octopus.energy/news/2017/10/13/custom-sentry-client.html">
     <link rel="icon" href="/assets/img/platform-icons/favicon.ico">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/platform-icons/apple-touch-icon.png">
@@ -55,8 +55,8 @@
 
             <div class="wrapper relative margin-bottom-md">
               <div class="blog-hero--content">
-                  <h1 class="blog-hero--title">Hello world, would you like to join us?</h1>
-                  <p><span class="blog-hero--info">Nov 23, 2015</span></p>
+                  <h1 class="blog-hero--title">Using a custom Sentry client</h1>
+                  <p><span class="blog-hero--info">Oct 13, 2017</span></p>
                   <p class="blog-hero--author">
                     
                         <a href="https://twitter.com/codeinthehole" target="_blank">David Winterbottom</a>,
@@ -74,53 +74,48 @@
   <div class="post">
 
   <article class="post-content">
-    <p>We’re looking for super-smart people to join the tech team at Octopus Energy. We’re in the process of designing and building our initial infrastructure. There are many difficult design problems to solve; we need creative, analytical minds who can help tame this notoriously tricky domain.</p>
+    <p>We use
+<a href="https://sentry.io/welcome/">Sentry</a> to monitor errors within our Django applications. It’s an
+excellent tool: you should use it. </p>
 
-<p>To start with, our main technologies will be:</p>
+<p>Regrettable however, we sometimes need to SSH into a server within our platform
+and use Django’s shell to explore or adjust data. However, by default,
+exceptions from these sessions are captured up Sentry and appear in the
+dashboard. </p>
 
-<ul>
-  <li>AWS - using the excellent Hashicorp toolset (Vagrant, Packer, Consul and Terraform);</li>
-  <li>Python - especially Django and Django-REST-Framework. We’re also looking to employ Python’s data processing libraries such as numpy and pandas (although this is still up for debate);</li>
-  <li>Postgres and DynamoDB;</li>
-  <li>Memcached and Redis;</li>
-  <li>React and related modules from the Javascript ecosystem - our consumer-facing user interfaces are going to be super slick;</li>
-  <li>Node, npm, webpack, babel, gulp etc.;</li>
-  <li>Puppet - for config management.</li>
-</ul>
+<p>This isn’t helpful as such errors are not application problems <em>per se</em> and
+just add noise.  We want Sentry to ignore these exceptions.</p>
 
-<p>Our current priorities lie with server-side work so we’re keen to
-speak to Pythonistas, developer data scientists or anyone with a love of automation and data processing.</p>
+<p>To prevent these errors being captured, the solution is to use a custom Sentry
+client class with an overridden <code>should_capture</code> method that ignores errors
+triggered from a shell session.</p>
 
-<p>But we’re always interested in talking to smart, motivated people with an
-interest in green tech - we’d love to hear from anyone with experience in the
-above.</p>
+<p>Here’s an example:</p>
 
-<p>Could this be you?</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
 
-<p>We hope so. Ideally, you’ll have experience in one or more of the following:</p>
+<span class="kn">from</span> <span class="nn">raven.contrib.django</span> <span class="kn">import</span> <span class="n">DjangoClient</span>
 
-<ul>
-  <li>Strong Python, especially Django and building for the web;</li>
-  <li>Knowledge of data processing (eg luigi, pandas, numpy - doesn’t have
-to be Python though);</li>
-  <li>Building slick user interfaces with React;</li>
-  <li>Knowledge of the modern Javascript ecosystem and asset build pipelines (eg
-webpack, mocha, gulp);</li>
-  <li>Non-trivial experience with AWS;</li>
-  <li>Experience working with 3rd party APIs, eg XML webservices, REST APIs, FTP
-filedrops, that kind of thing.</li>
-</ul>
 
-<p>This is a great opportunity to be an early employee at a revolutionary company. Working at Octopus Energy offers the unique combination of solving difficult technical problems with modern technology as well as working on something that will genuinely make the world a better place (that is, helping transition the UK to a lower carbon future).</p>
+<span class="k">class</span> <span class="nc">CustomSentryClient</span><span class="p">(</span><span class="n">DjangoClient</span><span class="p">):</span>
 
-<p>Lots of experience isn’t strictly necessary to join. We’re interested in graduates as well as developers with experience in the above technologies or the UK energy market.</p>
+    <span class="k">def</span> <span class="nf">should_capture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_info</span><span class="p">):</span>
+        <span class="c"># Check if this exception was triggered from a shell session. We don&#39;t care about these</span>
+        <span class="c"># as they are normally human typos and of no further interest.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;shell&quot;</span><span class="p">,</span> <span class="s">&quot;shell_plus&quot;</span><span class="p">,</span> <span class="s">&quot;dbshell&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">False</span>
 
-<p>If this sounds interesting, tell us about yourself via <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#116;&#097;&#108;&#101;&#110;&#116;&#064;&#111;&#099;&#116;&#111;&#101;&#110;&#101;&#114;&#103;&#121;&#046;&#099;&#111;&#109;">&#116;&#097;&#108;&#101;&#110;&#116;&#064;&#111;&#099;&#116;&#111;&#101;&#110;&#101;&#114;&#103;&#121;&#046;&#099;&#111;&#109;</a>.</p>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">should_capture</span><span class="p">(</span><span class="n">exc_info</span><span class="p">)</span></code></pre></div>
 
-<p>PS - Right now, we’re not considering 100% remote candidates. At this early
-stage, there’s enormous value in high-bandwidth person-to-person communication
-that you can only get by working in the same space. This may change later on of
-course.</p>
+<p>Plumb this in by adding a <code>SENTRY_CLIENT</code> setting specifying the module path to
+this class:</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># settings.py</span>
+
+<span class="n">SENTRY_CLIENT</span> <span class="o">=</span> <span class="s">&#39;path.to.module.CustomSentryClient&#39;</span></code></pre></div>
+
+<p>Problem solved.</p>
 
 
 

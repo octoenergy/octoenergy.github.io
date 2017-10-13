@@ -1,10 +1,10 @@
-# Organisation homepage
+# Octopus Energy tech blog
 
-This repo provides a simple Jekyll site for the octoenergy.github.io domain.
+This repo provides a simple Jekyll site for the http://tech.octopus.energy domain.
 
 ## Installation
 
-You'll need a modern Ruby (>2.0) and bundler (`gem install bundler`) installed. For OSX, it's generally
+You'll need a modern Ruby (>2.0) and bundler (`gem install bundler`) installed. For OS-X, it's generally
 easiest to use [rvm](https://rvm.io/).
 
 We use Pygments for syntax highlighting. This seems to need Python 2.7 as the default Python. If you're using pyenv, then
@@ -13,7 +13,7 @@ run:
     $ pyenv install 2.7.8
     $ pyenv local 2.7.8
 
-to set the local Python version to 2.7.8.
+to set the local Python version to 2.7.8 (or 2.7.x).
 
 Once those are in place, simply check out the repo and run:
 
@@ -22,3 +22,5 @@ Once those are in place, simply check out the repo and run:
 to install all Ruby dependencies. You can then run the local development server with:
 
     $ bundle exec jekyll server
+
+
