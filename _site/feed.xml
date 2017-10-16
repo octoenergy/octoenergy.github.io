@@ -6,9 +6,64 @@
 </description>
     <link>http://tech.octopus.energy/</link>
     <atom:link href="http://tech.octopus.energy/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 02 Mar 2017 12:46:09 +0000</pubDate>
-    <lastBuildDate>Thu, 02 Mar 2017 12:46:09 +0000</lastBuildDate>
+    <pubDate>Fri, 13 Oct 2017 21:31:04 +0100</pubDate>
+    <lastBuildDate>Fri, 13 Oct 2017 21:31:04 +0100</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Using a custom Sentry client</title>
+        <description>&lt;p&gt;We use
+&lt;a href=&quot;https://sentry.io/welcome/&quot;&gt;Sentry&lt;/a&gt; to monitor errors within our Django applications. It’s an
+excellent tool: you should use it. &lt;/p&gt;
+
+&lt;p&gt;Regrettable however, we sometimes need to SSH into a server within our platform
+and use Django’s shell to explore or adjust data. However, by default,
+exceptions from these sessions are captured up Sentry and appear in the
+dashboard. &lt;/p&gt;
+
+&lt;p&gt;This isn’t helpful as such errors are not application problems &lt;em&gt;per se&lt;/em&gt; and
+just add noise.  We want Sentry to ignore these exceptions.&lt;/p&gt;
+
+&lt;p&gt;To prevent these errors being captured, the solution is to use a custom Sentry
+client class with an overridden &lt;code&gt;should_capture&lt;/code&gt; method that ignores errors
+triggered from a shell session.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;raven.contrib.django&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DjangoClient&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CustomSentryClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DjangoClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;should_capture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exc_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# Check if this exception was triggered from a shell session. We don&amp;#39;t care about these&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# as they are normally human typos and of no further interest.&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;shell&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;shell_plus&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;dbshell&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should_capture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exc_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Plumb this in by adding a &lt;code&gt;SENTRY_CLIENT&lt;/code&gt; setting specifying the module path to
+this class:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# settings.py&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;SENTRY_CLIENT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;path.to.module.CustomSentryClient&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Problem solved.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 13 Oct 2017 00:00:00 +0100</pubDate>
+        <link>http://tech.octopus.energy/news/2017/10/13/custom-sentry-client.html</link>
+        <guid isPermaLink="true">http://tech.octopus.energy/news/2017/10/13/custom-sentry-client.html</guid>
+        
+        
+        <category>news</category>
+        
+      </item>
     
       <item>
         <title>Software Engineer</title>
