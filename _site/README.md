@@ -4,7 +4,7 @@ This repo provides a simple Jekyll site for the http://tech.octopus.energy domai
 
 ## Installation
 
-You'll need a modern Ruby (>2.0) and bundler (`gem install bundler`) installed. For OS-X, it's generally
+You'll need a modern Ruby (>2.0) and bundler (`gem install bundler`) installed. For macOS, it's generally
 easiest to use [rvm](https://rvm.io/).
 
 We use Pygments for syntax highlighting. This seems to need Python 2.7 as the default Python. If you're using pyenv, then

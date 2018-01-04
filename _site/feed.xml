@@ -6,8 +6,8 @@
 </description>
     <link>http://tech.octopus.energy/</link>
     <atom:link href="http://tech.octopus.energy/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 13 Oct 2017 21:31:04 +0100</pubDate>
-    <lastBuildDate>Fri, 13 Oct 2017 21:31:04 +0100</lastBuildDate>
+    <pubDate>Wed, 01 Nov 2017 15:24:55 +0000</pubDate>
+    <lastBuildDate>Wed, 01 Nov 2017 15:24:55 +0000</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -62,122 +62,6 @@ this class:&lt;/p&gt;
         
         
         <category>news</category>
-        
-      </item>
-    
-      <item>
-        <title>Software Engineer</title>
-        <description>&lt;p&gt;&lt;strong&gt;Employment Type&lt;/strong&gt;: Full-time, permanent&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Location&lt;/strong&gt;: Soho, London&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Remote&lt;/strong&gt;: Not at the moment&lt;/p&gt;
-
-&lt;p&gt;We are a tech-focussed energy supplier for the UK market and we’re looking for
-diligent software engineers (especially with Python experience) to join us.&lt;/p&gt;
-
-&lt;p&gt;We’re using open-source software to build a modern, event-driven infrastructure
-for interacting with both consumers (via the web, mobile and smart-meters) and
-the industry (eg data flows, consumption forecasting, trading on the wholesale
-market).&lt;/p&gt;
-
-&lt;p&gt;On the server-side, our main language is Python. Our &lt;a href=&quot;https://octopus.energy&quot;&gt;public site&lt;/a&gt; and internal services employ Django and the Django-REST-framework - we
-also use Pandas, Numpy and Jupyter extensively for analysis and forecasting.&lt;/p&gt;
-
-&lt;p&gt;We use AWS heavily, employing most of the “Hashistack” (eg Packer, Consul,
-Terraform, Atlas) as part of a continuous deployment pipeline. See, for example,
-our article on &lt;a href=&quot;http://tech.octopus.energy/2016/05/05/django-elb-health-checks.html&quot;&gt;effective ELB healthchecks&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Client-side, we use React and SASS; our mobile apps are built using React
-Native.&lt;/p&gt;
-
-&lt;p&gt;Engineering standards are high. All code is well tested and thoroughly reviewed.&lt;/p&gt;
-
-&lt;p&gt;This is a great opportunity for several reasons:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;We have lots of difficult &lt;em&gt;design&lt;/em&gt; challenges to solve. The UK energy market
-is complicated, dated and process-heavy - there’s an awful lot of domain
-modelling that we need to get right.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;We have difficult &lt;em&gt;technical&lt;/em&gt; problems to solve. With the advent of smart
-meters, we’ll soon be processing millions of meter readings a day. We need
-the right technology in place to handle this smoothly as well as feeding
-data into a machine learning pipeline that models and predicts consumption.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;There’s a great opportunity for disruption in the UK energy market. The
-big suppliers still dominate, but are not exactly popular. The energy
-landscape is changing as we move to more disaggregated forms of
-generation, with less predictability, more dynamism and smarter
-technology.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;You’ll be working for a company that is helping to tackle climate
-change. We’ll be helping move people onto using greener technology and
-consuming energy from renewable sources. This will all help transition
-the UK towards a lower carbon future.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 21 Sep 2016 00:00:00 +0100</pubDate>
-        <link>http://tech.octopus.energy/career/2016/09/21/career-software-engineer.html</link>
-        <guid isPermaLink="true">http://tech.octopus.energy/career/2016/09/21/career-software-engineer.html</guid>
-        
-        
-        <category>career</category>
-        
-      </item>
-    
-      <item>
-        <title>Data Analyst</title>
-        <description>&lt;p&gt;&lt;strong&gt;Employment Type&lt;/strong&gt;: Full-time, permanent&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Location&lt;/strong&gt;: London&lt;/p&gt;
-
-&lt;p&gt;The UK wholesale energy market is going through unprecedented change with rapid development of renewable energy technologies, the introduction of large scale battery storage and demand side response initiatives, and the roll-out of Smart meters into consumer’s home. These developments increase the complexity of trading and risk inherent in supplying energy to consumers. But they also create significant opportunities for agile market participants that are able to harness the burgeoning data flows and respond quickly to changes in customer demand and market signals. This role will be at the leading edge of the revolutionary changes that are starting to take place in the energy industry.&lt;/p&gt;
-
-&lt;p&gt;Your core challenge will be to automate trading administration and market risk management processes as part of Octopus Energy’s relentless drive to create a highly efficient platform. The scope of the role covers the full trade life cycle from demand forecasting through trade calculation and execution to recording and settling trades. Your work will contribute to the evolution of our procurement strategy as the business becomes larger and more complex.&lt;/p&gt;
-
-&lt;p&gt;Although the role will necessarily involve getting to grips with complex industry processes and language, prior experience in the industry is not a pre-requisite; we provide a supportive learning environment for those with the right inherent capabilities and motivation to succeed.&lt;/p&gt;
-
-&lt;h2 id=&quot;principal-accountabilities&quot;&gt;Principal Accountabilities&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Carry out a number of tasks but simultaneously use Python, SQL, VBA or other appropriate methods to implement process automation, including:
-    &lt;ul&gt;
-      &lt;li&gt;Using weather forecasts to produce forecasted output from renewable generation sites and forecasted customer usage&lt;/li&gt;
-      &lt;li&gt;Using forecast data and hedge position to produce trade proposals, minimising exposure to cash-out prices&lt;/li&gt;
-      &lt;li&gt;Producing proposals on quantity and timings of certificate purchases&lt;/li&gt;
-      &lt;li&gt;Trade capture and notification&lt;/li&gt;
-      &lt;li&gt;Regular reporting around forecast accuracy&lt;/li&gt;
-      &lt;li&gt;Validation of industry counterparty invoices (e.g. electricity transmission and distribution, imbalance costs, government schemes etc)&lt;/li&gt;
-      &lt;li&gt;Settlements analysis and risk reporting on meter read performance&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Use knowledge of invoice validation and wholesale traded position to assist in production of month-end gross margins and forward looking financial statements&lt;/li&gt;
-  &lt;li&gt;Assist with production of regular cashflow forecasts&lt;/li&gt;
-  &lt;li&gt;Contribute to the design and implementation of the ongoing procurement strategy&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;skills-and-qualifications&quot;&gt;Skills and Qualifications&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Knowledge of Electricity and Gas wholesale markets would be an advantage but not essential&lt;/li&gt;
-  &lt;li&gt;Experience with Python, SQL and VBA with willingness to learn&lt;/li&gt;
-  &lt;li&gt;Strong analytical skills&lt;/li&gt;
-  &lt;li&gt;Excellent verbal and written communication skills.&lt;/li&gt;
-  &lt;li&gt;Flexibility to grow and adapt as the business grows&lt;/li&gt;
-  &lt;li&gt;Excellent command of standard IT applications, such as Word, Powerpoint and Excel&lt;/li&gt;
-  &lt;li&gt;Able to challenge with empathy and ‘muck in’ as required at times as we develop the business&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 17 Aug 2016 00:00:00 +0100</pubDate>
-        <link>http://tech.octopus.energy/career/2016/08/17/career-data-analyst.html</link>
-        <guid isPermaLink="true">http://tech.octopus.energy/career/2016/08/17/career-data-analyst.html</guid>
-        
-        
-        <category>career</category>
         
       </item>
     
