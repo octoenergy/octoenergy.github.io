@@ -1,0 +1,70 @@
+{
+  "name": "Opal SysDefs",
+  "scopeName": "source.opalsysdefs",
+  "fileTypes": [
+    "SysDefs"
+  ],
+  "uuid": "3da0f3f0-8b32-41c9-857c-ce9be39b99d5",
+  "patterns": [
+    {
+      "name": "comment.line.number-sign.opalsysdefs",
+      "match": "(#).*$",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.comment.opalsysdefs"
+        }
+      }
+    },
+    {
+      "name": "meta.keyvaluepair.opalsysdefs",
+      "begin": "^\\s*([A-Z_]+)\\s*(\\+?=)",
+      "end": "\\n|(?=#)",
+      "beginCaptures": {
+        "1": {
+          "name": "variable.parameter.opalsysdefs"
+        },
+        "2": {
+          "name": "punctuation.separator.keyvaluepair.opalsysdefs"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#value"
+        }
+      ]
+    },
+    {
+      "name": "invalid.illegal.justkidding.noseriously.whoknows.opalsysdefs",
+      "match": ".*"
+    }
+  ],
+  "repository": {
+    "value": {
+      "patterns": [
+        {
+          "name": "meta.structure.thingy.opalsysdefs",
+          "begin": "(\\$)(\\()",
+          "end": "(\\))",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.dollar.opalsysdefs"
+            },
+            "2": {
+              "name": "punctuation.definition.parameters.begin.opalsysdefs"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.parameters.end.opalsysdefs"
+            }
+          },
+          "contentName": "string.other.opalsysdefs"
+        },
+        {
+          "name": "string.other.opalsysdefs",
+          "match": "([\\w\\?!\\_])*"
+        }
+      ]
+    }
+  }
+}

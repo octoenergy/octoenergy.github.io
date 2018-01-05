@@ -1,0 +1,46 @@
+{
+  "fileTypes": [
+    "sbt"
+  ],
+  "foldingStartMarker": "/\\*\\*|\\{\\s*$",
+  "foldingStopMarker": "\\*\\*/|^\\s*\\}",
+  "keyEquivalent": "^~S",
+  "name": "Simple Build Tool",
+  "patterns": [
+    {
+      "captures": {
+        "1": {
+          "name": "constant.other.setting.sbt"
+        }
+      },
+      "match": "(\\w*)\\s+(?=.*=)"
+    },
+    {
+      "match": "\\b(at)\\b",
+      "name": "keyword.control.directive.sbt"
+    },
+    {
+      "begin": "\"",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.begin.sbt"
+        }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.end.sbt"
+        }
+      },
+      "name": "string.quoted.double.sbt",
+      "patterns": [
+        {
+          "match": "\\\\.",
+          "name": "constant.character.escape.sbt"
+        }
+      ]
+    }
+  ],
+  "scopeName": "source.sbt",
+  "uuid": "4A4E6D54-9232-4F33-9E4F-777A56075844"
+}

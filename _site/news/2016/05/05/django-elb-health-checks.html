@@ -1,24 +1,16 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en-gb" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en-gb" class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en-gb" class="no-js lt-ie10 lt-ie9"> <![endif]-->
-<!--[if IE 9]>         <html lang="en-gb" class="no-js lt-ie10 ie9"> <![endif]-->
-<!--[if gt IE 9]><!--> <html lang="en-gb" class="no-js"> <!--<![endif]-->
+<html lang="en">
 
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Django, ELB health checks and continuous delivery | Octopus Energy Tech blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Octopus Energy: supplying greener, affordable energy to the UK.
 ">
-
-	<link rel="stylesheet" type="text/css" href="//cloud.typography.com/6806472/664928/css/fonts.css" />
-    <link rel="stylesheet" href="/css/main.css">
+    <title>Django, ELB health checks and continuous delivery | Octopus Energy Tech blog</title>
+    <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6806472/664928/css/fonts.css" />
     <link rel="canonical" href="http://tech.octopus.energy/news/2016/05/05/django-elb-health-checks.html">
-    <link rel="icon" href="/assets/img/platform-icons/favicon.ico">
 
+    <link rel="icon" href="/assets/img/platform-icons/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/platform-icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/assets/img/platform-icons/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="/assets/img/platform-icons/favicon-16x16.png" sizes="16x16">
@@ -27,54 +19,84 @@
     <meta name="apple-mobile-web-app-title" content="Octopus Energy">
     <meta name="application-name" content="Octopus Energy">
     <meta name="theme-color" content="#1b073a">
-</head>
 
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
 
   <body>
-    <div class="page-content">
-      <div class="site-header">
-        <a class="site-title" href="https://octopus.energy" target="_blank"><span>Octopus Energy</span></a>
-        
-	
-		
-	
 
-	
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Octopus Energy Tech</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://octopus.energy">Octopus Energy</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://octopus.energy/careers">Careers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://octopus.energy/contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    
+  
+    
+  
+
+  
 
 
-    <div class="wrapper">
-      <a href="/" class="btn-back"><img src="/assets/img/back.svg" alt=""><span>Back</span></a>
-    </div> <!-- /post -->
-  </div> <!-- /wrapper -->
-
-  <header>
-    <div style="background-color: #727377;">
-            
-              <img src="/assets/img/posts/2016-05-05-django-elb-health-checks.jpg" alt="banner image" class="blog-hero-image">
-            
-
-            <div class="wrapper relative margin-bottom-md">
-              <div class="blog-hero--content">
-                  <h1 class="blog-hero--title">Django, ELB health checks and continuous delivery</h1>
-                  <p><span class="blog-hero--info">May 5, 2016</span></p>
-                  <p class="blog-hero--author">
+<!-- Page Header -->
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h1>Django, ELB health checks and continuous delivery</h1>
+                    <span class="meta">Posted by
                     
-                        <a href="https://twitter.com/codeinthehole" target="_blank">David Winterbottom</a>,
+                        <a href="https://twitter.com/codeinthehole" target="_blank" style="text-decoration: underline;">David Winterbottom</a>
                     
                     
-                        <span class="blog-author--title">Head of Engineering</span>
+                        Head of Engineering
                     
-                  </p>
-              </div>
-          </div>
+                    on May 5, 2016</span>
+                </div>
+            </div>
+        </div>
     </div>
-  </header>
+</header>
 
-  <div class="wrapper">
-  <div class="post">
-
-  <article class="post-content">
-    <p>A robust means of deploying web applications with Amazon Web
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <p>A robust means of deploying web applications with Amazon Web
 Services is to use an <a href="https://aws.amazon.com/elasticloadbalancing/">Elastic Load Balancer</a>
 (ELB) to balance requests between an “Auto Scaling Group” (ASG) of EC2 instances. As
 well as horizontally scaling, this set-up allows automated canary (aka
@@ -416,53 +438,57 @@ health check:</p>
 
 <p>And there you have it: an effective health check view for Django applications.</p>
 
-
-    <div class="author">
-      
-        <div class="author-image">
-          
-            <a href="https://twitter.com/codeinthehole" target="_blank">
-          
-              <img src="/assets/img/authors/david.jpg" alt="image of ">
-          
-            </a>
-          
+            </div>
         </div>
-      
+    </div>
+</article>
 
-      <div class="author-profile">
-        <p class="author-profile--name">
-          
-            <a href="https://twitter.com/codeinthehole" target="_blank">David Winterbottom</a>
-          
-        </p>
-        
-          <p class="author-profile--title">
-            Head of Engineering
-          </p>
-        
+
+    <hr>
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          <li class="list-inline-item">
+            <a href="https://twitter.com/octopus_energy">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://www.facebook.com/octopusenergy/">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://github.com/octoenergy">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Octopus Energy 2018</p>
       </div>
     </div>
-
-  </article>
-
-</div>
-
-      </div>
-    </div>
-    <footer class="site-footer">
-
-  <div class="wrapper">
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col-1">
-        <p>Octopus Energy Ltd is a company registered in England and Wales. Registered number: 09263424. Registered office: 33 Holborn, London, EC1N 2HT. Trading office: 20-24 Broadwick Street, London, W1F 8HT</p>
-      </div>
-    </div>
-
   </div>
-
 </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="/assets/js/app.js"></script>
 
   </body>
 

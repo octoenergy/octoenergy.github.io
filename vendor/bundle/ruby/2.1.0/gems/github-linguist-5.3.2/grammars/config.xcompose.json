@@ -1,0 +1,83 @@
+{
+  "scopeName": "config.xcompose",
+  "name": "XCompose",
+  "fileTypes": [
+    "XCompose"
+  ],
+  "patterns": [
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#multikey"
+    },
+    {
+      "include": "#key"
+    },
+    {
+      "include": "#quoted"
+    },
+    {
+      "include": "#function"
+    },
+    {
+      "include": "#colon"
+    },
+    {
+      "include": "#unicode"
+    },
+    {
+      "include": "#keyword"
+    }
+  ],
+  "repository": {
+    "comment": {
+      "match": "#.*",
+      "name": "comment.block.xcompose"
+    },
+    "multikey": {
+      "match": "(?x) ( < ) ( Multi_key ) ( > )",
+      "captures": {
+        "1": {
+          "name": "entity.function.xcompose"
+        },
+        "2": {
+          "name": "declaror.class.xcompose"
+        },
+        "3": {
+          "name": "entity.function.xcompose"
+        }
+      }
+    },
+    "key": {
+      "match": "(?x) ( < ) ( \\S+ ) ( > )",
+      "captures": {
+        "1": {
+          "name": "entity.function.xcompose"
+        },
+        "2": {
+          "name": "keyword.xcompose.xcompose"
+        },
+        "3": {
+          "name": "entity.function.xcompose"
+        }
+      }
+    },
+    "quoted": {
+      "match": "\".*\"",
+      "name": "string.quoted.double.xcompose"
+    },
+    "colon": {
+      "match": ":",
+      "name": "entity.function.xcompose"
+    },
+    "keyword": {
+      "match": "\binclude\b",
+      "name": "entity.function.xcompose"
+    },
+    "unicode": {
+      "match": "U[0-9A-Fa-f]+",
+      "name": "storage.modifier.unicode.xcompose"
+    }
+  }
+}

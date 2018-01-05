@@ -1,0 +1,27 @@
+{
+  "name": "Literate Clean",
+  "scopeName": "text.restructuredtext.clean",
+  "fileTypes": [
+    "lcl"
+  ],
+  "patterns": [
+    {
+      "name": "meta.embedded.clean",
+      "begin": "^(>>?)",
+      "end": "$",
+      "captures": {
+        "1": {
+          "name": "punctuation.separator.literate.clean"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.clean"
+        }
+      ]
+    },
+    {
+      "include": "text.restructuredtext"
+    }
+  ]
+}

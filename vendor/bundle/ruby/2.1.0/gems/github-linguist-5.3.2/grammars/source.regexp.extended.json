@@ -1,0 +1,21 @@
+{
+  "name": "Regular Expression (Extended)",
+  "scopeName": "source.regexp.extended",
+  "firstLineMatch": "^\\s*\\(\\?[im]*x[im]*\\)",
+  "patterns": [
+    {
+      "include": "source.regexp#main"
+    }
+  ],
+  "injections": {
+    "source.regexp.extended": {
+      "patterns": [
+        {
+          "begin": "(?<![^\\\\]\\\\)#",
+          "end": "$",
+          "name": "comment.line.number-sign"
+        }
+      ]
+    }
+  }
+}

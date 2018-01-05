@@ -1,0 +1,25 @@
+/Users/ashleyfirth/.rvm/rubies/ruby-2.1.5/bin/ruby -r ./siteconf20180105-13439-1mscukb.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling escape_utils.c
+compiling buffer.c
+compiling houdini_js_u.c
+compiling houdini_href_e.c
+compiling houdini_html_e.c
+compiling houdini_uri_e.c
+compiling houdini_js_e.c
+compiling houdini_xml_e.c
+compiling houdini_uri_u.c
+compiling houdini_html_u.c
+houdini_html_u.c:75:62: warning: implicit conversion loses integer precision: 'size_t' (aka 'unsigned long') to 'unsigned int' [-Wshorten-64-to-32]
+                                const struct html_ent *entity = find_entity((char *)src, i);
+                                                                ~~~~~~~~~~~              ^
+1 warning generated.
+linking shared-object escape_utils/escape_utils.bundle
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 escape_utils.bundle ./.gem.20180105-13439-1wirppk/escape_utils
+installing default escape_utils libraries

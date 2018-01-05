@@ -1,4 +1,5 @@
 .highlight {
+    padding: 1.0rem;
     margin: 2.4rem 0;
     background: #272822;
     
@@ -66,5 +67,6 @@
     .gu { color: #75715e; } /* Generic.Subheading & Diff Unified/Comment? */
     .gd { color: #f92672; } /* Generic.Deleted & Diff Deleted */
     .gi { color: #a6e22e; } /* Generic.Inserted & Diff Inserted */
-
 }
+
+pre code { color: #ffffff; }

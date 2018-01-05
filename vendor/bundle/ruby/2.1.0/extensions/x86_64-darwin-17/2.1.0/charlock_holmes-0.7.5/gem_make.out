@@ -1,0 +1,68 @@
+/Users/ashleyfirth/.rvm/rubies/ruby-2.1.5/bin/ruby -r ./siteconf20180105-13439-1whqzfi.rb extconf.rb
+checking for main() in -licui18n... no
+checking for main() in -licui18n... yes
+checking for unicode/ucnv.h... yes
+checking for main() in -lz... yes
+checking for main() in -licuuc... yes
+checking for main() in -licudata... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling ext.c
+compiling encoding_detector.c
+encoding_detector.c:183:71: warning: implicit conversion loses integer precision: 'long' to 'int32_t' (aka 'int') [-Wshorten-64-to-32]
+                ucsdet_setDeclaredEncoding(detector->csd, RSTRING_PTR(rb_enc_hint), RSTRING_LEN(rb_enc_hint), &status);
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~                                          ^~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ashleyfirth/.rvm/rubies/ruby-2.1.5/include/ruby-2.1.0/ruby/ruby.h:843:6: note: expanded from macro 'RSTRING_LEN'
+     RSTRING_EMBED_LEN(str) : \
+     ^~~~~~~~~~~~~~~~~~~~~~
+/Users/ashleyfirth/.rvm/rubies/ruby-2.1.5/include/ruby-2.1.0/ruby/ruby.h:839:6: note: expanded from macro 'RSTRING_EMBED_LEN'
+     (long)((RBASIC(str)->flags >> RSTRING_EMBED_LEN_SHIFT) & \
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+encoding_detector.c:183:71: warning: implicit conversion loses integer precision: 'long' to 'int32_t' (aka 'int') [-Wshorten-64-to-32]
+                ucsdet_setDeclaredEncoding(detector->csd, RSTRING_PTR(rb_enc_hint), RSTRING_LEN(rb_enc_hint), &status);
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~                                          ^~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ashleyfirth/.rvm/rubies/ruby-2.1.5/include/ruby-2.1.0/ruby/ruby.h:844:28: note: expanded from macro 'RSTRING_LEN'
+     RSTRING(str)->as.heap.len)
+     ~~~~~~~~~~~~~~~~~~~~~~^~~
+encoding_detector.c:232:71: warning: implicit conversion loses integer precision: 'long' to 'int32_t' (aka 'int') [-Wshorten-64-to-32]
+                ucsdet_setDeclaredEncoding(detector->csd, RSTRING_PTR(rb_enc_hint), RSTRING_LEN(rb_enc_hint), &status);
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~                                          ^~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ashleyfirth/.rvm/rubies/ruby-2.1.5/include/ruby-2.1.0/ruby/ruby.h:843:6: note: expanded from macro 'RSTRING_LEN'
+     RSTRING_EMBED_LEN(str) : \
+     ^~~~~~~~~~~~~~~~~~~~~~
+/Users/ashleyfirth/.rvm/rubies/ruby-2.1.5/include/ruby-2.1.0/ruby/ruby.h:839:6: note: expanded from macro 'RSTRING_EMBED_LEN'
+     (long)((RBASIC(str)->flags >> RSTRING_EMBED_LEN_SHIFT) & \
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+encoding_detector.c:232:71: warning: implicit conversion loses integer precision: 'long' to 'int32_t' (aka 'int') [-Wshorten-64-to-32]
+                ucsdet_setDeclaredEncoding(detector->csd, RSTRING_PTR(rb_enc_hint), RSTRING_LEN(rb_enc_hint), &status);
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~                                          ^~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ashleyfirth/.rvm/rubies/ruby-2.1.5/include/ruby-2.1.0/ruby/ruby.h:844:28: note: expanded from macro 'RSTRING_LEN'
+     RSTRING(str)->as.heap.len)
+     ~~~~~~~~~~~~~~~~~~~~~~^~~
+4 warnings generated.
+compiling converter.c
+converter.c:23:12: warning: implicit conversion loses integer precision: 'long' to 'int32_t' (aka 'int') [-Wshorten-64-to-32]
+        src_len = RSTRING_LEN(rb_txt);
+                ~ ^~~~~~~~~~~~~~~~~~~
+/Users/ashleyfirth/.rvm/rubies/ruby-2.1.5/include/ruby-2.1.0/ruby/ruby.h:843:6: note: expanded from macro 'RSTRING_LEN'
+     RSTRING_EMBED_LEN(str) : \
+     ^~~~~~~~~~~~~~~~~~~~~~
+/Users/ashleyfirth/.rvm/rubies/ruby-2.1.5/include/ruby-2.1.0/ruby/ruby.h:839:6: note: expanded from macro 'RSTRING_EMBED_LEN'
+     (long)((RBASIC(str)->flags >> RSTRING_EMBED_LEN_SHIFT) & \
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+converter.c:23:12: warning: implicit conversion loses integer precision: 'long' to 'int32_t' (aka 'int') [-Wshorten-64-to-32]
+        src_len = RSTRING_LEN(rb_txt);
+                ~ ^~~~~~~~~~~~~~~~~~~
+/Users/ashleyfirth/.rvm/rubies/ruby-2.1.5/include/ruby-2.1.0/ruby/ruby.h:844:28: note: expanded from macro 'RSTRING_LEN'
+     RSTRING(str)->as.heap.len)
+     ~~~~~~~~~~~~~~~~~~~~~~^~~
+2 warnings generated.
+compiling transliterator.cpp
+linking shared-object charlock_holmes/charlock_holmes.bundle
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 charlock_holmes.bundle ./.gem.20180105-13439-tffx4e/charlock_holmes
+installing default charlock_holmes libraries

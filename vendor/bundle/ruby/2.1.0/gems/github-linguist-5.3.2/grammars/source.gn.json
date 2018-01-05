@@ -1,0 +1,350 @@
+{
+  "scopeName": "source.gn",
+  "name": "gn",
+  "fileTypes": [
+    "gn",
+    "gni"
+  ],
+  "firstLineMatch": "(?xi)\n# Emacs modeline\n-\\*-(?:\\s*(?=[^:;\\s]+\\s*-\\*-)|(?:.*?[;\\s]|(?<=-\\*-))mode\\s*:\\s*)\n  gn\n(?=[\\s;]|(?<![-*])-\\*-).*?-\\*-\n|\n# Vim modeline\n(?:(?:\\s|^)vi(?:m[<=>]?\\d+|m)?|\\sex)(?=:(?=\\s*set?\\s[^\\n:]+:)|:(?!\\s*set?\\s))(?:(?:\\s|\\s*:\\s*)\\w*(?:\\s*=(?:[^\\n\\\\\\s]|\\\\.)*)?)*[\\s:](?:filetype|ft|syntax)\\s*=\n  gn\n(?=\\s|:|$)",
+  "patterns": [
+    {
+      "include": "#main"
+    }
+  ],
+  "repository": {
+    "main": {
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#condition"
+        },
+        {
+          "include": "#function-call"
+        },
+        {
+          "include": "#keywords"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#variable"
+        },
+        {
+          "include": "#operators"
+        },
+        {
+          "include": "#array"
+        },
+        {
+          "include": "#brackets"
+        },
+        {
+          "include": "#separators"
+        },
+        {
+          "include": "#scope"
+        }
+      ]
+    },
+    "separators": {
+      "patterns": [
+        {
+          "name": "punctuation.separator.list.comma.gn",
+          "match": ","
+        },
+        {
+          "name": "punctuation.delimiter.property.period.gn",
+          "match": "\\."
+        }
+      ]
+    },
+    "comment": {
+      "name": "comment.line.number-sign.gn",
+      "begin": "#",
+      "end": "$",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.gn"
+        }
+      },
+      "patterns": [
+        {
+          "match": "(?<=TODO)(\\()\\s*(\\w+)\\s*(\\))\\s*:",
+          "captures": {
+            "1": {
+              "name": "punctuation.section.begin.bracket.round.todo"
+            },
+            "2": {
+              "name": "storage.type.class.assignee.todo"
+            },
+            "3": {
+              "name": "punctuation.section.end.bracket.round.todo"
+            }
+          }
+        }
+      ]
+    },
+    "condition": {
+      "name": "meta.condition.gn",
+      "begin": "(if|else)\\s*(?=\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.$1.gn"
+        }
+      },
+      "end": "(?<=\\))",
+      "patterns": [
+        {
+          "begin": "\\G\\(",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.condition.begin.bracket.round.gn"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.condition.end.bracket.round.gn"
+            }
+          },
+          "patterns": [
+            {
+              "include": "$self"
+            },
+            {
+              "match": "\\w+",
+              "name": "variable.reference.gn"
+            }
+          ]
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.$1.gn",
+          "match": "\\b(true|false)\\b"
+        },
+        {
+          "name": "keyword.control.$1.gn",
+          "match": "\\b(if|else|foreach)\\b"
+        }
+      ]
+    },
+    "string": {
+      "name": "string.quoted.double.gn",
+      "begin": "\"",
+      "end": "\"",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.gn"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.gn"
+        }
+      },
+      "patterns": [
+        {
+          "name": "constant.character.escape.gn",
+          "match": "\\\\[\"$\\\\]"
+        },
+        {
+          "name": "constant.character.escape.hex.gn",
+          "match": "\\$0x[0-9A-Fa-f]{2}"
+        },
+        {
+          "name": "punctuation.separator.build-path.gn",
+          "match": ":(?=\\w+\")"
+        },
+        {
+          "name": "punctuation.definition.build-path.gn",
+          "match": "\\G//"
+        },
+        {
+          "name": "source.gn.embedded",
+          "begin": "\\${",
+          "end": "}",
+          "contentName": "variable.interpolated.embedded.gn",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.begin.gn"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.end.gn"
+            }
+          }
+        },
+        {
+          "name": "variable.interpolated.embedded.gn",
+          "match": "(\\$)\\w+",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.variable.embedded.gn"
+            }
+          }
+        }
+      ]
+    },
+    "number": {
+      "patterns": [
+        {
+          "name": "invalid.illegal.number.gn",
+          "match": "-0+|0+(?=[1-9])"
+        },
+        {
+          "name": "constant.numeric.gn",
+          "match": "-?\\d+"
+        }
+      ]
+    },
+    "variable": {
+      "patterns": [
+        {
+          "name": "variable.assignment.gn",
+          "match": "\\w+(?=\\s*[-+]?=|\\s*[\\[.])"
+        },
+        {
+          "match": "(?<==)\\s*(?!\\d|if|else|foreach|true|false)(\\w+)\\s*(?!\\()",
+          "captures": {
+            "1": {
+              "name": "variable.reference.gn"
+            }
+          }
+        }
+      ]
+    },
+    "function-call": {
+      "name": "meta.function-call.gn",
+      "begin": "\\s*(?!if|else|foreach|true|false)(\\w+)\\s*(?=\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.function.gn"
+        }
+      },
+      "end": "(?<=\\))",
+      "patterns": [
+        {
+          "name": "meta.parameters.gn",
+          "begin": "\\G\\(",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.parameters.begin.bracket.round.gn"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.parameters.end.bracket.round.gn"
+            }
+          },
+          "patterns": [
+            {
+              "include": "$self"
+            },
+            {
+              "match": "\\w+",
+              "name": "variable.argument.parameter.gn"
+            }
+          ]
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.comparison.gn",
+          "match": "==|!=|[><]=?"
+        },
+        {
+          "name": "keyword.operator.logical.gn",
+          "match": "!|[|&]{2}"
+        },
+        {
+          "name": "keyword.operator.assignment.gn",
+          "match": "[-+]?="
+        },
+        {
+          "name": "keyword.operator.arithmetic.gn",
+          "match": "-|\\+"
+        }
+      ]
+    },
+    "scope": {
+      "name": "meta.scope.gn",
+      "begin": "{",
+      "end": "}",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.scope.begin.bracket.curly.gn"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.scope.begin.bracket.curly.gn"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
+    },
+    "array": {
+      "name": "meta.array.gn",
+      "begin": "\\[",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.begin.bracket.square.gn"
+        }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.end.bracket.square.gn"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        },
+        {
+          "match": "\\w+",
+          "name": "variable.reference.gn"
+        }
+      ]
+    },
+    "brackets": {
+      "begin": "\\(",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.begin.bracket.round.gn"
+        }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.end.bracket.round.gn"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        },
+        {
+          "match": "\\w+",
+          "name": "variable.reference.gn"
+        }
+      ]
+    }
+  }
+}

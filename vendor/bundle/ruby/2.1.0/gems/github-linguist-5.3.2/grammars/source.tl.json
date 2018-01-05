@@ -1,0 +1,264 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Type Language",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#triple-statement"
+    },
+    {
+      "include": "#combinator-declaration"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "match": "\\#",
+          "name": "keyword.other.hash.tl"
+        },
+        {
+          "match": "\\?",
+          "name": "keyword.other.questionmark.tl"
+        },
+        {
+          "match": "\\%",
+          "name": "keyword.other.percent.tl"
+        }
+      ]
+    },
+    "combinator-args-member": {
+      "name": "meta.combinator.arg.tl",
+      "begin": "([_$[:alpha:]][_$[:alnum:]]*)(\\:)(([_$[:alpha:]][_$[:alnum:]]*)|(#))",
+      "end": "",
+      "beginCaptures": {
+        "1": {
+          "name": "meta.definition.combinator.arg.tl variable.other.tl"
+        },
+        "2": {
+          "name": "punctuation.separator.key-value.tl"
+        },
+        "4": {
+          "name": "entity.name.type.tl"
+        },
+        "5": {
+          "name": "keyword.other.hash.tl"
+        }
+      },
+      "patterns": [
+
+      ]
+    },
+    "combinator-opt-args": {
+      "name": "meta.object.type.tl",
+      "begin": "\\{",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.block.tl"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.block.tl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#combinator-args-member"
+        }
+      ]
+    },
+    "combinator-args": {
+      "patterns": [
+        {
+          "include": "#combinator-args-member"
+        }
+      ]
+    },
+    "combinator-result-type": {
+      "patterns": [
+        {
+          "match": "([_$[:alpha:]][_$[:alnum:]]*)\\s*(\\.)",
+          "captures": {
+            "1": {
+              "name": "entity.name.type.module.tl"
+            },
+            "2": {
+              "name": "punctuation.accessor.tl"
+            }
+          }
+        },
+        {
+          "name": "entity.name.type.tl",
+          "match": "[_$[:alpha:]][_$[:alnum:]]*"
+        }
+      ]
+    },
+    "combinator-declaration": {
+      "patterns": [
+        {
+          "include": "#combinator-declaration-with-hash"
+        },
+        {
+          "include": "#combinator-declaration-without-hash"
+        }
+      ]
+    },
+    "combinator-declaration-without-hash": {
+      "name": "meta.combinator.declaration.tl",
+      "begin": "(([_$\\w]+)(\b\\.))?([_$\\w]*)(?= )",
+      "beginCaptures": {
+        "2": {
+          "name": "meta.definition.combinator.tl variable.other.tl"
+        },
+        "4": {
+          "name": "meta.definition.combinator.tl variable.other.tl"
+        }
+      },
+      "end": "\\;\\s*",
+      "patterns": [
+        {
+          "match": "\\.",
+          "name": "punctuation.namespace.tl"
+        },
+        {
+          "include": "#keywords"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#combinator-opt-args"
+        },
+        {
+          "include": "#combinator-args"
+        },
+        {
+          "include": "#combinator-result-type"
+        },
+        {
+          "match": "(=)\\s*",
+          "captures": {
+            "1": {
+              "name": "keyword.operator.assignment.tl"
+            }
+          }
+        }
+      ]
+    },
+    "combinator-declaration-with-hash": {
+      "name": "meta.combinator.declaration.tl",
+      "begin": "(([_$\\w]+)(\\b\\.))?([_$\\w]*)(\\b#)([[:alpha:][:alnum:]]*)\\s*",
+      "beginCaptures": {
+        "2": {
+          "name": "meta.definition.combinator.tl variable.other.tl"
+        },
+        "4": {
+          "name": "meta.definition.combinator.tl variable.other.tl"
+        },
+        "5": {
+          "name": "storage.type.tl"
+        },
+        "6": {
+          "name": "storage.type.tl"
+        }
+      },
+      "end": "\\;\\s*",
+      "patterns": [
+        {
+          "match": "\\.",
+          "name": "punctuation.namespace.tl"
+        },
+        {
+          "include": "#keywords"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#combinator-opt-args"
+        },
+        {
+          "include": "#combinator-args"
+        },
+        {
+          "include": "#combinator-result-type"
+        },
+        {
+          "match": "(=)\\s*",
+          "captures": {
+            "1": {
+              "name": "keyword.operator.assignment.tl"
+            }
+          }
+        }
+      ]
+    },
+    "triple-statement": {
+      "patterns": [
+        {
+          "name": "keyword.control.triple.tl",
+          "begin": "\\-\\-\\-",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.triple.open.tl"
+            }
+          },
+          "end": "\\-\\-\\-",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.triple.close.tl"
+            }
+          },
+          "patterns": [
+            {
+              "match": "\\b(types|functions)\\b",
+              "name": "keyword.control.triple.name.tl"
+            },
+            {
+              "match": "\\b(.*)\\b",
+              "name": "invalid.illegal"
+            }
+          ]
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "begin": "/\\*\\*",
+          "captures": {
+            "0": {
+              "name": "punctuation.definition.comment.tl"
+            }
+          },
+          "end": "\\*/",
+          "name": "comment.block.documentation.tl"
+        },
+        {
+          "begin": "/\\*",
+          "captures": {
+            "0": {
+              "name": "punctuation.definition.comment.tl"
+            }
+          },
+          "end": "\\*/",
+          "name": "comment.block.tl"
+        },
+        {
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.comment.tl"
+            }
+          },
+          "match": "(//).*$\\n?",
+          "name": "comment.line.double-slash.tl"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.tl"
+}

@@ -1,0 +1,138 @@
+{
+  "name": "Jolie",
+  "fileTypes": [
+    "ol",
+    "iol"
+  ],
+  "scopeName": "source.jolie",
+  "foldingStartMarker": "\\{\\s*$",
+  "foldingStopMarker": "^\\s*\\}",
+  "patterns": [
+    {
+      "include": "#code"
+    }
+  ],
+  "repository": {
+    "code": {
+      "patterns": [
+        {
+          "include": "#block_comments"
+        },
+        {
+          "include": "#line_comments"
+        },
+        {
+          "include": "#constants_language"
+        },
+        {
+          "include": "#constants_numeric"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#keywords_control"
+        },
+        {
+          "include": "#keywords_with_colon"
+        },
+        {
+          "include": "#keywords_other"
+        },
+        {
+          "include": "#keywords_types"
+        },
+        {
+          "include": "#keywords_modifiers"
+        },
+        {
+          "include": "#invocations"
+        },
+        {
+          "include": "#operators"
+        },
+        {
+          "include": "#definitions"
+        }
+      ]
+    },
+    "constants_language": {
+      "name": "constant.language.jolie",
+      "match": "\\b(true|false)\\b"
+    },
+    "constants_numeric": {
+      "name": "constant.numeric.jolie",
+      "match": "\\b\\d+\\b"
+    },
+    "block_comments": {
+      "begin": "/\\*",
+      "end": "\\*/",
+      "name": "comment.block.jolie"
+    },
+    "line_comments": {
+      "begin": "//",
+      "end": "\\n",
+      "name": "comment.line.double-slash.jolie"
+    },
+    "definitions": {
+      "match": "\\b(inputPort|outputPort|interface|type|define|service)\\s+(\\w+)\\b",
+      "captures": {
+        "1": {
+          "name": "keyword.other.jolie"
+        },
+        "2": {
+          "name": "meta.class.identifier.jolie"
+        }
+      }
+    },
+    "keywords_with_colon": {
+      "name": "keyword.other.with_colon.jolie",
+      "match": "\\b(Location|Protocol|Interfaces|Aggregates|Redirects|Jolie|JavaScript|Java|OneWay|RequestResponse)\\b\\s*:"
+    },
+    "keywords_other": {
+      "name": "keyword.other.jolie",
+      "match": "\\b(constants|cH|instanceof|execution|comp|concurrent|nullProcess|single|sequential|main|init|cset|is_defined|embedded|extender|courier|forward|install|undef|include|synchronized|throws|throw)\\b"
+    },
+    "keywords_control": {
+      "name": "keyword.control.jolie",
+      "match": "\\b(if|else|while|for|foreach|provide|until|throw|forward|scope)\\b"
+    },
+    "keywords_types": {
+      "name": "storage.type.jolie",
+      "match": "\\b(void|bool|int|string|long|double|any|raw)\\b"
+    },
+    "keywords_modifiers": {
+      "name": "storage.modifiers.jolie",
+      "match": "\\b(csets|global)\\b"
+    },
+    "invocations": {
+      "match": "\\b(\\w+)\\s*(@)\\s*(\\w+)\\b",
+      "captures": {
+        "1": {
+          "name": "meta.method.jolie"
+        },
+        "2": {
+          "name": "keyword.operator.jolie"
+        },
+        "3": {
+          "name": "meta.class.jolie"
+        }
+      }
+    },
+    "strings": {
+      "name": "string.quoted.double.jolie",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "match": "\\\\.",
+          "name": "constant.character.escape.jolie"
+        }
+      ]
+    },
+    "operators": {
+      "name": "keyword.operator.jolie",
+      "match": "\\b(<<|&&|\\|\\||\\+|\\-|/|\\*|=|==|\\+\\+|--|\\+=|-=|\\*=|/=|!|%|%=)\\b"
+    }
+  }
+}
