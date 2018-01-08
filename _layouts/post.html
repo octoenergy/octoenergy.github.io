@@ -3,76 +3,41 @@ layout: default
 ---
 
 {% for member in site.data.members %}
-	{% if member.name == page.author %}
-		{% assign author = member %}
-	{% endif %}
+  {% if member.name == page.author %}
+    {% assign author = member %}
+  {% endif %}
 {% endfor %}
 
-    <div class="wrapper">
-      <a href="/" class="btn-back"><img src="/assets/img/back.svg" alt=""><span>Back</span></a>
-    </div> <!-- /post -->
-  </div> <!-- /wrapper -->
-
-  <header>
-    <div style="background-color: {% if page.hex %}#{{ page.hex }}{% else %}#233249{% endif %};">
-            {% if page.banner %}
-              <img src="{{ site.baseurl }}{{ page.banner }}" alt="banner image" class="blog-hero-image">
-            {% endif %}
-
-            <div class="wrapper relative margin-bottom-md">
-              <div class="blog-hero--content">
-                  <h1 class="blog-hero--title">{{ page.title }}</h1>
-                  <p><span class="blog-hero--info">{{ page.date | date: "%b %-d, %Y" }}</span></p>
-                  <p class="blog-hero--author">
+<!-- Page Header -->
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h1>{{ page.title }}</h1>
+                    <span class="meta">Posted by
                     {% if author.twitter %}
-                        <a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ page.author }}</a>,
+                        <a href="https://twitter.com/{{ author.twitter }}" target="_blank" style="text-decoration: underline;">{{ page.author }}</a>
                     {% else %}
-                        {{ page.author }}
+                        <strong>{{ page.author }}</strong>
                     {% endif %}
                     {% if author.jobtitle %}
-                        <span class="blog-author--title">{{ author.jobtitle }}</span>
+                        {{ author.jobtitle }}
                     {% endif %}
-                  </p>
-              </div>
-          </div>
-    </div>
-  </header>
-
-  <div class="wrapper">
-  <div class="post">
-
-  <article class="post-content">
-    {{ content }}
-
-    <div class="author">
-      {% if author.image %}
-        <div class="author-image">
-          {% if author.twitter %}
-            <a href="https://twitter.com/{{ author.twitter }}" target="_blank">
-          {% endif %}
-              <img src="{{ author.image }}" alt="image of {{ post.author }}">
-          {% if author.twitter %}
-            </a>
-          {% endif %}
+                    on {{ page.date | date: "%b %-d, %Y" }}</span>
+                </div>
+            </div>
         </div>
-      {% endif %}
-
-      <div class="author-profile">
-        <p class="author-profile--name">
-          {% if author.twitter %}
-            <a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ page.author }}</a>
-          {% else %}
-              {{ page.author }}
-          {% endif %}
-        </p>
-        {% if author.jobtitle %}
-          <p class="author-profile--title">
-            {{ author.jobtitle }}
-          </p>
-        {% endif %}
-      </div>
     </div>
+</header>
 
-  </article>
-
-</div>
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                {{ content }}
+            </div>
+        </div>
+    </div>
+</article>
