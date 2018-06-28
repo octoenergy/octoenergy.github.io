@@ -6,8 +6,8 @@
 </description>
     <link>http://tech.octopus.energy/</link>
     <atom:link href="http://tech.octopus.energy/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 28 Jun 2018 10:02:01 +0100</pubDate>
-    <lastBuildDate>Thu, 28 Jun 2018 10:02:01 +0100</lastBuildDate>
+    <pubDate>Thu, 28 Jun 2018 12:28:35 +0100</pubDate>
+    <lastBuildDate>Thu, 28 Jun 2018 12:28:35 +0100</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -15,23 +15,23 @@
         <description>&lt;p&gt;&lt;a href=&quot;https://twitter.com/jamesbeith?lang=en&quot;&gt;James Beith&lt;/a&gt;, a member of our tech team, has written up an excellent post on &lt;a href=&quot;https://www.jamesbeith.co.uk/blog/how-to-structure-django-projects/&quot;&gt;how
 to structure a Django
 project&lt;/a&gt;, based on how we structure our Django projects
-here at Octopus Energy. &lt;/p&gt;
+here at Octopus Energy.&lt;/p&gt;
 
 &lt;p&gt;We’ve found that Django’s emphasis on re-usable apps can lead to structural
 problems and a three-layer approach, where data and application logic are
-clearly separated works better for large Django projects. &lt;/p&gt;
+clearly separated works better for large Django projects.&lt;/p&gt;
 
 &lt;p&gt;There’s some discussion of this approach over on &lt;a href=&quot;https://news.ycombinator.com/item?id=17408958&quot;&gt;Hacker News&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
         <link>http://tech.octopus.energy/news/2018/06/28/django-project-structure.html</link>
         <guid isPermaLink="true">http://tech.octopus.energy/news/2018/06/28/django-project-structure.html</guid>
-
-
+        
+        
         <category>news</category>
-
+        
       </item>
-
+    
       <item>
         <title>Using a custom Sentry client</title>
         <description>&lt;p&gt;We use
