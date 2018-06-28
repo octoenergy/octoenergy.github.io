@@ -1,6 +1,6 @@
 # Octopus Energy tech blog
 
-This repo provides a simple Jekyll site for the http://tech.octopus.energy domain.
+This repo provides a simple Jekyll site for the https://tech.octopus.energy site.
 
 ## Installation
 
@@ -19,8 +19,17 @@ Once those are in place, simply check out the repo and run:
 
     $ bundle install
 
-to install all Ruby dependencies. You can then run the local development server with:
+to install all Ruby dependencies. 
+
+If you have problems installing charlock_holmes, refer to [this Github issues
+page](https://github.com/brianmario/charlock_holmes/issues/117) for work-arounds.
+
+## Local development
+
+Run the local development server with:
 
     $ bundle exec jekyll server
+
+Create new posts by creating a markdown file in `_posts/`.
 
 
