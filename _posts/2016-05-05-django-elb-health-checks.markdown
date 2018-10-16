@@ -128,7 +128,7 @@ script
     # Set environment variables
     source $ENV_FILE
 
-    # Apply migrations. Piping the output to logger ensures it get
+    # Apply migrations. Piping the output to logger ensures it
     # is included in /var/log/syslog and hence gets forwarded to Loggly.
     sudo -u www-data django-admin migrate --noinput --no-color | logger -t migrations
 
@@ -280,7 +280,7 @@ def page_response(path, expected_status=httplib.OK):
     """
     Make an internal (fake) HTTP request to check a page returns the expected
     status code.
-    """"
+    """
     try:
         response = client.get(path)
     except Exception as e:
