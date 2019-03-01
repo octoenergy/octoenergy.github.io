@@ -11,4 +11,4 @@ github_username: octoenergy
 # Build settings
 markdown: kramdown
 highlighter: pygments
-exclude: [vendor]
+exclude: [vendor, 'README.md', 'makefile', 'Gemfile*', 'CNAME']
