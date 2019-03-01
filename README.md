@@ -30,6 +30,11 @@ Run the local development server with:
 
     $ bundle exec jekyll server
 
-Create new posts by creating a markdown file in `_posts/`.
+or just:
+
+    $ make run
+
+Create new posts by creating a markdown file in `_posts/` with filename format
+like `2019-02-20-some-article-description.md`.
 
 

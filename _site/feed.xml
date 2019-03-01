@@ -6,9 +6,44 @@
 </description>
     <link>http://tech.octopus.energy/</link>
     <atom:link href="http://tech.octopus.energy/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 28 Jun 2018 12:28:35 +0100</pubDate>
-    <lastBuildDate>Thu, 28 Jun 2018 12:28:35 +0100</lastBuildDate>
+    <pubDate>Fri, 01 Mar 2019 10:46:24 +0000</pubDate>
+    <lastBuildDate>Fri, 01 Mar 2019 10:46:24 +0000</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Our in-house coding conventions</title>
+        <description>&lt;p&gt;We’ve published our in-house coding conventions in a public Github repo: &lt;a href=&quot;https://github.com/octoenergy/conventions&quot;&gt;github.com/octoenergy/conventions&lt;/a&gt;. It contains
+guidelines for:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Python and Django code&lt;/li&gt;
+  &lt;li&gt;CSS and SASS&lt;/li&gt;
+  &lt;li&gt;HTML templates for the web and email&lt;/li&gt;
+  &lt;li&gt;Git usage&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There’s lots of useful information there: hard-won lessons from building a large
+platform and the challenges that come with it.&lt;/p&gt;
+
+&lt;p&gt;The document is constantly evolving. We continually reflect on our codebase and
+use the document to codify new conventions and patterns. &lt;/p&gt;
+
+&lt;p&gt;It’s useful as a reference in code-review comments; to provide the
+detailed reasoning behind design decisions.&lt;/p&gt;
+
+&lt;p&gt;We keep it in a public repo as we believe the conventions will be useful to
+other teams building large Django applications.  Hopefully it will prove a
+valuable resource.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
+        <link>http://tech.octopus.energy/news/2019/02/28/conventions-repo.html</link>
+        <guid isPermaLink="true">http://tech.octopus.energy/news/2019/02/28/conventions-repo.html</guid>
+        
+        
+        <category>news</category>
+        
+      </item>
     
       <item>
         <title>Recommended Django project structure</title>
