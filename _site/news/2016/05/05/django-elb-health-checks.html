@@ -8,7 +8,7 @@
 ">
     <title>Django, ELB health checks and continuous delivery | Octopus Energy Tech blog</title>
     <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6806472/664928/css/fonts.css" />
-    <link rel="canonical" href="http://tech.octopus.energy/news/2016/05/05/django-elb-health-checks.html">
+    <link rel="canonical" href="http://localhost:4000/news/2016/05/05/django-elb-health-checks.html">
 
     <link rel="icon" href="/assets/img/platform-icons/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/platform-icons/apple-touch-icon.png">
@@ -63,12 +63,6 @@
 
     <!-- Main Content -->
     
-  
-    
-  
-
-  
-
 
 <!-- Page Header -->
 <header class="masthead">
@@ -143,13 +137,13 @@ checked out Terraform before - do that today.</p>
 
 <p>Our ELB health check is configured in Terraform as:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">resource &quot;aws_elb&quot; &quot;web&quot; {
+<figure class="highlight"><pre><code class="language-text" data-lang="text">resource "aws_elb" "web" {
 
     ...
 
     health_check {
         # Where to make health check requests to
-        target = &quot;HTTP:80/health&quot;
+        target = "HTTP:80/health"
 
         # How often to make health check requests (in seconds)
         interval = 15
@@ -163,27 +157,27 @@ checked out Terraform before - do that today.</p>
         # Number of seconds to wait for a healthcheck response
         timeout = 5
     }
-}</code></pre></div>
+}</code></pre></figure>
 
-<p>In other words: an EC2 instance is considered healthy when two HTTP requests to <code>/health</code>
+<p>In other words: an EC2 instance is considered healthy when two HTTP requests to <code class="highlighter-rouge">/health</code>
 return a 200 status (within five seconds).</p>
 
 <p>Let’s start simple:</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># urls.py</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># urls.py</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
 
 <span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^health&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">health</span><span class="p">),</span>
-<span class="p">)</span></code></pre></div>
+    <span class="n">url</span><span class="p">(</span><span class="s">r'^health'</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">health</span><span class="p">),</span>
+<span class="p">)</span></code></pre></figure>
 
 <p>and</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># views.py</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># views.py</span>
 <span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">http</span>
 
 <span class="k">def</span> <span class="nf">health</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">()</span></code></pre></div>
+    <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">()</span></code></pre></figure>
 
 <p>It would have been easier to use NGINX to respond to the health-check request
 directly without troubling uWSGI.
@@ -198,56 +192,56 @@ start the Python application.</p>
 read their configuration from environment variables. These are set by Upstart,
 sourcing a configuration file managed by consul-template:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/init/uwsgi</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/init/uwsgi</span>
 
-<span class="c"># Ensure the uWSGI process doesn&#39;t start until</span>
+<span class="c"># Ensure the uWSGI process doesn't start until</span>
 <span class="c"># the consul-template process has started.</span>
 start on started consul-template
-stop on runlevel <span class="o">[</span>06<span class="o">]</span>
+stop on runlevel <span class="o">[</span>06]
 
 respawn
 
 <span class="c"># This is the file consul-template manages</span>
-env <span class="nv">ENV_FILE</span><span class="o">=</span><span class="s2">&quot;/etc/application/env-vars&quot;</span>
-env <span class="nv">UWSGI_INI_FILE</span><span class="o">=</span><span class="s2">&quot;/etc/uwsgi.ini&quot;</span>
-env <span class="nv">VENV_ROOT</span><span class="o">=</span><span class="s2">&quot;/opt/venv&quot;</span>
+env <span class="nv">ENV_FILE</span><span class="o">=</span><span class="s2">"/etc/application/env-vars"</span>
+env <span class="nv">UWSGI_INI_FILE</span><span class="o">=</span><span class="s2">"/etc/uwsgi.ini"</span>
+env <span class="nv">VENV_ROOT</span><span class="o">=</span><span class="s2">"/opt/venv"</span>
 
 script
     <span class="c"># Set environment variables</span>
     <span class="nb">source</span> <span class="nv">$ENV_FILE</span>
 
-    <span class="c"># Apply migrations. Piping the output to logger ensures it get</span>
+    <span class="c"># Apply migrations. Piping the output to logger ensures it</span>
     <span class="c"># is included in /var/log/syslog and hence gets forwarded to Loggly.</span>
-    sudo -u www-data django-admin migrate --noinput --no-color <span class="p">|</span> logger -t migrations
+    <span class="nb">sudo</span> <span class="nt">-u</span> www-data django-admin migrate <span class="nt">--noinput</span> <span class="nt">--no-color</span> | logger <span class="nt">-t</span> migrations
 
     <span class="c"># Start uWSGI</span>
-    <span class="nb">exec</span> <span class="nv">$VENV_ROOT</span>/bin/uwsgi --ini <span class="nv">$UWSGI_INI_FILE</span>
-end script</code></pre></div>
+    <span class="nb">exec</span> <span class="nv">$VENV_ROOT</span>/bin/uwsgi <span class="nt">--ini</span> <span class="nv">$UWSGI_INI_FILE</span>
+end script</code></pre></figure>
 
 <p>We ensure the Python application cannot start with missing/invalid configuration
-using simple wrapper functions in <code>settings.py</code>:</p>
+using simple wrapper functions in <code class="highlighter-rouge">settings.py</code>:</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># settings.py</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># settings.py</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="k">def</span> <span class="nf">value_from_env</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return a env variable, raising an exception if it is not defined</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="s">"""
+    Return a env variable, raising an exception if it is not defined
+    """</span>
     <span class="n">value</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s">&quot;No &#39;</span><span class="si">%s</span><span class="s">&#39; env variable found. This needs to be set in Consul&#39;s &quot;</span>
-            <span class="s">&quot;key-value store.&quot;</span>
+            <span class="s">"No '</span><span class="si">%</span><span class="s">s' env variable found. This needs to be set in Consul's "</span>
+            <span class="s">"key-value store."</span>
         <span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">error_msg</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="nb">RuntimeError</span><span class="p">(</span><span class="n">error_msg</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span>
 
 <span class="c"># Example config look-up</span>
-<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">value_from_env</span><span class="p">(</span><span class="s">&quot;SECRET_KEY&quot;</span><span class="p">)</span></code></pre></div>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">value_from_env</span><span class="p">(</span><span class="s">"SECRET_KEY"</span><span class="p">)</span></code></pre></figure>
 
-<p>If the <code>SECRET_KEY</code> environmental variable isn’t defined in Consul, uWSGI won’t
+<p>If the <code class="highlighter-rouge">SECRET_KEY</code> environmental variable isn’t defined in Consul, uWSGI won’t
 be able to start the Python application and health checks will fail. This
 practice ensures canary deployments fail if configuration is missing.</p>
 
@@ -257,11 +251,11 @@ allows Django to respond successfully to the health check.</p>
 <h1 id="nginx">NGINX</h1>
 
 <p>We terminate TLS on the ELB and proxy requests to port 80 of the EC2 instance.
-For normal user requests, we use the <code>X_FORWARDED_PROTO</code> header to ensure TLS is used.
-However, we don’t want this for health-check requests so we use a separate <code>location</code>
+For normal user requests, we use the <code class="highlighter-rouge">X_FORWARDED_PROTO</code> header to ensure TLS is used.
+However, we don’t want this for health-check requests so we use a separate <code class="highlighter-rouge">location</code>
 directive:</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># /etc/nginx/sites-enabled/default</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># /etc/nginx/sites-enabled/default</span>
 
 <span class="c"># uWSGI is configured to use this socket</span>
 <span class="n">upstream</span> <span class="n">public</span> <span class="p">{</span>
@@ -285,14 +279,14 @@ directive:</p>
 
     <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
         <span class="c"># Ensure non-TLS requests are redirected</span>
-        <span class="k">if</span> <span class="p">(</span><span class="err">$</span><span class="n">http_x_forwarded_proto</span> <span class="o">!=</span> <span class="s">&#39;https&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="err">$</span><span class="n">http_x_forwarded_proto</span> <span class="o">!=</span> <span class="s">'https'</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">rewrite</span> <span class="o">^</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="err">$</span><span class="n">host</span><span class="err">$</span><span class="n">request_uri</span><span class="err">?</span> <span class="n">permanent</span><span class="p">;</span>
         <span class="p">}</span>
 
         <span class="n">uwsgi_pass</span> <span class="n">public</span><span class="p">;</span>
         <span class="n">include</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">uwsgi_params</span><span class="p">;</span>
     <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre></figure>
 
 <p>Here we use a separate log file as we don’t want the health check requests being
 included in the main access file which we forward as a JSON event stream
@@ -308,36 +302,36 @@ application.</p>
 catch-all virtualhost (the first one defined).</p>
 
 <p>For the Django application to respond correctly, the private IP address must be
-in the <code>ALLOWED_HOSTS</code> setting or Django will return a “400 Bad Request”
+in the <code class="highlighter-rouge">ALLOWED_HOSTS</code> setting or Django will return a “400 Bad Request”
 response. Since webservers are ephemeral, this setting needs to be set
 dynamically, normally by calling the AWS internal metadata service during
 start-up.  You can make such a request in the EC2 “user-data” and write the
-value to a config file, or call the metadata service when <code>settings.py</code> is
+value to a config file, or call the metadata service when <code class="highlighter-rouge">settings.py</code> is
 imported.  The former may look something like:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># userdata.sh</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># userdata.sh</span>
 
-<span class="nb">echo</span> <span class="s2">&quot;Writing EC2 metadata to files in /etc/aws/&quot;</span>
-mkdir -p /etc/aws/
-ec2metadata --local-ipv4 &gt; /etc/aws/ipv4</code></pre></div>
+<span class="nb">echo</span> <span class="s2">"Writing EC2 metadata to files in /etc/aws/"</span>
+mkdir <span class="nt">-p</span> /etc/aws/
+ec2metadata <span class="nt">--local-ipv4</span> <span class="o">&gt;</span> /etc/aws/ipv4</code></pre></figure>
 
 <p>and</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># settings.py</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># settings.py</span>
 
 <span class="k">def</span> <span class="nf">value_from_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return a string value from a local file</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="s">"""
+    Return a string value from a local file
+    """</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">default</span>
 
 <span class="c"># Read local IP address from file created by EC2 user-data script</span>
-<span class="n">AWS_LOCAL_IP</span> <span class="o">=</span> <span class="n">value_from_file</span><span class="p">(</span><span class="s">&quot;/etc/aws/ipv4&quot;</span><span class="p">)</span>
+<span class="n">AWS_LOCAL_IP</span> <span class="o">=</span> <span class="n">value_from_file</span><span class="p">(</span><span class="s">"/etc/aws/ipv4"</span><span class="p">)</span>
 
-<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="n">AWS_LOCAL_IP</span><span class="p">,</span> <span class="s">&quot;octopus.energy&quot;</span><span class="p">]</span></code></pre></div>
+<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="n">AWS_LOCAL_IP</span><span class="p">,</span> <span class="s">"octopus.energy"</span><span class="p">]</span></code></pre></figure>
 
 <p>At this point, the simple health-check view defined above will happily respond
 to requests.  Let’s now extend the implementation of the health-check view.</p>
@@ -347,34 +341,34 @@ to requests.  Let’s now extend the implementation of the health-check view.</p
 <p>You can use the Django test client to run a simple smoke test on your site. For
 example, checking the homepage loads.</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># check.py</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># check.py</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">httplib</span>
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;health&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">'health'</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">page_response</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">expected_status</span><span class="o">=</span><span class="n">httplib</span><span class="o">.</span><span class="n">OK</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Make an internal (fake) HTTP request to check a page returns the expected</span>
-<span class="sd">    status code.</span>
-<span class="sd">    &quot;&quot;&quot;</span><span class="s">&quot;</span>
+    <span class="s">"""
+    Make an internal (fake) HTTP request to check a page returns the expected
+    status code.
+    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Error from </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">"Error from </span><span class="si">%</span><span class="s">s: </span><span class="si">%</span><span class="s">s"</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">False</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">expected_status</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
         <span class="c"># Log healthcheck errors to Loggly so we can debug failing deployments</span>
         <span class="c"># where the new instances fail the healthcheck.</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Response from </span><span class="si">%s</span><span class="s"> was </span><span class="si">%s</span><span class="s">, not </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">"Response from </span><span class="si">%</span><span class="s">s was </span><span class="si">%</span><span class="s">s, not </span><span class="si">%</span><span class="s">s"</span><span class="p">,</span>
                      <span class="n">path</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span></code></pre></div>
+    <span class="k">return</span> <span class="n">result</span></code></pre></figure>
 
 <p>We can use this helper in our view function:</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># views.py</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># views.py</span>
 <span class="kn">import</span> <span class="nn">httplib</span>
 
 <span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">http</span>
@@ -382,9 +376,9 @@ example, checking the homepage loads.</p>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">check</span>
 
 <span class="k">def</span> <span class="nf">health</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">check</span><span class="o">.</span><span class="n">page_response</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">check</span><span class="o">.</span><span class="n">page_response</span><span class="p">(</span><span class="s">'/'</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">httplib</span><span class="o">.</span><span class="n">SERVICE_UNAVAILABLE</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">()</span></code></pre></div>
+    <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">()</span></code></pre></figure>
 
 <h2 id="check-migrations-have-applied-successfully">Check migrations have applied successfully</h2>
 
@@ -393,19 +387,19 @@ application. Should any of these migrations fails, we don’t want to bring that
 machine into production. Hence we check for unapplied migrations as part of the
 health check:</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># check.py</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># check.py</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">DEFAULT_DB_ALIAS</span><span class="p">,</span> <span class="n">connections</span>
 <span class="kn">from</span> <span class="nn">django.db.migrations.loader</span> <span class="kn">import</span> <span class="n">MigrationLoader</span>
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;health&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">'health'</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">migrations_have_applied</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Check if there are any migrations that haven&#39;t been applied yet</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="s">"""
+    Check if there are any migrations that haven't been applied yet
+    """</span>
     <span class="n">connection</span> <span class="o">=</span> <span class="n">connections</span><span class="p">[</span><span class="n">DEFAULT_DB_ALIAS</span><span class="p">]</span>
     <span class="n">loader</span> <span class="o">=</span> <span class="n">MigrationLoader</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
     <span class="n">graph</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">graph</span>
@@ -418,11 +412,11 @@ health check:</p>
                 <span class="k">if</span> <span class="n">plan_node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">loader</span><span class="o">.</span><span class="n">applied_migrations</span><span class="p">:</span>
                     <span class="n">num_unapplied_migrations</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="k">return</span> <span class="n">num_unapplied_migrations</span> <span class="o">==</span> <span class="mi">0</span></code></pre></div>
+    <span class="k">return</span> <span class="n">num_unapplied_migrations</span> <span class="o">==</span> <span class="mi">0</span></code></pre></figure>
 
 <p>Our extended health check view function now looks like:</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># views.py</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># views.py</span>
 <span class="kn">import</span> <span class="nn">httplib</span>
 
 <span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">http</span>
@@ -430,11 +424,11 @@ health check:</p>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">check</span>
 
 <span class="k">def</span> <span class="nf">health</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">check</span><span class="o">.</span><span class="n">page_response</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">check</span><span class="o">.</span><span class="n">page_response</span><span class="p">(</span><span class="s">'/'</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">httplib</span><span class="o">.</span><span class="n">SERVICE_UNAVAILABLE</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">check</span><span class="o">.</span><span class="n">migrations_have_applied</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">httplib</span><span class="o">.</span><span class="n">SERVICE_UNAVAILABLE</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">()</span></code></pre></div>
+    <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">()</span></code></pre></figure>
 
 <p>And there you have it: an effective health check view for Django applications.</p>
 

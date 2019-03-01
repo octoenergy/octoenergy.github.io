@@ -8,7 +8,7 @@
 ">
     <title>Testing for missing migrations in Django | Octopus Energy Tech blog</title>
     <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6806472/664928/css/fonts.css" />
-    <link rel="canonical" href="http://tech.octopus.energy/news/2016/01/21/testing-for-missing-migrations-in-django.html">
+    <link rel="canonical" href="http://localhost:4000/news/2016/01/21/testing-for-missing-migrations-in-django.html">
 
     <link rel="icon" href="/assets/img/platform-icons/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/platform-icons/apple-touch-icon.png">
@@ -63,12 +63,6 @@
 
     <!-- Main Content -->
     
-  
-    
-  
-
-  
-
 
 <!-- Page Header -->
 <header class="masthead">
@@ -98,14 +92,14 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <p>Since version 1.7, Django creates migrations for more than just changes to
 your model fields. It’s easy to forget to create a migration after changing,
-say, the <code>verbose_name_plural</code> of a model class - I’ve done this many times.
+say, the <code class="highlighter-rouge">verbose_name_plural</code> of a model class - I’ve done this many times.
 This can lead to a mess down the line when multiple developers all end up
 creating the same migration in separate branches.</p>
 
 <p>You can avoid this situation by checking for missing migrations in your test
 suite:</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
 <span class="kn">from</span> <span class="nn">django.core.management</span> <span class="kn">import</span> <span class="n">call_command</span>
 <span class="kn">import</span> <span class="nn">pytest</span>
 
@@ -113,25 +107,25 @@ suite:</p>
     <span class="n">output</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">call_command</span><span class="p">(</span>
-            <span class="s">&#39;makemigrations&#39;</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exit_code</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+            <span class="s">'makemigrations'</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exit_code</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
             <span class="n">stdout</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">SystemExit</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="nb">SystemExit</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="c"># The exit code will be 1 when there are no missing migrations</span>
-        <span class="k">assert</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;1&#39;</span>
+        <span class="k">assert</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1'</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">pytest</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s">&quot;There are missing migrations:</span><span class="se">\n</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span></code></pre></div>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s">"There are missing migrations:</span><span class="se">\n</span><span class="s"> </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span></code></pre></figure>
 
-<p>Here we call the <code>makemigrations</code> command in “dry-run” mode and test the
+<p>Here we call the <code class="highlighter-rouge">makemigrations</code> command in “dry-run” mode and test the
 exit code to determine if there are any missing migrations. If there are missing
 migrations, the test will fail and print the captured output from the
-<code>makemigrations</code> command.</p>
+<code class="highlighter-rouge">makemigrations</code> command.</p>
 
-<p>Note that if you are using a custom <code>MIGRATION_MODULES</code> setting to <a href="https://docs.djangoproject.com/en/1.9/ref/settings/#migration-modules">avoid
+<p>Note that if you are using a custom <code class="highlighter-rouge">MIGRATION_MODULES</code> setting to <a href="https://docs.djangoproject.com/en/1.9/ref/settings/#migration-modules">avoid
 applying migrations during
 tests</a>, you need to restore its default value for
 the above command to work:</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
 <span class="kn">from</span> <span class="nn">django.core.management</span> <span class="kn">import</span> <span class="n">call_command</span>
 <span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">override_settings</span>
 <span class="kn">import</span> <span class="nn">pytest</span>
@@ -141,13 +135,13 @@ the above command to work:</p>
     <span class="n">output</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">call_command</span><span class="p">(</span>
-            <span class="s">&#39;makemigrations&#39;</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exit_code</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+            <span class="s">'makemigrations'</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exit_code</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
             <span class="n">stdout</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">SystemExit</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="nb">SystemExit</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="c"># The exit code will be 1 when there are no missing migrations</span>
-        <span class="k">assert</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;1&#39;</span>
+        <span class="k">assert</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1'</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">pytest</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s">&quot;There are missing migrations:</span><span class="se">\n</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span></code></pre></div>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s">"There are missing migrations:</span><span class="se">\n</span><span class="s"> </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span></code></pre></figure>
 
 <p>Credit for this implementation belongs to Mozilla’s Ed Morley, who <a href="https://github.com/mozilla/treeherder/commit/dd539147716125bb4d2798cdaf613e294c363fb2">committed a
 similar fix</a>

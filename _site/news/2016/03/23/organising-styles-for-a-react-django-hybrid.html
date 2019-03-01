@@ -8,7 +8,7 @@
 ">
     <title>Organising styles for a React/Django hybrid | Octopus Energy Tech blog</title>
     <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6806472/664928/css/fonts.css" />
-    <link rel="canonical" href="http://tech.octopus.energy/news/2016/03/23/organising-styles-for-a-react-django-hybrid.html">
+    <link rel="canonical" href="http://localhost:4000/news/2016/03/23/organising-styles-for-a-react-django-hybrid.html">
 
     <link rel="icon" href="/assets/img/platform-icons/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/platform-icons/apple-touch-icon.png">
@@ -63,12 +63,6 @@
 
     <!-- Main Content -->
     
-  
-
-  
-    
-  
-
 
 <!-- Page Header -->
 <header class="masthead">
@@ -110,41 +104,41 @@ things like mixins, nesting, and variables, I was ready to go.</p>
 
 <p>Briefly, CSS Modules can be used with a React component as follows. Given a stylesheet for a component:</p>
 
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="c">/* component.css */</span>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="c">/* component.css */</span>
 <span class="nc">.className</span> <span class="p">{</span>
-    <span class="k">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
 
 <p>you can reference it in your component JSX file:</p>
 
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* Component.jsx */</span>
-<span class="kr">import</span> <span class="nx">styles</span> <span class="nx">from</span> <span class="s2">&quot;./component.css&quot;</span><span class="p">;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* Component.jsx */</span>
+<span class="k">import</span> <span class="nx">styles</span> <span class="k">from</span> <span class="s2">"./component.css"</span><span class="p">;</span></code></pre></figure>
 
 <p>and reference the styles in the JSX:</p>
 
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* Component.jsx */</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* Component.jsx */</span>
 <span class="k">return</span> <span class="p">(</span>
-	<span class="o">&lt;</span><span class="nx">h1</span> <span class="kr">class</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">className</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="nx">word</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
-	<span class="o">&lt;</span><span class="nx">p</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">className</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Lorem</span> <span class="nx">ipsum</span> <span class="nx">dolor</span> <span class="nx">sit</span> <span class="nx">amet</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-<span class="p">);</span></code></pre></div>
+	<span class="o">&lt;</span><span class="nx">h1</span> <span class="kd">class</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">className</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="nx">word</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>	<span class="o">&lt;</span><span class="nx">p</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">className</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Lorem</span> <span class="nx">ipsum</span> <span class="nx">dolor</span> <span class="nx">sit</span> <span class="nx">amet</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span><span class="p">);</span></code></pre></figure>
 
 <p>Finally, during compilation, the CSS modules will ensure each reference is unique:</p>
 
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.className__abc5436</span><span class="o">,</span>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.className__abc5436</span><span class="o">,</span>
 <span class="nc">.className__def6547</span> <span class="p">{</span>
-	<span class="k">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+	<span class="nl">color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">&quot;className__abc5436&quot;</span><span class="nt">&gt;</span>Hello word<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;className__def6547&quot;</span><span class="nt">&gt;</span>Lorem ipsum dolor sit amet<span class="nt">&lt;/p&gt;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"className__abc5436"</span><span class="nt">&gt;</span>Hello word<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"className__def6547"</span><span class="nt">&gt;</span>Lorem ipsum dolor sit amet<span class="nt">&lt;/p&gt;</span></code></pre></figure>
 
 <p><em>For a more detailed introduction to <a href="http://glenmaddern.com/articles/css-modules">CSS Modules: Welcome to the Future</a> by Glen Maddern</em></p>
 
-<p>The benefits were pretty immediate. I had a <code>.css</code> file to accompany every
-component <code>.jsx</code> file and I could use the sort of vague classnames you would
-never dream of using in a regular CSS file. Suddenly <code>.Image</code> was an
+<p>The benefits were pretty immediate. I had a <code class="highlighter-rouge">.css</code> file to accompany every
+component <code class="highlighter-rouge">.jsx</code> file and I could use the sort of vague classnames you would
+never dream of using in a regular CSS file. Suddenly <code class="highlighter-rouge">.Image</code> was an
 acceptable selector in the context, and one that wouldn’t result in me being
-killed by another front end developer. The use of <code>@extend</code> prevented code
+killed by another front end developer. The use of <code class="highlighter-rouge">@extend</code> prevented code
 duplication inside the component file, and allowed me to use styles from another
 file if I was happy with reducing the level of encapsulation a little.</p>
 
@@ -163,13 +157,13 @@ modules creates and use it in a Django template.</p>
 
 <p>Specifically, this part:</p>
 
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">__abc5436</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">__abc5436</span></code></pre></figure>
 
 <p>of this class name:</p>
 
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.className__abc5436</span> <span class="p">{</span>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.className__abc5436</span> <span class="p">{</span>
 
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre></figure>
 
 <p>is dynamically injected before the page is rendered. I could try and guess the
 hash but I may as well have bought a lottery ticket and expected the same
@@ -179,7 +173,7 @@ outcome - an unstyled component and no extra money.</p>
 
 <p>So I had CSS siloed in modular component files and areas of the site that now
 wanted to use those styles that weren’t React-based. In an attempt to prevent
-excessive duplication between the two, I created a <code>Sitewide.css</code> file that both
+excessive duplication between the two, I created a <code class="highlighter-rouge">Sitewide.css</code> file that both
 the CSS modules and the SASS (used for the rest of the site/global styles) could
 extend from. The downside to this approach is two-fold:</p>
 
@@ -197,7 +191,7 @@ techniques that I brought over to the custom approach we use now.</p>
 to lay out our styles and directories (although ours is only 5-1). It looks like
 this:</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html">sass/
+<figure class="highlight"><pre><code class="language-html" data-lang="html">sass/
 |
 |- base/
 |    |- _global.scss    # Global rules
@@ -237,7 +231,7 @@ this:</p>
 |    |- _variables.scss # Variables
 |
 |
-|- styles.scss          # Main Sass file</code></pre></div>
+|- styles.scss          # Main Sass file</code></pre></figure>
 
 <p>Although all styles are technically ‘global’ now, we try and make each component as encapsulated as possible, enabling it to be used throughout the application with no visible changes in appearance.</p>
 
@@ -245,61 +239,61 @@ this:</p>
 
 <h2 id="the-rules">The rules</h2>
 
-<h3 id="mimic-the-react-component-layout">1. Mimic the React component layout</h3>
+<h3 id="1-mimic-the-react-component-layout">1. Mimic the React component layout</h3>
 
-<p>As you can see from the structure above, within <code>sass/</code>, we have a <code>components/</code> directory that mimics the layout of the React components folder in <code>app/components</code>. Although this isn’t in the same directory as the JS, it still maintains CSS modules’ idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!</p>
+<p>As you can see from the structure above, within <code class="highlighter-rouge">sass/</code>, we have a <code class="highlighter-rouge">components/</code> directory that mimics the layout of the React components folder in <code class="highlighter-rouge">app/components</code>. Although this isn’t in the same directory as the JS, it still maintains CSS modules’ idea of style separation. The effect is you still always know where to find the styles specific to a React component; it has the same name!</p>
 
-<h3 id="never-use-global-classes">2. Never use global classes</h3>
+<h3 id="2-never-use-global-classes">2. Never use global classes</h3>
 
-<p>Each selector in a component <code>.scss</code> file will start with the name of the component followed by the class name. i.e. if we were creating a <code>button</code> class in a container called <code>JoinComponent</code>, the class selector in <code>_JoinComponent.scss</code> would be:</p>
+<p>Each selector in a component <code class="highlighter-rouge">.scss</code> file will start with the name of the component followed by the class name. i.e. if we were creating a <code class="highlighter-rouge">button</code> class in a container called <code class="highlighter-rouge">JoinComponent</code>, the class selector in <code class="highlighter-rouge">_JoinComponent.scss</code> would be:</p>
 
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.JoinComponent-button</span> <span class="p">{</span>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.JoinComponent-button</span> <span class="p">{</span>
 
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre></figure>
 
-<p>This way, the button styles are exclusive to the <code>JoinComponent</code> component, and would not be caught up in specificity issues or accidentally overridden in another file.</p>
+<p>This way, the button styles are exclusive to the <code class="highlighter-rouge">JoinComponent</code> component, and would not be caught up in specificity issues or accidentally overridden in another file.</p>
 
-<h3 id="only-extend-global-classes-for-a-reason">3. Only <code>@extend</code> global classes for a reason</h3>
+<h3 id="3-only-extend-global-classes-for-a-reason">3. Only <code class="highlighter-rouge">@extend</code> global classes for a reason</h3>
 
 <p>If your component uses a common piece of styling, such as a button or link, you should use the original selector rather than extending it just to give it a new name that starts with the name of the component. So this is no good:</p>
 
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.JoinComponent-button</span> <span class="p">{</span>
-  <span class="o">@</span><span class="n">extend</span> <span class="o">.</span><span class="n">button</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.JoinComponent-button</span> <span class="p">{</span>
+  <span class="err">@extend</span> <span class="err">.button;</span>
+<span class="p">}</span></code></pre></figure>
 
-<p>The only reasons to <code>@extend</code> a selector in this way are:</p>
+<p>The only reasons to <code class="highlighter-rouge">@extend</code> a selector in this way are:</p>
 
 <ul>
   <li>If you wish to use the core styles but want to add some more on top. In this case extending is fine as it prevents code duplication.</li>
   <li>If the name of the core selector would make no sense in the context of the component. The markup of a component should be easy to read and therefore the selectors should make sense alongside the markup. An example of this would be using the exact same styles as a <code>.button</code> but it actually being an alert. In which case the following would be fine:</li>
 </ul>
 
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.JoinComponent-alert</span> <span class="p">{</span>
-  <span class="o">@</span><span class="n">extend</span> <span class="o">.</span><span class="n">button</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.JoinComponent-alert</span> <span class="p">{</span>
+  <span class="err">@extend</span> <span class="err">.button;</span>
+<span class="p">}</span></code></pre></figure>
 
-<h3 id="do-not-nest-classes">4. Do not nest classes</h3>
+<h3 id="4-do-not-nest-classes">4. Do not nest classes</h3>
 
-<p>This rule only applies to component-specific <code>.scss</code> files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the hierarchy of the component markup, it would break the styling.</p>
+<p>This rule only applies to component-specific <code class="highlighter-rouge">.scss</code> files. The reasoning behind this is that your layers of specificity remain low, as you avoid cases where classes only get certain styling when they are inside other classes etc. Therefore if you ever changed the hierarchy of the component markup, it would break the styling.</p>
 
 <p>You are allowed to style anything inside a class that is a regular HTML component (paragraph or anchor tags for example), but instead of nesting classes, simply create them as two separate selectors. The fact that each component selector starts with the component’s name also means that you can be vague in your selector names and not worry that the style will affect other areas of the app:</p>
 
-<div class="highlight"><pre><code class="language-scss" data-lang="scss"><span class="cm">/* Instead of this: */</span>
+<figure class="highlight"><pre><code class="language-scss" data-lang="scss"><span class="cm">/* Instead of this: */</span>
 <span class="nc">.well</span> <span class="p">{</span>
-  <span class="na">background-color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
 
   <span class="nc">.well-title</span> <span class="p">{</span>
-    <span class="na">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="cm">/* Do this: */</span>
 <span class="nc">.Component-well</span> <span class="p">{</span>
-  <span class="na">background-color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.Component-title</span> <span class="p">{</span>
-  <span class="na">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
 
 
             </div>
