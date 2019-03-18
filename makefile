@@ -1,2 +1,2 @@
 run:
-	bundle exec jekyll server
+	bundle exec jekyll server --incremental
