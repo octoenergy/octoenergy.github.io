@@ -2,3 +2,4 @@ env/
 .bundle
 .sass-cache
 _site
+.jekyll-metadata
