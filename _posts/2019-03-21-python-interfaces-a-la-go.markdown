@@ -19,7 +19,7 @@ static typing and interfaces. At Octopus Energy we use Python's type
 hinting in order to avoid silly mistakes (the ones I do more
 often) with some success but there are intrinsic limitations. 
 
-While dealing with data streams and specially with the `io` package in Python,
+While dealing with data streams and especially with the `io` package in Python,
 it becomes a burden trying to keep a flexible interface while reusing elements
 of the standard library. Consider the following example:
 
@@ -34,7 +34,7 @@ def transform(input_file: str) -> pd.DataFrame:
 This implementation has some drawbacks: passing a file-path string for
 pandas to load a CSV file makes testing difficult as you would need to create an
 actual CSV. Also, we restrict ourselves to local files for applying our data
-transform - you might want to load the stream from other sources, such as HTTP
+transform - however you might want to load the stream from other sources, such as HTTP
 connections or a S3 bucket. 
 
 You might be tempted to rewrite this function using `io` classes. 
@@ -50,7 +50,7 @@ def transform(input_io: io.TextIO) -> pd.DataFrame:
 
 This is more sensible: we're using a class offered by the standard library and
 `pandas` will like it as it uses an intrinsic reading _protocol_ (more on this
-soon). This means that as long as what you send down `pd.read_csv` has a
+soon). This means that as long as whatever you send down to `pd.read_csv` has a
 method/function called `read`, pandas will be able to load the data. But it's
 difficult to extend the classes in the `io` package.
 Many `ftp` or `S3` readers won't inherit from these classes
@@ -78,7 +78,7 @@ Relying on type hinting to play along with protocols is known as [structural
 subtyping](https://www.python.org/dev/peps/pep-0544/) in python.
 
 You might be wondering how this is different from inheritance. Let's have a look
-to the following example where we will create a useful function to print the
+at the following example where we will create a useful function to print the
 length of different objects.
 
 ```python
