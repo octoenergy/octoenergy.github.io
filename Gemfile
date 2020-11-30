@@ -1,2 +1,4 @@
 source 'https://rubygems.org'
-gem 'github-pages', group: :jekyll_plugins
+
+# See https://pages.github.com/versions/ for github-pages version that GH uses.
+gem 'github-pages', "~> 209", group: :jekyll_plugins
