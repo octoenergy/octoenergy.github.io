@@ -1,5 +1,5 @@
 ---
-title: Duration database transactions in Django
+title: Durable database transactions in Django
 layout: post
 category: news
 author: David Winterbottom
