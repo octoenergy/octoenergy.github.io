@@ -13,7 +13,7 @@ server:
 		-it jekyll/jekyll:3.8 \
 		jekyll serve --incremental
 
-run:
+upgrade:
 	# Upgrade dependencies
 	#
 	# See https://github.com/envygeeks/jekyll-docker/blob/master/README.md#updating
