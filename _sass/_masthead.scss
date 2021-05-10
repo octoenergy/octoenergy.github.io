@@ -1,12 +1,8 @@
 // Styling for the masthead
 header.masthead {
     margin-bottom: 50px;
-    background: no-repeat center center;
-    background-image: url('../assets/img/blog-background.png');
-    background-color: $gray-600;
-    background-attachment: scroll;
+    background-color: $gray-100;
     position: relative;
-    @include background-cover;
 
     .overlay {
         position: absolute;
@@ -14,7 +10,7 @@ header.masthead {
         left: 0;
         height: 100%;
         width: 100%;
-        background-color: $gray-900;
+        background-color: $gray-100;
         opacity: 0.5;
     }
 
@@ -22,19 +18,17 @@ header.masthead {
     .post-heading,
     .site-heading {
         padding: 200px 0 150px;
-        color: white;
-
-        @media only screen and (min-width: 768px) {
-          padding: 200px 0;
-        }
+        color: black;
     }
 
     .page-heading,
     .site-heading {
         text-align: center;
+
         h1 {
             font-size: 50px;
             margin-top: 0;
+            color: $primary;
         }
 
         .subheading {
@@ -77,10 +71,6 @@ header.masthead {
             font-weight: 300;
             font-style: italic;
             @include serif-font;
-
-            a {
-                color: $white;
-            }
         }
 
         @media only screen and (min-width: 768px) {
