@@ -61,3 +61,29 @@
         }
     }
 }
+
+.author {
+    margin: 80px 0 40px;
+}
+
+.dev {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+
+    img {
+        width: 150px;
+        border-radius: 50%;
+    }
+
+    &__links {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2.4rem;
+    }
+}
