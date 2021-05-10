@@ -1,4 +1,13 @@
 // Global styling for this template
+@font-face {
+    font-family: Gotham;
+    font-style: normal;
+    font-weight: 800;
+    src: url('../assets/fonts/Gotham/GothamSSm-Bold.woff2') format('woff2');
+    font-display: swap;
+}
+
+
 body {
     font-size: 20px;
     color: $gray-900;
