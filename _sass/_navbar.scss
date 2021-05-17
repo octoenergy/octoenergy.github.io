@@ -2,27 +2,39 @@
 #mainNav {
     position: absolute;
     border-bottom: 1px solid $gray-200;
-    background-color: white;
+    background-color: $primary;
     @include sans-serif-font;
 
+    img {
+        width: 50px;
+    }
+
     .navbar-brand {
+        margin: 0;
+        font-family: Gotham, Helvetica, sans-serif;
         font-weight: 800;
-        color: $gray-800;
+        color: $white;
     }
 
     .navbar-toggler {
-        font-size: 12px;
+        font-size: 16px;
         font-weight: 800;
         padding: 13px;
         text-transform: uppercase;
-        color: $gray-800;
+        color: $white;
     }
 
     .navbar-nav {
+        margin-top: 20px;
+
+        @media only screen and (min-width: 992px) {
+            margin-top: 0;
+        }
 
         > li.nav-item {
-
             > a {
+                color: $white;
+                font-family: Gotham, Helvetica, sans-serif;
                 font-size: 12px;
                 font-weight: 800;
                 letter-spacing: 1px;
@@ -33,7 +45,6 @@
 
     @media only screen and (min-width: 992px) {
         border-bottom: 1px solid transparent;
-        background: transparent;
 
         .navbar-brand {
             padding: 10px 20px;
@@ -77,16 +88,12 @@
         &.is-fixed {
             /* when the user scrolls down, we hide the header right above the viewport */
             position: fixed;
-            top: -67px;
+            top: -69px;
             -webkit-transition: -webkit-transform 0.2s;
             -moz-transition: -moz-transform 0.2s;
             transition: transform 0.2s;
-            border-bottom: 1px solid darken($white, .05);
-            background-color: fade-out($white, .1);
 
             .navbar-brand {
-                color: $gray-900;
-
                 &:focus,
                 &:hover {
                     color: $primary;
@@ -98,7 +105,7 @@
                 > li.nav-item {
 
                     > a {
-                        color: $gray-900;
+                        color: $white;
 
                         &:focus,
                         &:hover {
