@@ -25,7 +25,7 @@ layout: default
 <article>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="col-xl-8 col-md-11 mx-auto">
                 {{ content }}
 
                 <p class="author">
@@ -40,6 +40,18 @@ layout: default
                     {% endif %}
                     on <strong>{{ page.date | date: "%b %-d, %Y" }}</strong>
                 </p>
+            </div>
+            <div class="d-none d-xl-block col-xl-3">
+                <ul class="post-list sticky-top">
+                    {% for post in site.categories['news'] %}
+                        <li class="post-preview">
+                            <a href="{{ post.url | prepend: site.baseurl }}">
+                                <span class="post-title">{{ post.title }}</span>
+                                <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
