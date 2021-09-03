@@ -5,6 +5,9 @@ description: > # this means to ignore newlines until "baseurl:"
   Octopus Energy: supplying greener, affordable energy to the UK.
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://tech.octopus.energy" # the base hostname & protocol for your site
+plugins:
+  - jekyll-feed
+
 twitter_username:
 github_username: octoenergy
 

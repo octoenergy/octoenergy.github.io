@@ -13,6 +13,8 @@ Run the local development server with:
 
     $ make server
 
+which will serve the site at http://localhost:4000
+
 Create new posts by creating a markdown file in `_posts/` with filename format
 `YYYY-MM-DD-article-slug` (e.g. `2019-02-20-some-article-description.md`).
 
