@@ -52,12 +52,12 @@
   site: https://seddonym.me/
 
 - name: Trina Stevens
-  jobtitle: Chief of Staff
-  image: https://media-exp1.licdn.com/dms/image/C4E03AQEmXuk3INuZhw/profile-displayphoto-shrink_800_800/0/1517681653460?e=1626307200&v=beta&t=etzP3bvcS9SJBIDsMwvvpoeZ65MtD15u5iK2MW_39Mc
+  jobtitle: Program Manager
+  image: /assets/img/profiles/trina.jpeg
   site: http://brightfuturesadventures.blogspot.com/
 
 - name: David Winterbottom
   twitter: codeinthehole
-  jobtitle: Head of Engineering
+  jobtitle: Head of Software Engineering
   image: https://pbs.twimg.com/profile_images/511967700826857473/3Q-kAV2F_400x400.jpeg
   site: https://codeinthehole.com
