@@ -1,10 +1,10 @@
 # Site settings
-title: Octopus Energy
+title: Kraken Tech
 email: talent@octoenergy.com
 description: > # this means to ignore newlines until "baseurl:"
-  Octopus Energy: supplying greener, affordable energy to the UK.
+  Kraken Tech: supplying greener, affordable energy to the UK.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://tech.octopus.energy" # the base hostname & protocol for your site
+url: "https://tech.octopus.energy" # the base hostname & protocol for your site
 plugins:
   - jekyll-feed
 

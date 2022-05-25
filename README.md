@@ -1,4 +1,4 @@
-# Octopus Energy tech blog
+# Kraken Technologies blog
 
 This repo provides a [Jekyll][jekyll] site for the <https://tech.octopus.energy>
 site. The site is published using [Github Pages][github_pages].
