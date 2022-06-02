@@ -29,7 +29,15 @@ When the post is ready, submit a pull request and request review from the
 
 Once approved, publish by merging your pull-request to `master`.
 
-## Maintenance
+## Working on site appearance
+
+The `css/main.scss` SASS file is compiled by Jekyll and served as `css/main.css`
+in the static site.
+
+You can work on site appearance by editing the SASS files in `_sass/` and using
+the live reload to preview changes.
+
+## Upgrade Ruby dependencies
 
 To upgrade Ruby dependencies, run:
 
