@@ -130,79 +130,6 @@ def test_some_use_case():
     ...
 ```
 
-### Anti-pattern 3: Implicit ordering
-
-Flakiness can occur in tests making equality assertions on lists where the order
-of the items isn't explicitly specified.
-
-For example, a test may fetch a list of results from a database and assert that
-the results match an expected list. But if the database query doesn't include an
-explicit `ORDER BY` clause, it's possible the order of the results can vary
-between test runs.
-
-#### Example: Django `QuerySet`s
-
-Consider this test which doesn't specify a sort order for the
-`pizza.toppings.all()` `QuerySet`:
-
-```py
-# Factory functions
-def _create_pizza(**kwargs):
-   ...
-def _create_topping(**kwargs):
-   ...
-
-def test_creates_toppings_correctly():
-    # Create a pizza with some toppings.
-    pizza = _create_pizza()
-    for topping_name in ("ham", "pineapple"):
-        _create_topping(
-            pizza=pizza,
-            topping_name=topping_name,
-        )
-
-    # Fetch all toppings associated with the pizza.
-    toppings = pizza.toppings.all()
-
-    assert toppings[0].topping_name == "ham"
-    assert toppings[1].topping_name == "pineapple"
-```
-
-At some point, one of your colleagues will have their afternoon ruined when the
-first assertion finds `toppings[0].topping_name` is `pineapple`.
-
-<!-- How to fix? -->
-
-Fix by chaining an explicit `order_by` call to the `QuerySet`:
-
-```py
-# Factory functions
-def _create_pizza(**kwargs):
-   ...
-def _create_topping(**kwargs):
-   ...
-
-def test_creates_toppings_correctly():
-    # Create a pizza with some toppings.
-    pizza = _create_pizza()
-    for topping_name in ("ham", "pineapple"):
-        _create_topping(
-            pizza=pizza,
-            topping_name=topping_name,
-        )
-
-    # Fetch all toppings associated with the pizza. We now explicitly sort
-    # the QuerySet to avoid future flakiness.
-    toppings = pizza.toppings.all().order_by("topping_name")
-    assert toppings[0].topping_name == "ham"
-    assert toppings[1].topping_name == "pineapple"
-```
-
-<!-- When does this happen? -->
-
-Flakiness of this form will happen randomly and can be difficult to recreate
-locally.
-
 ### Anti-pattern 2: Calling the system clock at compile time
 
 If the system clock is called at compile time, tests can fail when the test
@@ -284,6 +211,79 @@ def get_active_things(active_at: Optional[datetime] = None):
         active_at = timezone.now()
     ...
 ```
+
+### Anti-pattern 3: Implicit ordering
+
+Flakiness can occur in tests making equality assertions on lists where the order
+of the items isn't explicitly specified.
+
+For example, a test may fetch a list of results from a database and assert that
+the results match an expected list. But if the database query doesn't include an
+explicit `ORDER BY` clause, it's possible the order of the results can vary
+between test runs.
+
+#### Example: Django `QuerySet`s
+
+Consider this test which doesn't specify a sort order for the
+`pizza.toppings.all()` `QuerySet`:
+
+```py
+# Factory functions
+def _create_pizza(**kwargs):
+   ...
+def _create_topping(**kwargs):
+   ...
+
+def test_creates_toppings_correctly():
+    # Create a pizza with some toppings.
+    pizza = _create_pizza()
+    for topping_name in ("ham", "pineapple"):
+        _create_topping(
+            pizza=pizza,
+            topping_name=topping_name,
+        )
+
+    # Fetch all toppings associated with the pizza.
+    toppings = pizza.toppings.all()
+
+    assert toppings[0].topping_name == "ham"
+    assert toppings[1].topping_name == "pineapple"
+```
+
+At some point, one of your colleagues will have their afternoon ruined when the
+first assertion finds `toppings[0].topping_name` is `pineapple`.
+
+<!-- How to fix? -->
+
+Fix by chaining an explicit `order_by` call to the `QuerySet`:
+
+```py
+# Factory functions
+def _create_pizza(**kwargs):
+   ...
+def _create_topping(**kwargs):
+   ...
+
+def test_creates_toppings_correctly():
+    # Create a pizza with some toppings.
+    pizza = _create_pizza()
+    for topping_name in ("ham", "pineapple"):
+        _create_topping(
+            pizza=pizza,
+            topping_name=topping_name,
+        )
+
+    # Fetch all toppings associated with the pizza. We now explicitly sort
+    # the QuerySet to avoid future flakiness.
+    toppings = pizza.toppings.all().order_by("topping_name")
+    assert toppings[0].topping_name == "ham"
+    assert toppings[1].topping_name == "pineapple"
+```
+
+<!-- When does this happen? -->
+
+Flakiness of this form will happen randomly and can be difficult to recreate
+locally.
 
 ### Anti-pattern 4: Randomly generated inputs or fixtures
 
