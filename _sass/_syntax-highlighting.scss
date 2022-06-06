@@ -1,6 +1,6 @@
 .highlight {
     padding: 1.0rem;
-    margin: 2.4rem 0;
+    margin: 1.0rem 0;
     background: #272822;
     
     .hll { background-color: #49483e }
@@ -70,3 +70,8 @@
 }
 
 pre code { color: #ffffff; }
+
+div.highlight pre.highlight {
+    padding: 0;
+    margin: 0;
+}
