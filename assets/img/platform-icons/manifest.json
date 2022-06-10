@@ -1,17 +1,22 @@
 {
-	"name": "Octopus Energy",
+	"background_color": "#1e0d35",
+	"description": "Tech blog from the team at Kraken Tech",
+	"display": "standalone",
 	"icons": [
 		{
-			"src": "\/android-chrome-192x192.png",
+			"src": "/assets/img/platform-icons/android-chrome-192x192.png",
 			"sizes": "192x192",
-			"type": "image\/png"
+			"type": "image/png"
 		},
 		{
-			"src": "\/android-chrome-512x512.png",
+			"src": "/assets/img/platform-icons/android-chrome-512x512.png",
 			"sizes": "512x512",
-			"type": "image\/png"
+			"type": "image/png"
 		}
 	],
-	"theme_color": "#1b073a",
-	"display": "standalone"
+	"name": "Tech Blog | Kraken Tech",
+	"scope": "/",
+	"short_name": "Kraken Tech",
+	"start_url": "/",
+	"theme_color": "#721CE3"
 }
