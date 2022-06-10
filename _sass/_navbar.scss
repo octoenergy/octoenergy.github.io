@@ -6,8 +6,12 @@
     @include sans-serif-font;
 
     img {
-        width: 50px;
-    }
+        width: 120px;
+
+        @media (min-width: 576px) {
+            width: 200px;
+        }
+    };
 
     .navbar-brand {
         margin: 0;
