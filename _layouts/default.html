@@ -5,34 +5,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="{{ site.description }}">
-    <title>{% if page.title %}{{ page.title }} | {% endif %}Tech blog | {{ site.title }}</title>
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <meta name="msapplication-TileColor" content="#1e0d35">
     <meta name="theme-color" content="#1e0d35">
+    <meta name="apple-mobile-web-app-title" content="Kraken Tech">
+    <meta name="application-name" content="Kraken Tech">
+    
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <link rel="icon" href="{{ site.baseurl }}/assets/img/platform-icons/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/assets/img/platform-icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="{{ site.baseurl }}/assets/img/platform-icons/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="{{ site.baseurl }}/assets/img/platform-icons/favicon-16x16.png" sizes="16x16">
     <link rel="manifest" href="{{ site.baseurl }}/assets/img/platform-icons/manifest.json">
     <link rel="mask-icon" href="{{ site.baseurl }}/assets/img/platform-icons/safari-pinned-tab.svg" color="#721ce3">
-    <meta name="apple-mobile-web-app-title" content="Kraken Tech">
-    <meta name="application-name" content="Kraken Tech">
-    
-
     <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="/feed.xml">
-
+    
     <!-- Bootstrap core CSS -->
     <link href="{{ site.baseurl }}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    
     <!-- Custom fonts for this template -->
     <link href="{{ site.baseurl }}/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
-
+    
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+    
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://tech.octopus.energy/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} | {% endif %}Tech blog | {{ site.title }}">
+    <meta property="og:description" content="{{ site.description }}">
+    <meta property="og:image" content="https://tech.octopus.energy/assets/img/og-image.png">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>{% if page.title %}{{ page.title }} | {% endif %}Tech blog | {{ site.title }}</title>
   </head>
 
   <body>
