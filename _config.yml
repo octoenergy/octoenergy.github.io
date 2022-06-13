@@ -2,7 +2,7 @@
 title: Kraken Tech
 email: talent@octoenergy.com
 description: > # this means to ignore newlines until "baseurl:"
-  Kraken Tech: supplying greener, affordable energy to the UK.
+  Kraken is the world's leading customer & culture platform for utilities.
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://tech.octopus.energy" # the base hostname & protocol for your site
 plugins:

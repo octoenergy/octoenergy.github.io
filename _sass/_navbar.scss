@@ -6,12 +6,15 @@
     @include sans-serif-font;
 
     img {
-        width: 50px;
-    }
+        width: 120px;
+
+        @media (min-width: 576px) {
+            width: 200px;
+        }
+    };
 
     .navbar-brand {
         margin: 0;
-        font-family: Gotham, Helvetica, sans-serif;
         font-weight: 800;
         color: $white;
     }
@@ -34,7 +37,7 @@
         > li.nav-item {
             > a {
                 color: $white;
-                font-family: Gotham, Helvetica, sans-serif;
+                font-family: Helvetica, sans-serif;
                 font-size: 12px;
                 font-weight: 800;
                 letter-spacing: 1px;
