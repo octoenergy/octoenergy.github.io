@@ -414,7 +414,7 @@ Caches often couple tests together and cause this pattern of flakiness. For
 example, Django's cache [is not cleared after each test][django_cache] which can
 lead to intermittent failure if tests assume they start with an empty cache.
 
-[django_cache]: https://docs.djangoproject.com/en/latest/topics/testing/overview/#other-test-conditions
+[django_cache]: https://docs.djangoproject.com/en/4.0/topics/testing/overview/#other-test-conditions
 
 This can be worked around with an auto-applied Pytest fixture:
 
