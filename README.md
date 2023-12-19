@@ -30,6 +30,8 @@ Install the `github-pages` gem:
 Add new posts by creating a markdown file in `_posts/` with filename format
 `YYYY-MM-DD-article-slug.md` (e.g. `2019-02-20-some-article-description.md`).
 
+Ensure your details are in the `_data/members.yml` file.
+
 Preview the appearance by running the local development server with:
 
     make server
