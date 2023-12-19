@@ -15,4 +15,3 @@ github_username: octoenergy
 markdown: kramdown
 highlighter: rouge
 exclude: [vendor, 'README.md', 'makefile', 'Gemfile*', 'CNAME']
-incremental: true
