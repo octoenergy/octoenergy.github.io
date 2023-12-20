@@ -38,6 +38,11 @@
   image: https://pbs.twimg.com/profile_images/692720813531926528/yf1xHYLD_400x400.jpg
   site: http://goochgooch.co.uk/posts/
 
+- name: Frederike Jaeger
+  twitter: DrFJaeger
+  jobtitle: Senior Back-end Developer
+  image: /assets/img/profiles/fred.png
+
 - name: Matt Kinnersley
   twitter: mattkinnersley_
   jobtitle: Front-end Developer
