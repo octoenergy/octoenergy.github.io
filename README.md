@@ -9,12 +9,28 @@ site. The site is published using [Github Pages][github_pages].
 
 ## Installation
 
-Ensure you have `docker` running locally.
+Ensure you have [`asdf`](https://asdf-vm.com/) installed then install Ruby
+2.7.8:
+
+```sh
+> asdf plugin add ruby
+> asdf install ruby 2.7.8
+> ruby --version  # verify
+ruby 2.7.8p225 (2023-03-30 revision 1f4d455848) [arm64-darwin23]
+```
+
+Install the `github-pages` gem:
+
+```sh
+> bundle install
+```
 
 ## Adding new blog posts
 
 Add new posts by creating a markdown file in `_posts/` with filename format
-`YYYY-MM-DD-article-slug` (e.g. `2019-02-20-some-article-description.md`).
+`YYYY-MM-DD-article-slug.md` (e.g. `2019-02-20-some-article-description.md`).
+
+Ensure your details are in the `_data/members.yml` file.
 
 Preview the appearance by running the local development server with:
 
@@ -23,7 +39,7 @@ Preview the appearance by running the local development server with:
 which will serve the site at <http://localhost:4000>.
 
 When the post is ready, submit a pull request and request review from the
-[`#octoenergy/publicity`][publicity_team] team.
+[`@octoenergy/publicity`][publicity_team] team.
 
 [publicity_team]: https://github.com/orgs/octoenergy/teams/publicity/
 
@@ -36,9 +52,3 @@ in the static site.
 
 You can work on site appearance by editing the SASS files in `_sass/` and using
 the live reload to preview changes.
-
-## Upgrade Ruby dependencies
-
-To upgrade Ruby dependencies, run:
-
-    make upgrade
