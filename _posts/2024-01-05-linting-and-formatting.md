@@ -8,7 +8,7 @@ hex: 0e1720
 ---
 
 At Kraken Tech we have a large global development team with over 500 developers, 
-the majority of which work on the same monolithic codebase comprising 3 million 
+the majority of which work on the same monolithic codebase comprising more than 4 million 
 lines of Python code. We release new code over 100 times a day, running hundreds 
 of thousands of tests in the process.
 
@@ -76,7 +76,7 @@ been extended to enforce typing on all function arguments for changed functions.
 Since that change, we’re actually seeing the benefits. It’s not only 
 helpful in preventing bugs but also in simply understanding what the function 
 does. Type hints are part of the documentation. We’ve also seen particular 
-value when transitioning between legacy and new sytems, as proper typing can 
+value when transitioning between legacy and new systems, as proper typing can 
 make it clear which system is supported.
 
 Of course, sometimes wrangling mypy can be a bit of a challenge, and there 
