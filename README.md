@@ -28,7 +28,9 @@ Install the `github-pages` gem:
 ## Adding new blog posts
 
 Add new posts by creating a markdown file in `_posts/` with filename format
-`YYYY-MM-DD-article-slug.md` (e.g. `2019-02-20-some-article-description.md`).
+`YYYY-MM-DD-article-slug.md` (e.g. `2019-02-20-some-article-description.md`). You should also add a header containing 
+the title and author of the article, amongst other items. For a blog post to appear, the `category` must be set to `news`. Check existing posts for examples.
+
 
 Ensure your details are in the `_data/members.yml` file.
 
