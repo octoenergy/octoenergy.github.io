@@ -49,6 +49,10 @@
   image: https://pbs.twimg.com/profile_images/1353630729503203330/ISHIQo1z_400x400.jpg
   site: https://www.techwaffle.dev/
 
+- name: Ross Rhodes
+  jobtitle: Senior Software Engineer
+  image: /assets/img/profiles/ross-rhodes.jpg
+
 - name: David Seddon
   twitter: seddonym
   jobtitle: Lead Back-end Developer
