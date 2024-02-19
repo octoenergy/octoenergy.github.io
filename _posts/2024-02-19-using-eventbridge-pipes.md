@@ -44,25 +44,24 @@ For Power API, the source integration is the DynamoDB Stream, and the target is 
 By default, we provision the infrastructure as code using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/) framework. Pipes are configurable under this framework using JSON or YAML syntax, where all Pipe stages can be defined to easily integrate the Stream to the Event Bus. Below is a simplified snippet of how the Power API’s Pipe is configured using SAM.
 
 ```yaml
-EventPublisherPipeExecutionFailureAlarm:
-  Type: AWS::CloudWatch::Alarm
+EventPublisherPipe:
+  Type: AWS::Pipes::Pipe
   Properties:
-    AlarmActions:
-      - !Ref AlertSnsTopic
-    OKActions:
-      - !Ref AlertSnsTopic
-    AlarmName: !Sub '${AWS::StackName}-EventPublisherPipeExecutionFailure'
-    ComparisonOperator: GreaterThanThreshold
-    Dimensions:
-      - Name: PipeName
-        Value: !Ref EventPublisherPipe
-    EvaluationPeriods: 15
-    MetricName: ExecutionFailed
-    Namespace: AWS/EventBridge/Pipes
-    Period: 60 # seconds
-    Statistic: Sum
-    Threshold: 0
-    TreatMissingData: notBreaching
+    DesiredState: RUNNING
+    RoleArn: !GetAtt EventPublisherPipeRole.Arn
+    Source: !GetAtt PowersTable.StreamArn
+    SourceParameters:
+      DynamoDBStreamParameters:
+        BatchSize: 10
+        MaximumBatchingWindowInSeconds: 5
+        OnPartialBatchItemFailure: AUTOMATIC_BISECT
+        StartingPosition: TRIM_HORIZON
+      FilterCriteria:
+        Filters:
+          - Pattern: '{ "eventName": ["INSERT", "MODIFY"] }'
+    Target: !GetAtt EventPublisherEventBus.Arn
+    TargetParameters:
+      InputTemplate: '{ "subjectId": <$.dynamodb.NewImage.subjectId.S> }'
 ```
 
 Note that other resources are omitted from the snippet. For example, the DynamoDB table `PowersTable` and the Event Bus `EventPublisherEventBus`. Furthermore, it is possible to transform input data for the target and enhancement steps. In the case of Power API, Stream record data nested within `dynamodb` → `NewImage` is extracted to simplify what the Event Bus receives.
