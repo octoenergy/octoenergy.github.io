@@ -11,11 +11,11 @@ Within the Kraken platform, we host a Dispatch API responsible for reading and w
 
 With that in mind, the Control & Dispatch team developed a new API - the Power API - which is designed to read and write power data, including dispatches, for a greater number of assets whilst delivering performance improvements per request. The team's worked hard on the development of Power API, which will soon replace Dispatch API within the platform.
 
-<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/system-change-notification-banner.png" width="725" />
+<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/system-change-notification-banner.png"/>
 
 Kraken's APIs are hosted in the cloud using [Amazon Web Services (AWS)](https://aws.amazon.com/). The Control & Dispatch team own the Dispatch and Power APIs, following a philosophy of adopting AWS serverless technology where this benefits business needs. The Power API leverages [Amazon API Gateway](https://aws.amazon.com/api-gateway/) with serverless [Lambda functions](https://aws.amazon.com/lambda/) to process read and write requests. New or updated power data is saved in a NoSQL [DynamoDB table](https://aws.amazon.com/dynamodb/) with changes to data captured in a [DynamoDB Stream](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html).
 
-<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/serverless-architecture.png" width="725" />
+<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/serverless-architecture.png"/>
 
 Several internal services were already subscribed to dispatch update events broadcast by the Dispatch API. Therefore, we required Power API to emit equivalent events before we could migrate these services away from Dispatch API. We adopted [Amazon EventBridge](https://aws.amazon.com/eventbridge/) to fulfil this requirement using an [Event Bus](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus.html), which acts as a broker between
 
@@ -28,7 +28,7 @@ So how are power changes sent to the Event Bus from the DynamoDB Stream?
 
 The team is leveraging [EventBridge Pipes](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html) to address this problem. Pipes ease the integration process between AWS resources — reducing the need for Lambda functions hosting custom application code - which includes integrations between DynamoDB Streams and EventBridge Event Buses.
 
-<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/eventbridge-pipe-architecture.png" width="725" />
+<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/eventbridge-pipe-architecture.png"/>
 
 At a high level, Pipes consist of four stages:
 
@@ -39,7 +39,7 @@ At a high level, Pipes consist of four stages:
 
 For Power API, the source integration is the DynamoDB Stream, and the target is the Event Bus. Filtering is configurable to specify which Stream records to put onto the Event Bus. While the Stream captures DynamoDB record inserts, updates, and deletions, we filter out deletions at this stage. We also skip the enhancement stage, which would require us to add additional infrastructure and / or custom logic within Lambda functions. The raw data from the Stream suffices for our needs.
 
-<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/eventbridge-pipe-stages.png" width="725" />
+<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/eventbridge-pipe-stages.png"/>
 
 By default, we provision the infrastructure as code using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/) framework. Pipes are configurable under this framework using JSON or YAML syntax, where all Pipe stages can be defined to easily integrate the Stream to the Event Bus. Below is a simplified snippet of how the Power API’s Pipe is configured using SAM.
 
@@ -76,7 +76,7 @@ When leveraging Pipes, further consideration is required for error scenarios. A 
 
 We observe application behavior through [CloudWatch Metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html) with [Grafana](https://grafana.com/) dashboards. Pipes offer a [range of metrics](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-monitoring.html) to monitor invocations, processing durations, and execution errors. We also [contributed to Grafana](https://github.com/grafana/grafana/pull/69994) in the past to make it easier to add Pipe metrics to these dashboards. Below is a screenshot of our Pipe dashboard panels.
 
-<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/eventbridge-pipe-dashboard.png" width="725" />
+<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/eventbridge-pipe-dashboard.png"/>
 
 Note that the “Pipe Execution Errors” panel covers a few scenarios — namely timeouts, throttling, and explicit failures processing a record. The “Pipe Target Stage Errors” focuses specifically on the target Event Bus and highlights any errors that arise for that particular stage of the Pipe. Throttling measures when a Pipe is invoked too many times within a short interval.
 
@@ -86,7 +86,7 @@ DynamoDB Stream records are [retained for 24 hours](https://docs.aws.amazon.com/
 
 Even if we were to address that particular issue, there is no AWS managed re-drive mechanism at the time of writing to move Stream records from the DLQ back to the Pipe. There’s also no API or SDK available to trigger the Pipe with a record. There are a couple approaches we considered to work around these limitations. One option requires custom logic within a Lambda function to read from the DLQ, replicate the Pipe’s filtering and transformation logic, then send records directly to the Event Bus. This is considerable overhead for us to manage, which itself could be error-prone. Below is an architecture diagram showing how such a re-drive solution may look.
 
-<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/eventbridge-pipe-error-handling.png" width="725" />
+<img src="/assets/img/posts/2024-02-19-using-eventbridge-pipes/eventbridge-pipe-error-handling.png"/>
 
 Another solution would be to create a secondary Pipe using the SQS DLQ as its source and targeting the same Event Bus. However, if we encounter problems with our original Pipe, it’s possible that a secondary Pipe would yield similar issues to resolve.
 
