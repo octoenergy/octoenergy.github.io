@@ -9,20 +9,48 @@ site. The site is published using [Github Pages][github_pages].
 
 ## Installation
 
-Ensure you have [`asdf`](https://asdf-vm.com/) installed then install Ruby
-2.7.8:
+### System prerequisites
+
+You should have Ruby 3.2.3 installed and available on the command line:
 
 ```sh
-> asdf plugin add ruby
-> asdf install ruby 2.7.8
-> ruby --version  # verify
-ruby 2.7.8p225 (2023-03-30 revision 1f4d455848) [arm64-darwin23]
+> ruby --version
+ruby 3.2.3 (2024-01-18 revision 52bb2ac0a6) [arm64-darwin23]
 ```
 
-Install the `github-pages` gem:
+#### If you don't have the correct version of Ruby
+
+There are a few different ways to manage Ruby versions on your computer locally.
+If you're not sure what to do, try the following:
+
+1. Install [`asdf`](https://asdf-vm.com/):
+  - `brew install asdf`
+  - Add the correct line to your `.bashrc` / `.zshrc` etc, as per [these instructions](https://asdf-vm.com/guide/getting-started.html#_3-install-asdf). 
+  - Open a new terminal and navigate to this folder.
+2. `asdf plugin add ruby`
+3. `asdf install ruby 3.2.3`
+4. `asdf local ruby 3.2.3`
+
+Now check you're on Ruby 3.2.3:
 
 ```sh
+> ruby --version
+ruby 3.2.3 (2024-01-18 revision 52bb2ac0a6) [arm64-darwin23]
+```
+
+### Installing the dependencies
+
+```sh
+> bundle config set --local path .bundle
 > bundle install
+```
+
+(This will install the Ruby libraries listed in `Gemfile.lock`.)
+
+### Verify the server starts
+
+```sh
+> make server
 ```
 
 ## Adding new blog posts
