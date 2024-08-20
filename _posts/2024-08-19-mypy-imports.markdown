@@ -138,8 +138,8 @@ Found 1 error in 1 file (checked 1 source file)
 ```
 
 Because mypy thinks of this module as a third party package (i.e. installed in your virtualenv's `site-packages`
-rather than alongside `blue.py`), we have a new error. This is because mypy requires the package to declare
-that it is 'fit for type checking' before it will use it. The simplest way to do this is to add an empty file called
+rather than alongside `blue.py`), we have a new error. This is because mypy won't use the package unless it is
+explicitly declared as fit for that purpose. The simplest way to do this is to add an empty file called
 `py.typed`, which tells mypy to look at the annotations in that package:
 
 ```
@@ -154,7 +154,7 @@ Success: no issues found in 1 source file
 ```
 
 So this is interesting. There is an error in the third party library, but mypy is not complaining about it. So if it's
-not type checking our third party package, why is it complaining about that `py.typed` file in the first place?
+not type checking our third party package, why did it ask us to add that `py.typed` file in the first place?
 
 Let's experiment by adding a slightly different kind of error. In `blue.py`, add a type annotation so that `some_string` is now an `int`:
 
@@ -204,7 +204,9 @@ copy.copy()
 some_string: int = thirdparty.get_string()
 ```
 
-And now let's run it:
+### `normal` mode
+
+Now let's run it in the default mode, which is `normal`:
 
 ```
 $ mypy -m blue
@@ -228,6 +230,8 @@ So, we have three different errors here:
 Although we haven't passed an argument, we're seeing mypy run in `normal` mode: the most 'dogged' mode.
 As we've already seen, even in this mode we won't see any errors relating to the internals of third party or standard library packages.
 
+### `error` mode
+
 Let's run it in the mode at the opposite end of the spectrum: `error`:
 
 ```
@@ -248,8 +252,8 @@ we're interacting correctly with it even though we're passing `error`.
 This mode is designed to force callers to explicitly specify all packages for checking, rather than let the imports
 be followed implicitly. To get around it, we can tell mypy to check all of the modules by passing all of them like this:
 
-```python
-mypy -m blue -m green -m red -m thirdparty --follow-imports=error
+```
+$ mypy -m blue -m green -m red -m thirdparty --follow-imports=error
 .venv/lib/python3.12/site-packages/thirdparty/__init__.py:2:
 error: Incompatible return value type (got "int",
 expected "str")  [return-value]
@@ -265,6 +269,8 @@ Found 4 errors in 3 files (checked 4 source files)
 Now we have _four_ errors, not three! This is because we are also now checking the internals of `thirdparty`,
 because we are explicitly passing it.
 
+### `skip` mode
+
 So, those are the two extremes. Let's try `skip` mode:
 
 ```
@@ -279,10 +285,12 @@ which it will always check). Notice in particular the absence of an error relati
 because we're skipping it, mypy is not bothering even to check the type signature of that function. We'd see the same
 behaviour if we were interacting incorrectly with a local module: no error!
 
+### `silent` mode
+
 Finally, there is `silent` mode:
 
 ```
-mypy -m blue --follow-imports=silent
+$ mypy -m blue --follow-imports=silent
 blue.py:5: error: Missing positional argument "x" in call
 to "copy"  [call-arg]
 blue.py:6: error: Incompatible types in assignment (expression
@@ -298,15 +306,15 @@ aren't reported on, but mistakes relating to interacting with those modules *are
 ## Observations on the different modes
 
 [The mypy docs](https://mypy.readthedocs.io/en/stable/running_mypy.html#following-imports) recommend using `normal`
-or `error` modes, if possible, as it makes sure you're accidentally skipping any part of the code base. The interesting
+or `error` modes, if possible, as it makes sure you're not accidentally skipping any part of the code base. The interesting
 thing about `error` mode is it will force you to check the internals of all third party packages, too, which seems
 strange to me.
 
-`skip`, the docs suggests, should be used with caution. I can understand why: detecting
+`skip`, the documentation suggests, should be used with caution. I can understand why: detecting
 whether a function in an upstream package is called with the correct types is, surely, essential if you're going to bother
 running a type checker at all? But perhaps there is some niche use case I haven't thought of.
 
-Finally, there's `silent`. The mypy docs suggest this is a kind of compromise mode, to be used if it is just too
+Finally, there's `silent`. The mypy docs suggest that using this is a compromise, to be used if it is just too
 difficult to check the whole code base. But now I understand what this does, I kind of like it. It brings the behaviour
 checking local modules in line with the third party / standard library packages, making it a bit easier to remember
 what's being checked. I can imagine this might be worth exploring if you wanted to run type checking on different parts of your code base
@@ -376,9 +384,11 @@ and whether it finds a stub file or not.
 
 - Mypy _always_ checks that we are interacting correctly with the standard library
  (and _never_ checks standard library internals).
-- In `normal` mode, third party packages are checked in the same way as standard library packages.
-- Local packages are different: in `normal` mode, mypy follows the chain of imports and type checks their internals too.
-- `silent` mode makes unpassed local packages behave like standard library / third party packages: it won't error
+- In `normal` mode:
+  - Third party packages are checked in the same way as standard library packages.
+  - Local modules imported by passed modules are fully checked, as if they were themselves explicitly passed. The same
+    goes for local modules imported by those modules, and so on.
+- `silent` mode makes imported local packages behave like standard library / third party packages: it won't error
   on their internals, only on the interactions.
 - `skip` mode doesn't check interactions with anything except the standard library.
 - `error` mode errors if we try to import anything (except the standard library) that isn't explicitly passed.
@@ -386,3 +396,7 @@ and whether it finds a stub file or not.
 
 You might find it interesting to test your knowledge by introducing errors in different places in the code base we just
 created, and see if you can predict which errors will show up in different modes. Happy type checking!
+
+## Further reading
+
+- [Mypy docs on following imports](https://mypy.readthedocs.io/en/latest/running_mypy.html#following-imports)
