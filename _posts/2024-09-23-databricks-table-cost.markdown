@@ -6,7 +6,7 @@ author: Evelyn Byer
 hex: 0e1720
 ---
 
-Many data teams across Kraken are using Databricks and dbt to build their analytics lakehouses. Databricks is a powerful tool that allows you to build and analyze dbt models quickly with Spark. However with an increasing number of analysts, complexity of queries and growing dbt projects, costs of building these models can quickly rise. To help optimize costs we first need to understand them. So, in this post we'll walk through one method to estimate the cost of running any dbt model in Databricks which can then be used for budgeting or prioritizing technical debt clean-up.
+Many data teams across Kraken are using Databricks and dbt to build their analytics lakehouses. Databricks is a powerful tool that allows you to run and query dbt models quickly with Spark. However with an increasing number of analysts, complexity of queries and growing dbt projects, costs of building these models can quickly rise. To help optimize costs we first need to understand them. So, in this post we'll walk through one method to estimate the cost of running any dbt model in Databricks which can then be used for budgeting or prioritizing technical debt clean-up.
 
 In this post, we'll be using the following tools:
 - Databricks Unity Catalog - [system tables](https://docs.databricks.com/en/admin/system-tables/index.html)
@@ -17,18 +17,19 @@ In this post, we'll be using the following tools:
 
 To estimate the cost of running each dbt model over a week in Databricks we will:
 1. Calculate the total cost accrued by your Databricks SQL warehouse (`cost_per_warehouse`)
-2. Cacluate the total execution time of all queries run against the warehouse (`total_warehouse_execution_time`)
+2. Calculate the total execution time of all queries run against the warehouse (`total_warehouse_execution_time`)
 3. Calculate the execution time of each dbt model and its associated tests (`model_execution_time`)
 4. Calculate every dbt model's estimated cost using our algorithm: `cost_per_model = cost_per_warehouse * (model_execution_time / total_warehouse_execution_time)`
 
 **Assumptions:**
 - dbt project is running against only one Databricks SQL warehouse
 - These costs ignore additional cloud compute and storage costs behind Databricks - the estimates explained here are therefore conservative
+- All prices are in USD
 
 ***
 ## Step 1: Calculate the total cost accrued by your Databricks SQL warehouse
 
-Databricks costs are based on processing units called [Databricks units (DBUs)](https://www.databricks.com/product/pricing). To get total costs of a warehouse, we need to multiply the number of DBUs used, by the dollar rate per DBU at the time of use. Luckily, we can easily find this using Databricks system tables: `system.billing.usage` and `system.billing.list_prices`. Summing the price column gives the total cost of running the warehouse for the week (note that all costs are in USD).
+Databricks costs are based on processing units called [Databricks units (DBUs)](https://www.databricks.com/product/pricing). To get total costs of a warehouse, we need to multiply the number of DBUs used, by the dollar rate per DBU at the time of use. Luckily, we can easily find this by joining Databricks system tables: `system.billing.usage` and `system.billing.list_prices`.
 
 ```sql
 SELECT
@@ -47,8 +48,8 @@ WHERE
 Now we have the value for the first part of our algorithm: `cost_per_warehouse` = `price`.
 
 ***
-## Step 2: Cacluate the total execution time of all queries run against the warehouse
-We can use the `system.query.history` table to get the total execution time of all queries run against the warehouse over the las week.
+## Step 2: Calculate the total execution time of all queries run against the warehouse
+We can use the `system.query.history` table to get the total execution time of all queries run against the warehouse over the last week.
 
 ```sql
 SELECT 
@@ -60,7 +61,7 @@ SELECT
     total_duration_ms,
     CASE 
         -- Categorizing dbt statements - if warehouse is running multiple dbt projects
-        WHEN statement_text LIKE '%", "target_name": "prod"%' THEN 'PRODUCTION'
+        WHEN statement_text LIKE '%", "target_name": "{PRODUCTION_PROJECT}"%' THEN 'PRODUCTION'
         ELSE 'OTHER'
     END AS dbt_project_category
 FROM 
@@ -70,7 +71,7 @@ WHERE
     AND client_application = 'Databricks Dbt'
     AND compute.warehouse_id = {WAREHOUSE_ID};
 ```
-The above query returns the total queries against the warehouse for the last seven days, along with additional information like their total duration, dbt object name, and dbt production category (if running different dbt processes against the same endpoint). We will be using the above results in the following steps, but to determine the total runtime against our warehouse, the code above can be extended:
+The above query returns the total queries against the warehouse for the last seven days, along with additional information like query total duration, dbt object name, and dbt production category (this is helpful if running different dbt processes against the same warehouse). The results will be reused in the following steps, but to determine the total runtime against our warehouse, all query durations can be summed like so:
 
 ```sql
 WITH all_queries AS (
@@ -83,7 +84,7 @@ WITH all_queries AS (
         total_duration_ms,
         CASE 
             -- Categorizing based on target_name in the statement
-            WHEN statement_text LIKE '%", "target_name": "prod"%' THEN 'PRODUCTION'
+            WHEN statement_text LIKE '%", "target_name": "{PRODUCTION_PROJECT}"%' THEN 'PRODUCTION'
             ELSE 'OTHER'
         END AS dbt_project_category
     FROM 
@@ -114,7 +115,7 @@ WITH all_queries AS (
         total_duration_ms,
         CASE 
             -- Categorizing based on target_name in the statement
-            WHEN statement_text LIKE '%", "target_name": "prod"%' THEN 'PRODUCTION'
+            WHEN statement_text LIKE '%", "target_name": "{PRODUCTION_PROJECT}"%' THEN 'PRODUCTION'
             ELSE 'OTHER'
         END AS dbt_project_category
     FROM 
@@ -146,8 +147,6 @@ The above query returns the total execution time of each dbt model and its assoc
 To get the weekly cost of all models in USD, the following code combining all the above SQL can be used:
 
 ```sql
--- select * from system.billing.list_prices limit 10
-
 WITH price AS (
     SELECT
         SUM(prices.pricing.default * databricks_usage.usage_quantity) AS price
@@ -168,8 +167,8 @@ all_queries AS (
         REGEXP_EXTRACT(statement_text, '(?:"node_id": ")(.*?)(?="}|$)') AS object_name,
         total_duration_ms,
         CASE 
-            -- Categorizing based on target_name in the statement
-            WHEN statement_text LIKE '%", "target_name": "prod"%' THEN 'PRODUCTION'
+            -- Categorizing based on target_name in statement_text
+            WHEN statement_text LIKE '%", "target_name": "{PRODUCTION_PROJECT}"%' THEN 'PRODUCTION'
             ELSE 'OTHER'
         END AS dbt_project_category
     FROM 
@@ -204,6 +203,7 @@ test_model_map AS (
 -- Bring it all together
 SELECT
     tmm.dbt_model_id,
+    -- cost algorithm
     price.price * (tmm.model_execution_time_hours / te.total_execution_time_hours) AS model_weekly_cost_usd
 FROM 
     test_model_map tmm
@@ -214,6 +214,6 @@ LEFT JOIN
 ```
 ***
 ## Further information
-Additional metadata from elementary tables can be added to enrich cost information. For example, models owners or business groups can be added to group costs by team.
+Additional metadata from elementary tables can be added to enrich cost information. For example, model owners can be added to group costs by users or team.
 
-There are similar blogs that cover estimating dbt model costs on Snowflake - this one by [SELECT](https://select.dev/posts/cost-per-query) is my favorite.
+There are similar blogs that cover estimating dbt model costs in Snowflake - this one by [SELECT](https://select.dev/posts/cost-per-query) is my favourite.
