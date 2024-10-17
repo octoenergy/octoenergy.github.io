@@ -1,5 +1,5 @@
 # Site settings
-title: Kraken Tech
+title: Kraken
 email: talent@octoenergy.com
 description: > # this means to ignore newlines until "baseurl:"
   Kraken is the world's leading customer & culture platform for utilities.
@@ -14,4 +14,4 @@ github_username: octoenergy
 # Build settings
 markdown: kramdown
 highlighter: rouge
-exclude: [vendor, 'README.md', 'makefile', 'Gemfile*', 'CNAME']
+exclude: [vendor, "README.md", "makefile", "Gemfile*", "CNAME"]

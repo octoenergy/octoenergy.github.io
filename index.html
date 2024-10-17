@@ -2,49 +2,9 @@
 layout: default
 ---
 
-<!-- Page Header -->
-<header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h1>Tech Blog</h1>
-                    <span class="subheading">From the team at Kraken Technologies</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<article>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-11 mx-auto">
-                <div class="row">
-                    {% for post in site.categories['news'] %}
-                        {% for member in site.data.members %}
-                            {% if member.name == post.author %}
-                                {% assign author = member %}
-                            {% endif %}
-                        {% endfor %}
-
-                        <div class="col-md-10 col-lg-6 mx-auto mb-4">
-                            <div class="post-preview">
-                                <a href="{{ post.url | prepend: site.baseurl }}">
-                                    <h2 class="post-title">
-                                        {{ post.title }}
-                                    </h2>
-                                    <p class="post-subtitle">
-                                        {{ post.content | strip_html | truncate:140}}
-                                    </p>
-                                </a>
-                                <p class="post-meta">Posted by {% if author.twitter %}<a href="https://twitter.com/{{ author.twitter }}" target="_blank">{{ post.author }}</a>{% else %}<strong>{{ post.author }}</strong>{% endif %} on {{ post.date | date: "%b %-d, %Y" }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-</article>
+<section>
+    <h1 class="redirect-heading">Redirecting...</h1>
+    <p>
+        <span class="subheading">We're now at <a href="https://engineering.kraken.tech">engineering.kraken.tech</a></span>
+    </p>
+</section>
