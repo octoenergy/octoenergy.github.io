@@ -1,18 +1,30 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
+
 @charset "utf-8";
 
-// Import partials from `sass_dir` (defaults to `_sass`)
-@import
-    "variables",
-    "mixins",
-    "global",
-    "navbar",
-    "masthead",
-    "post",
-    "footer",
-    "syntax-highlighting",
-    "bootstrap-overrides",
-    "utilities"
-;
+html, body {
+    font-family: 'Chromatophore', sans-serif;
+    font-size: 62.5%;
+    line-height: 1.6;
+    color: #180048;
+}
+
+body {
+    height: 100dvh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+    margin: 0;
+}
+
+h1 {
+    font-size: 8rem;
+}
+
+p { 
+    font-size: 2rem;
+}

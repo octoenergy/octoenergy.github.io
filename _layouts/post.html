@@ -2,59 +2,9 @@
 layout: default
 ---
 
-{% for member in site.data.members %}
-  {% if member.name == page.author %}
-    {% assign author = member %}
-  {% endif %}
-{% endfor %}
-
-<!-- Page Header -->
-<header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-lg-11 mx-auto align-center">
-                <div class="post-heading">
-                    <h1>{{ page.title }}</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<article>
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-8 col-md-11 mx-auto">
-                {{ content }}
-
-                <p class="author">
-                    Posted by
-                    {% if author.twitter %}
-                        <a href="https://twitter.com/{{ author.twitter }}" target="_blank" style="text-decoration: underline;">{{ page.author }}</a>
-                    {% else %}
-                        <strong>{{ page.author }}</strong>
-                    {% endif %}
-                    {% if author.jobtitle %}
-                        {{ author.jobtitle }}
-                    {% endif %}
-                    on <strong>{{ page.date | date: "%b %-d, %Y" }}</strong>
-                </p>
-            </div>
-            <div class="d-none d-xl-block col-xl-3">
-                <ul class="post-list sticky-top">
-                    {% for post in site.categories['news'] %}
-                        {% if page.title != post.title %}
-                            <li class="post-preview">
-                                <a href="{{ post.url | prepend: site.baseurl }}">
-                                    <span class="post-title">{{ post.title }}</span>
-                                    <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-</article>
+<section>
+    <h1 class="redirect-heading">Redirecting...</h1>
+    <p>
+        <span class="subheading">We're now at <a href="https://engineering.kraken.tech">engineering.kraken.tech</a></span>
+    </p>
+</section>

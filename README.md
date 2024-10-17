@@ -1,11 +1,14 @@
-# Kraken Technologies blog
+# Engineering Blog redirects
 
-This repo provides a [Jekyll][jekyll] site for the <https://tech.octopus.energy>
-site. The site is published using [Github Pages][github_pages].
+This repo previously provided a [Jekyll][jekyll] site for the Kraken Engineering Blog, when it was hosted at <https://tech.octopus.energy>. Having since moved to <https://engineering.kraken.tech> with a new repo to boot, this repo now serves only to redirect traffic to the equivalent page on the new site. The site - like the maintained blog - is published using [Github Pages][github_pages].
 
 [jekyll]: https://jekyllrb.com/
 [github_pages]:
   https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll
+
+
+> [!WARNING]
+> Do not contribute new posts to this repo, they will not be published. Contribute to the new repo at <https://github.com/octoenergy/kraken-tech-blog>, which is published at <https://engineering.kraken.tech>. Posts only exist here to ensure legacy URLs are redirected to the new site.
 
 ## Installation
 
@@ -52,28 +55,6 @@ ruby 3.2.3 (2024-01-18 revision 52bb2ac0a6) [arm64-darwin23]
 ```sh
 > make server
 ```
-
-## Adding new blog posts
-
-Add new posts by creating a markdown file in `_posts/` with filename format
-`YYYY-MM-DD-article-slug.md` (e.g. `2019-02-20-some-article-description.md`). You should also add a header containing 
-the title and author of the article, amongst other items. For a blog post to appear, the `category` must be set to `news`. Check existing posts for examples.
-
-
-Ensure your details are in the `_data/members.yml` file.
-
-Preview the appearance by running the local development server with:
-
-    make server
-
-which will serve the site at <http://localhost:4000>.
-
-When the post is ready, submit a pull request and request review from the
-[`@octoenergy/publicity`][publicity_team] team.
-
-[publicity_team]: https://github.com/orgs/octoenergy/teams/publicity/
-
-Once approved, publish by merging your pull-request to `master`.
 
 ## Working on site appearance
 
